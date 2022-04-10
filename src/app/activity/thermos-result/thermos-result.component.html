@@ -1,0 +1,210 @@
+<app-title-section
+  [title]="survey.title">
+  <p>
+    {{'thermos.intro.greeting' | translate:{name: authService.user.display_name} }}<br/>
+    <span *ngIf="isSurveyCompleted; else noResults">
+      {{'thermos.intro.message' | translate}}
+      <a [routerLink]="'../questions'" [queryParams]="getQueryParams()"><i class="fas fa-redo mx-2"></i>{{'thermos.intro.retake' | translate}}</a>
+      <a [routerLink]="'../../' + survey.properties.feedback_survey_id + '/questions'" [queryParams]="getQueryParams()"><i class="fas fa-comments mx-2"></i>{{'thermos.intro.feedback' | translate}}</a>
+    </span>
+    <ng-template #noResults>
+      {{'thermos.intro.message_no_results' | translate}} <a [routerLink]="['..', 'questions']">{{'thermos.intro.start' | translate}}</a>
+    </ng-template>
+    <a class="cursor-pointer" (click)="videoModal.open()"><i class="fas fa-video mx-2"></i>{{'thermos.intro.rewatch' | translate}}</a>
+  </p>
+</app-title-section>
+
+<div class="alert alert-warning" *ngIf="showMobileWarning">
+  {{'thermos.mobile_warning' | translate}}
+</div>
+
+<app-modal #mobileWarningModal [title]="'Mobile Warning'">
+  {{'thermos.mobile_warning' | translate}}
+</app-modal>
+
+<div class="row">
+  <div class="col-lg-8 card-spacing" [ngClass]="{'showHover': !isSurveyCompleted}">
+    <app-card
+      [icon]="'fas fa-chart-pie'"
+      [title]="'Motivation & Engagement'"
+      highlight="primary"
+      [actions]="constructChart.cardActions">
+      <app-polar-chart
+        class="top-img"
+        #constructChart
+        [datasets]="MESDataset"
+        [labels]="MESLabels"
+        [legend]="false"
+        [max]="100"
+        [stepSize]="25"
+        [angles]="angles"
+        [plugins]="plugins"
+        [options]="MESOptions"
+        [activeDataIndices]="MESActiveDataIndices"
+        (labelClick)="labelClick(MESConstructs[$event.dataIndex])"
+        (labelHover)="labelHover($event, MESConstructs[$event.dataIndex])"
+        (chartClick)="chartClick($event)"
+        (chartHover)="chartHover($event)">
+      </app-polar-chart>
+      <div class="app-card-footer">
+        <a *ngIf="survey.properties.copyright" class="muted-link" (click)="MESCopyrightModal.open()">&copy; Copyright</a>
+      </div>
+    </app-card>
+    <ng-template *ngTemplateOutlet="noResultsHover"></ng-template>
+  </div>
+  <div class="col-lg-4 card-spacing" id="feedbackCard">
+    <app-card
+      [icon]="'fas fa-comment-alt'"
+      [title]="'Feedback'">
+      <ng-template *ngIf="feedbackPreviewConstruct || feedbackClickedConstruct; else nothingToShow"
+                   [ngTemplateOutlet]="feedbackTemplate"
+                   [ngTemplateOutletContext]="{$implicit: feedbackPreviewConstruct || feedbackClickedConstruct}"></ng-template>
+      <ng-template #nothingToShow>{{'thermos.empty_feedback' | translate}}</ng-template>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 card-spacing" [ngClass]="{'showHover': !isSurveyCompleted}">
+    <app-card
+      [icon]="'fas fa-users'"
+      [title]="'Group Work Skills'"
+      highlight="primary">
+      <div class="row">
+        <div class="col-lg-6" *ngFor="let construct of GSQConstructs; let i = index">
+          <app-gauge-chart
+            class="top-img"
+            [percentage]="getScore(construct) * 100"
+            [normPercentage]="showNorms ? construct.properties.norms[0] : null"
+            [labels]="[construct.name]"
+            [colors]="GSQColors[i]"
+            [showText]="'label'"
+            [plugins]="plugins"
+            [options]="GSQOptions[i]"
+            [isActive]="GSQActiveList[i]"
+            (labelClick)="labelClick(GSQConstructs[i])"
+            (labelHover)="labelHover($event, GSQConstructs[i], 'GSQ')"
+            (chartClick)="chartClick($event, construct)"
+            (chartHover)="chartHover($event, construct)">
+          </app-gauge-chart>
+        </div>
+      </div>
+    </app-card>
+    <ng-template *ngTemplateOutlet="noResultsHover"></ng-template>
+  </div>
+  <div class="col-sm-6">
+    <div class="row h-100">
+      <div class="col-lg-6 card-spacing">
+        <app-card
+          [icon]="'fas fa-graduation-cap'"
+          [title]="'thermos.study_progress.title' | translate">
+          <div class="d-flex flex-column justify-content-center h-100">
+            <p class="text-center mb-2">{{studyName}}</p>
+            <!-- <div class="highlight-circle mx-auto">
+              <p class="highlight-circle-text">{{EC}} EC</p>
+            </div> -->
+            <h4 class="text-center mb-2 big">{{studyCredits}} EC</h4>
+            <p class="text-center">Grade Point Average {{studyGrade}}</p>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-lg-6 card-spacing">
+        <app-card
+          [icon]="'fas fa-clock'"
+          [title]="'thermos.result_history.title' | translate">
+          <div class="timestamp-list-container">
+            <ul class="list-unstyled">
+              <li *ngFor="let result of allResults; let i = index">
+                <a class="timestamp-list-item"
+                   [routerLink]="[]"
+                   [queryParams]="{'resultIdx': allResults.length - i - 1}"
+                   [queryParamsHandling]="'merge'"
+                   [ngClass]="{'active': resultIdx === i}"
+                   (click)="clickResult(i)">
+                  {{result.timestamp | date}} <span *ngIf="i === 0">({{'thermos.latest_result' | translate}})</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+      <p class="text-right contact-p" [innerHTML]="'thermos.contact' | translate"></p>
+  </div>
+</div>
+
+<ng-template #feedbackTemplate let-construct>
+  <ng-container *ngIf="construct">
+    <div class="scrollable-body">
+      <div class="row">
+        <div class="col">
+          <p><b>{{construct.name}}</b> {{construct.properties.feedback | translate}}</p>
+          <p [innerHTML]="
+            ('thermos.feedback.score' | translate:{constructName: construct.name, score: getScore(construct) | percent }) +
+            (feedbackNormKey | translate:{constructName: construct.name, norm: construct.properties.norms[0] })"></p>
+          <p><b>{{'thermos.feedback.importance' | translate}}</b></p>
+          <p *appMultiline="let line of (construct.properties.importance | translate)">{{line}}</p>
+          <p>{{'thermos.feedback.tips' | translate}}</p>
+        </div>
+      </div>
+      <div class="btn-group mr-3 d-none-empty" role="group">
+        <ng-container *ngIf="feedbackPrepare && activityService.withId(feedbackPrepare.id) | async as prepareSurvey">
+          <button role="button" class="btn btn-primary" (click)="prepareModal.open()">{{'thermos.feedback.prepare' | translate}}</button>
+          <app-modal #prepareModal [title]="prepareSurvey.title | contentTranslate" [size]="'lg'" [loggingSubject]="'PrepareModal'">
+            <app-survey-form [survey]="prepareSurvey" *ngIf="prepareModal.isOpen" [showTitle]="false" [allowScroll]="false" (completed)="prepareModal.close('Completed')"></app-survey-form>
+          </app-modal>
+        </ng-container>
+        <ng-container *ngIf="feedbackActions && activityService.withIds(feedbackActionIds) | async as actions">
+          <button role="button" class="btn btn-primary" (click)="allExercisesModal.open()">{{'thermos.feedback.act' | translate}}</button>
+          <app-modal #allExercisesModal [title]="'thermos.feedback.exercises' | translate:{constructName: construct.name}"  [loggingSubject]="'ActModal'">
+            <ul class="list-unstyled">
+              <li *ngFor="let exercise of actions">
+                <app-modal #exerciseModal [title]="exercise.title | contentTranslate" [size]="'lg'" [loggingSubject]="'ExerciseModal:' + exercise.title">
+                  <app-survey-form [survey]="exercise" *ngIf="exerciseModal.isOpen" [showTitle]="false" [allowScroll]="false" (completed)="exerciseModal.close('Completed')"></app-survey-form>
+                </app-modal>
+                <a role="button" class="force-a-styling" (click)="exerciseModal.open()">
+                  {{exercise.title | contentTranslate}}
+                  <i class="true-icon" *ngIf="isCompleted(exercise)"></i>
+                </a>
+              </li>
+            </ul>
+          </app-modal>
+        </ng-container>
+        <ng-container *ngIf="feedbackReflect && activityService.withId(feedbackReflect.id) | async as reflectSurvey">
+          <app-modal #reflectModal [title]="reflectSurvey.title | contentTranslate" [size]="'lg'" [loggingSubject]="'ReflectModal'">
+            <app-survey-form [survey]="reflectSurvey" *ngIf="reflectModal.isOpen" [showTitle]="false" [allowScroll]="false" (completed)="reflectModal.close('Completed')"></app-survey-form>
+          </app-modal>
+          <button role="button" class="btn btn-primary" (click)="reflectModal.open()">{{'thermos.feedback.reflect' | translate}}</button>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="construct.properties.links">
+        <a (click)="linkModal.open()" class="cursor-pointer" target="_blank">{{'thermos.feedback.links' | translate}}</a>
+        <app-modal #linkModal [title]="'thermos.feedback.additionalTitle' | translate:{constructName: construct.name}" [loggingSubject]="'LinkModal'">
+          <div [innerHTML]="construct.properties.links | contentTranslate"></div>
+        </app-modal>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #noResultsHover>
+  <div class="hoverContent">
+    <div class="text-center">
+      <p>{{'thermos.intro.message_no_results' | translate}}</p>
+      <p><a [routerLink]="['..', 'questions']">{{'thermos.intro.start' | translate}}</a></p>
+    </div>
+  </div>
+</ng-template>
+
+<app-modal #videoModal [title]="'Thermos Introduction'" [size]="'xl'" [loggingSubject]="'IntroductionVideoModal'">
+  <app-video [src]="'/assets/env/thermos_intro.mp4'"></app-video>
+</app-modal>
+
+<app-modal #MESCopyrightModal [title]="'Copyright Notice'">
+    <p>MES constructs are copyright &copy; 2020 Lifelong Achievement Group</p>
+</app-modal>

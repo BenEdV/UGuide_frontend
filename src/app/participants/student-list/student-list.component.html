@@ -1,0 +1,15 @@
+<app-title-section [title]="'student.list.section_title' | translate | titlecase"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'student.list.table_title' | translate | titlecase" [icon]="'student-icon'" [actions]="participantList.cardActions">
+      <app-participant-table
+        #participantList
+        [participants]="students"
+        [exams]="exams"
+        [constructs]="constructs"
+        [limit]="10">
+      </app-participant-table>
+    </app-card>
+  </div>
+</div>

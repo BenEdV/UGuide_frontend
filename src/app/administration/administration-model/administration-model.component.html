@@ -1,0 +1,74 @@
+<app-title-section [title]="'admin.model.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.model.table_title' | translate" [icon]="'model-icon'" [actions]="modelTable.cardActions">
+  <app-model-table
+    #modelTable
+    [models]="models"
+    [limit]="10"
+    [actions]="tableActions">
+  </app-model-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.model.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.model.model' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.model.new_model.modal_title' | translate">
+  <form id="add-model-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addName">{{'admin.model.new_model.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="addName"
+             [placeholder]="'admin.model.new_model.name' | translate" [ngClass]="{'is-invalid': addName.invalid}">
+      <app-form-control-error [form]="addForm" controlName="name" #addName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addDescription">{{'admin.model.new_model.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="addDescription" rows="3" [placeholder]="'admin.model.new_model.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="addType">{{'admin.model.new_model.method' | translate}} *</label>
+      <app-dropdown [items]="modelTypes" bindValue="name" id="addType" formControlName="method"
+                    [placeholder]="'admin.model.new_model.method' | translate" [ngClass]="{'is-invalid': addMethod.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="method" #addMethod></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-model-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.model.edit_model.modal_title' | translate:{modelName: editingItem?.name}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-model-form" [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="editName">{{'admin.model.edit_model.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="editName"
+             [placeholder]="'admin.model.edit_model.name' | translate" [ngClass]="{'is-invalid': editName.invalid}">
+      <app-form-control-error [form]="editForm" controlName="name" #editName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="editDescription">{{'admin.model.edit_model.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="editDescription" rows="3" [placeholder]="'admin.model.edit_model.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editType">{{'admin.model.edit_model.method' | translate}} *</label>
+      <app-dropdown [items]="modelTypes" bindValue="name" id="editType" formControlName="method"
+                    [placeholder]="'admin.model.edit_model.method' | translate" [ngClass]="{'is-invalid': editMethod.invalid}"></app-dropdown>
+      <app-form-control-error [form]="editForm" controlName="method" #editMethod></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-model-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

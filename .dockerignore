@@ -1,0 +1,7 @@
+node_modules
+dist
+doc
+ssl
+.git
+.gitignore
+package-lock\.json

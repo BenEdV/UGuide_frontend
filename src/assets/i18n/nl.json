@@ -1,0 +1,1185 @@
+{
+  "admin": {
+    "connector": {
+      "connector": "Aansluiting",
+      "create": "Nieuw",
+      "edit_connector": {
+        "lrs": {
+          "key": "Key: {{key}}",
+          "secret": "Secret: {{secret}}",
+          "xapi_url": "URL: {{url}}"
+        },
+        "modal_title": "Pas {{connectorTitle}} aan",
+        "remindo": {
+          "base_url": "API-URL",
+          "callback_url": "Callback URL: {{callbackURL}}",
+          "secret": "Geheim",
+          "uuid": "UUID"
+        },
+        "title": "Titel",
+        "type": "Type"
+      },
+      "new_connector": {
+        "modal_title": "Nieuw Aansluiting",
+        "remindo": {
+          "base_url": "API-URL",
+          "secret": "Geheim",
+          "uuid": "UUID"
+        },
+        "title": "Titel",
+        "type": "Type"
+      },
+      "section_title": "Administratie Aansluitingen",
+      "table_title": "Alle Aansluitingen"
+    },
+    "construct": {
+      "construct": "Onderwerp",
+      "constructs": "Onderwerpen",
+      "create": "Nieuw",
+      "edit_construct": {
+        "description": "Beschrijving",
+        "modal_title": "Pas {{constructName}} Aan",
+        "model": "Model",
+        "name": "Naam",
+        "type": "Type"
+      },
+      "link_construct": {
+        "construct": "Onderwerp",
+        "existing": "Bestaande Koppelingen",
+        "modal_title": "Koppel Onderwerpen",
+        "new": "Nieuw",
+        "type": "Type"
+      },
+      "link_study_material": {
+        "construct": "Onderwerp",
+        "existing": "Bestaande Koppelingen",
+        "modal_title": "Koppel Studiemateriaal",
+        "new": "Nieuw",
+        "study_material": "Studiemateriaal",
+        "type": "Type"
+      },
+      "linking": "Koppelingen",
+      "new_construct": {
+        "description": "Beschrijving",
+        "modal_title": "Nieuw Onderwerp",
+        "model": "Model",
+        "name": "Naam",
+        "type": "Type"
+      },
+      "section_title": "Administratie Onderwerpen",
+      "study_material": "Studiemateriaal",
+      "table_title": "Alle Onderwerpen"
+    },
+    "course": {
+      "experimental": {
+        "section_title": "Experimenteel",
+        "see_subgroup_results": "Studenten zullen de resultaten van groepen zien.",
+        "shift_comparison": "Wissel de vergelijking die studenten zien op de Kennismap pagina af wanneer er nieuw toetsresultaten worden ingeladen."
+      },
+      "logging": {
+        "allow_student_interaction": "Sta het loggen van interacties van studenten binnen het systeem toe.",
+        "section_title": "Loggen"
+      },
+      "save_changes": "Bewaar aanpassingen",
+      "section_title": "Administratie Vak",
+      "social_comparison": {
+        "allow_see_course_average": "Sta het bekijken van vakgemiddelden door studenten toe.",
+        "section_title": "Sociale Vergelijking"
+      },
+      "widgets": {
+        "allow_widgets": "Laat externe partijen widgets tonen met informatie uit dit vak. (BETA)",
+        "section_title": "Widgets API"
+      }
+    },
+    "delete_modal": {
+      "confirmation": "Weet je zeker dat je {{entityName}} wilt verwijderen?",
+      "linked_activities": "Koppelingen met {{numLinkedActivities}} activiteiten",
+      "linked_constructs": "Koppelingen met {{numLinkedConstructs}} onderwerpen",
+      "modal_title": "Verwijder {{entityName}}",
+      "removals": "Deze actie zal ook de volgende verwijderen:"
+    },
+    "exam": {
+      "edit_exam": {
+        "description": "Beschrijving",
+        "modal_title": "Pas {{examName}} aan",
+        "remote": "Remote",
+        "remote_info": "Remote Informatie:",
+        "remote_moment": "Remote Moment",
+        "remote_name": "Remote Naam",
+        "title": "Titel",
+        "visibility": "Zichtbaarheid"
+      },
+      "exam": "Toets",
+      "import": "Importeer",
+      "import_results": {
+        "description": "Beschrijving",
+        "modal_title": "Importeer Resultaten van {{examName}}",
+        "remote": "Remote",
+        "remote_info": "Remote Informatie:",
+        "remote_moment": "Remote Moment",
+        "remote_name": "Remote Naam",
+        "title": "Titel",
+        "visibility": "Zichtbaarheid"
+      },
+      "new_exam": {
+        "description": "Beschrijving",
+        "modal_title": "Nieuwe toets",
+        "moment": "Moment",
+        "remote": "Remote",
+        "remote_name": "Remote Naam",
+        "settings": {
+          "import_all_results": "Importeer alle resultaten als de toets afgesloten is.",
+          "import_exam_results": "Als een student de toets afsluit wordt de toetsresultaten (cijfer en tijdsduur) geïmporteerd.",
+          "import_question_results": "Als een student de toets afsluit wordt de vraagresultaten geïmporteerd.",
+          "update_group_scores": "Werk de groepscores bij als de toets afgesloten is."
+        },
+        "title": "Titel",
+        "visibility": "Zichtbaarheid"
+      },
+      "section_title": "Administratie Toetsen",
+      "table_title": "Alle Toetsen",
+      "visibility": {
+        "f": "Onzichtbaar",
+        "t": "Zichtbaar"
+      }
+    },
+    "group": {
+      "create": "Nieuw",
+      "edit_group": {
+        "add": "Voeg",
+        "add_members": "Voeg leden toe",
+        "as": "toe als",
+        "existing": "Bestaande leden",
+        "members": "Leden",
+        "modal_title": "Pas {{groupName}} aan",
+        "name": "Naam"
+      },
+      "group": "Groep",
+      "new_group": {
+        "add": "Voeg",
+        "add_members": "Voeg leden toe",
+        "as": "toe als",
+        "members": "Leden",
+        "modal_title": "Nieuwe Groep",
+        "name": "Naam"
+      },
+      "roles": {
+        "admin": "Adminstrator",
+        "developer": "Ontwikkelaar",
+        "manager": "Manager",
+        "member": "Lid",
+        "researcher": "Onderzoeker",
+        "role": "Rol",
+        "student": "Student",
+        "teacher": "Leraar",
+        "teaching_assistant": "Studentassistent"
+      },
+      "section_title": "Administratie Groepen",
+      "table_title": "Alle Groepen"
+    },
+    "mapping": {
+      "advanced_linking": {
+        "construct": "Onderwerp",
+        "modal_title": "Koppel {{questionTitle}}",
+        "weight": "Weging"
+      },
+      "card_title": "Koppel",
+      "exam": "Toets",
+      "exam_level": {
+        "construct": "Onderwerp",
+        "existing_links": "Bestaande Koppelingen",
+        "explanation": "Selecteer het onderwerp dat je met de resultaat van het gehele toets wilt koppelen.",
+        "link": "Koppel",
+        "new_link": "Nieuwe onderwerpkoppeling"
+      },
+      "level": "Niveau",
+      "question_level": {
+        "answers": "Antwoorden",
+        "construct": "Onderwerp",
+        "explanation": "Geef een onderwerp per vraag aan.",
+        "preview_no_question": "Zweef over een vraag om de inhoud ervan te zien.",
+        "question": "Vraag"
+      },
+      "section_title": "Koppel Onderwerpen aan Vragen",
+      "switch_exam": "Toets",
+      "switch_exam_explanation": "Koppel onderwerpen aan een toets",
+      "switch_question": "Vraag",
+      "switch_question_explanation": "Koppel onderwerpen aan een vraag"
+    },
+    "model": {
+      "create": "Nieuw",
+      "edit_model": {
+        "description": "Beschrijving",
+        "method": "Methode",
+        "modal_title": "Pas {{modelName}} aan",
+        "name": "Naam"
+      },
+      "model": "Model",
+      "new_model": {
+        "description": "Beschrijving",
+        "method": "Methode",
+        "modal_title": "Nieuwe Model",
+        "name": "Naam"
+      },
+      "section_title": "Administratie Modellen",
+      "table_title": "Alle Modellen"
+    },
+    "study_material": {
+      "constructs": "Onderwerpen",
+      "create": "Nieuw",
+      "edit_study_material": {
+        "covered_on": "Behandeld op",
+        "description": "Beschrijving",
+        "existing_attachments": "Bestaande Bijlage(n)",
+        "modal_title": "Pas {{materialTitle}} aan",
+        "new_attachments": "Nieuwe Bijlage(n)",
+        "title": "Titel",
+        "type": "Type",
+        "url": "URL",
+        "visibility": "Zichtbaarheid"
+      },
+      "link_construct": {
+        "construct": "Onderwerp",
+        "existing": "Bestaande Koppelingen",
+        "modal_title": "Koppel Onderwerp",
+        "new": "Nieuw",
+        "study_material": "Studiemateriaal",
+        "type": "Type"
+      },
+      "linking": "Koppelingen",
+      "material": {
+        "article": {
+          "article": "article",
+          "wikipedia": "wikipedia"
+        },
+        "book": {
+          "book": "Boek",
+          "chapter": "Hoofdstuk"
+        },
+        "file": {
+          "factsheet": "Factsheet",
+          "slides": "Slides"
+        },
+        "video": {
+          "unspecified": "Video",
+          "youtube": "YouTube video"
+        }
+      },
+      "new_study_material": {
+        "attachments": "Bijlage(n)",
+        "covered_on": "Behandeld op",
+        "description": "Beschrijving",
+        "modal_title": "Nieuwe Studiemateriaal",
+        "title": "Titel",
+        "type": "Type",
+        "url": "URL",
+        "visibility": "Zichtbaarheid"
+      },
+      "section_title": "Administratie Studiemateriaal",
+      "study_material": "Studiemateriaal",
+      "table_title": "Alle Studiemateriaal",
+      "visibility": {
+        "f": "Onzichtbaar",
+        "t": "Zichtbaar"
+      }
+    },
+    "survey": {
+      "create": "Nieuw",
+      "edit_survey": {
+        "description": "Beschrijving",
+        "modal_title": "Pas {{surveyTitle}} aan",
+        "title": "Titel",
+        "visibility": "Zichtbaarheid"
+      },
+      "manage_content": "Beheer Inhoud",
+      "new_survey": {
+        "description": "Beschrijving",
+        "modal_title": "Nieuwe Enquête",
+        "title": "Titel",
+        "visibility": "Zichtbaarheid"
+      },
+      "section_title": "Administratie Enquêtes",
+      "survey": "Survey",
+      "table_title": "Alle Enquêtes",
+      "visibility": {
+        "f": "Onzichtbaar",
+        "t": "Zichtbaar"
+      }
+    }
+  },
+  "breadcrumb": {
+    "administration": "Administratie",
+    "collections": "Collecties",
+    "constructs": "Onderwerpen",
+    "courses": "Cursussen",
+    "exams": "Toetsen",
+    "groups": "Groepen",
+    "material": "Studiemateriaal",
+    "students": "Studenten",
+    "surveys": "Enquêtes"
+  },
+  "card": {
+    "action": {
+      "export_png": "Exporteer als .png",
+      "toggle_cumulative": "Schakel Cumulatief"
+    },
+    "date": "Datum",
+    "type": "Type",
+    "updated": "Bijgewerkt op"
+  },
+  "chart": {
+    "distribution": {
+      "and_n_more": " en {{n}} meer...",
+      "students_scored_lower": "{{studentCount}}% van de studenten haalde een {{grade}} of lager"
+    },
+    "error": {
+      "cannot_display": "Grafiek kon niet worden getoond. Probeer het later opnieuw.",
+      "not_enough_data": "Er zijn niet genoeg datapunten beschikbaar om deze grafiek te tonen."
+    }
+  },
+  "collection": {
+    "list": {
+      "section_title": "Alle Collecties",
+      "table_title": "Collecties"
+    }
+  },
+  "construct": {
+    "entity": {
+      "connected_questions": "Gekoppelde Vragen",
+      "connected_study_material": "Gekoppeld Studiemateriaal",
+      "construct_progress": {
+        "chart": {
+          "callback": "De gemiddelde score was {{score}}% op {{date}}",
+          "title": "Onderwerp Vooruitgang",
+          "x_label": "Tijd",
+          "y_label": "Onderwerpscore"
+        },
+        "construct_average": "Onderwerp Gemiddelde",
+        "label": "{{constructName}} Gemiddelde",
+        "misconstruct_average": "Misconceptie Gemiddelde",
+        "title": "Onderwerp Vooruitgang"
+      },
+      "course_average": "Vakgemiddelde",
+      "general_information": "Algemene Informatie",
+      "question_rir": {
+        "chart": {
+          "callback": "{{question}} heeft een Rir-waarde van {{value}}",
+          "title": "Rir-Waarde per Vraag",
+          "x_label": "Vraag",
+          "y_label": "Rir-Waarde"
+        },
+        "title": "Vraag R<sub>ir</sub> Waarde"
+      },
+      "questions": "Vragen",
+      "score_distribution": {
+        "chart": {
+          "my_score": "Mijn Score",
+          "title": "Scoreverdeling",
+          "x_label": "Score",
+          "y_label": "Percentage van Studenten"
+        },
+        "title": "Scoreverdeling"
+      },
+      "score_too_high": "Dit onderwerp heeft een score hoger dan",
+      "score_too_low": "Dit onderwerp heeft een score lager dan",
+      "study_material": "Studiemateriaal",
+      "study_material_completed": "Voltooid",
+      "study_material_progress": "Studiemateriaal Vooruitgang",
+      "study_material_progress_completed": "Je hebt {{percent}} van het verbonden studiemateriaal voltooid.",
+      "study_material_progress_seen": "Je hebt {{percent}} van het verbonden studiemateriaal gezien.",
+      "subconstructs": "Deelonderwerpen",
+      "your_score": "Jouw Score"
+    },
+    "knowledge": {
+      "chart_title": {
+        "concept": "Conceptengrafiek",
+        "misconception": "Misconceptengrafiek"
+      },
+      "compare_results_with": "Vergelijk je resultaten met",
+      "course_average": "Vakgemiddelde",
+      "current_comparison": "Je resultaten zijn nu vergeleken met: {{comparisonGroup}}",
+      "hover_request": "Zweef over een item",
+      "lower_50": "Onderste 50% van het vak",
+      "no_study_material": "Geen gekoppelde studiemateriaal",
+      "section_title": "Vergelijking",
+      "study_material_table_title": "Studiemateriaal",
+      "study_material_table_title_construct": "Studiemateriaal van {{construct}}",
+      "switch_to_compare": "Schakel om om je resultaten met de {{comparisonGroup}} te vergelijken",
+      "upper_50": "Bovenste 50% van het vak"
+    },
+    "list": {
+      "administration_link": "Klik <a class='cursor-pointer administration-link'>hier</a> om onderwerpen aan te maken.",
+      "section_title": "Onderwerpenlijst",
+      "table_title": "Onderwerpen"
+    },
+    "overview": {
+      "concepts": {
+        "chart": {
+          "average_label": "Gemiddelde",
+          "title": "Onderwerpen"
+        },
+        "title": "Onderwerpen"
+      },
+      "construct_progress": {
+        "chart": {
+          "callback": "De gemiddelde score was {{score}}% op {{date}}",
+          "title": "Onderwerp Vooruitgang",
+          "x_label": "Tijd",
+          "y_label": "Onderwerpscore"
+        },
+        "construct_average": "Onderwerp Gemiddelde",
+        "misconstruct_average": "Misconceptie Gemiddelde",
+        "title": "Onderwerp Vooruitgang"
+      },
+      "highest_scoring_section_title": "Hoogst Scorend",
+      "lowest_scoring_section_title": "Laagst Scorend",
+      "misconceptions": "Misconcepten",
+      "progress.section_title": "Algemene Voortgang",
+      "recent_updated_concepts_table_title": "Recent bijgewerkte onderwerpen",
+      "recent_updated_misconceptions_table_title": "Recent bijgewerkte misconcepten",
+      "recent_updated_section_title": "Recent Bijgewerkt",
+      "require_attention": "De volgende onderwerpen hebben mogelijk meer aandacht nodig:",
+      "score_too_high": "omdat de score hoger is dan",
+      "score_too_low": "omdat de score lager is dan",
+      "section_description": "Algemene overzichtspagina voor onderwerpen.",
+      "section_title": "Overzicht Onderwerpen"
+    }
+  },
+  "content_interface": {
+    "read_less": "Lees Minder",
+    "read_more": "Lees Meer"
+  },
+  "course": {
+    "list": {
+      "section_title": "Alle Vakken",
+      "table_subtitle": "Lijst van alle vakken",
+      "table_title": "Vakken"
+    },
+    "overview": {
+      "constructs": {
+        "construct_chart_title": "Onderwerpen",
+        "misconstruct_chart_title": "Misconcepties",
+        "section_title": "Concepten"
+      },
+      "exams": {
+        "chart": {
+          "card_title": "Gemiddelde Cijfer Verdeling",
+          "title": "Gemiddelde Cijfer Verdeling",
+          "x_label": "Gemiddelde Cijfer",
+          "y_label": "Aantal Studenten"
+        },
+        "section_title": "Toetsen",
+        "table_title": "Alle Toetsen"
+      },
+      "general": {
+        "average_construct_score": "Gemiddelde Onderwerp Score",
+        "average_grade": "Gemiddeld Cijfer",
+        "average_misconstruct_score": "Gemiddelde Misconcept Score",
+        "section_title": "Algemene Informatie",
+        "student_count": "Aantal Studenten"
+      },
+      "material": {
+        "chart": {
+          "card_title": "Studiemateriaal Interactie",
+          "completed": "Voltooid",
+          "seen": "Gezien",
+          "title": "Studiemateriaal Interactie",
+          "tooltip": {
+            "completed": "{{percentage}} van al het studiemateriaal is voltooid op {{date}}",
+            "seen": "{{percentage}} van al het studiemateriaal is gezien op {{date}}",
+            "unseen": "{{percentage}} van al het studiemateriaal is nog niet gezien op {{date}}"
+          },
+          "unseen": "Ongezien",
+          "x_label": "Datum",
+          "y_label": "Percentage"
+        },
+        "section_title": "Studiemateriaal",
+        "table_title": "Al het Studiemateriaal"
+      },
+      "section_description": {
+        "collection": "Algemeen overzicht van de collectie.",
+        "course": "Algemeen overzicht van het vak."
+      }
+    },
+    "student_overview": {
+      "constructs": {
+        "construct_chart_title": "Onderwerp Scores",
+        "misconstruct_chart_title": "Misconceptie Scores",
+        "recommended_constructs": "Het is aangeraden om naar de volgende concepten te kijken, omdat hun score lager is dan {{threshold}}:",
+        "recommended_misconstructs": "Het is aangeraden om naar de volgende misconcepties te kijken, omdat hun score hoger is dan {{threshold}}:",
+        "section_title": "Concepten"
+      },
+      "description": "Deze pagina biedt een overzicht van jouw prestaties binnen dit vak.",
+      "exams": {
+        "chart": {
+          "average_grade":"Gemiddeld Cijfer",
+          "card_title": "Cijfer per Toest",
+          "my_grade":"Mijn Cijfer",
+          "title": "Cijfer per Toets",
+          "x_label": "Toets",
+          "y_label": "Cijfer"
+        },
+        "section_title": "Toetsen",
+        "table_title": "Alle Toetsen"
+      },
+      "general": {
+        "average_construct_score": "Gemiddelde Onderwerp Score",
+        "average_grade": "Gemiddeld Cijfer",
+        "average_misconstruct_score": "Gemiddelde Misconceptie Score",
+        "section_title": "Algemene Informatie",
+        "study_material": {
+          "completed": "Voltooid",
+          "tooltip": {
+            "completed": "{{percentage}} van al het studiemateriaal is gemarkeerd als voltooid.",
+            "seen": "{{percentage}} van al het studiemateriaal is gemarkeerd als gezien."
+          },
+          "title": "Studiemateriaal Voortgang"
+        }
+      },
+      "material": {
+        "chart": {
+          "card_title": "Studiemateriaal Voortgang",
+          "completed": "Voltooid",
+          "seen": "Gezien",
+          "title": "Studiemateriaal Voortgang",
+          "unseen": "Ongezien",
+          "x_label": "Status",
+          "y_label": "Aantal studiemateriaal"
+        },
+        "section_title": "Studiemateriaal",
+        "table_title": "Al het Studiemateriaal"
+      }
+    }
+  },
+  "dashboard": {
+    "courses": "Vakken",
+    "create_course": "Nieuwe Cursus",
+    "create_survey": "Nieuwe Enquête",
+    "not_enrolled": "Je staat op dit moment bij geen vakken ingeschreven.",
+    "show_all": "Toon Alles",
+    "surveys": "Alle Enquêtes"
+  },
+  "error": {
+    "could_not_convert_png": "De grafiek kon niet in een png bestaand worden omgezet.",
+    "standard": "Er is een fout opgetreden; probeer later opnieuw."
+  },
+  "exam": {
+    "entity": {
+      "all_questions": "Alle Vragen",
+      "answer_distribution": {
+        "chart": {
+          "callback": "{{percent}}% van de studenten gaven {{answer}} op {{question}}",
+          "title": "Antwoordverdeling",
+          "x_label": "Vraag",
+          "y_label": "Antwoord"
+        },
+        "text": {
+          "not_given_mult": "Er waren <b class=num_not_given></b> antwoorden die door geen student was gegeven.",
+          "not_given_sing": "Er was <b class=num_not_given></b> antwoord dat door geen student was gegeven.",
+          "pop_wrong_mult": "Er waren <b class=num_pop_wrong></b> incorrecte antwoorden die door meer dan 20% van de studenten gegeven waren.",
+          "pop_wrong_sing": "Er was <b class=num_pop_wrong></b> incorrecte antwoord dat door meer dan 20% van de studenten gegeven was."
+        },
+        "title": "Antwoordverdeling"
+      },
+      "course_average": "Vakgemiddelde",
+      "exam_duration": {
+        "chart": {
+          "callback": "{{student}} haalde een {{grade}} en deed {{duration}} over de toets",
+          "title": "Cijfer en Duur",
+          "x_label": "Cijfer",
+          "y_label": "Duur (U:MM:SS)"
+        },
+        "text": "Studenten deden er gemiddeld <b class=avg_duration></b> over om de toets te voltooien. Studenten met een voldoende deden er gemiddeld <b class=avg_duration_passed></b> over. Er waren <b class=outliers></b> studenten met een toetsduur van 2 of meer standaardafwijkingen van het gemiddelde.",
+        "title": "Toets Duur"
+      },
+      "general_information": "Algemene Informatie",
+      "my_grade": "Mijn Cijfer",
+      "participants": "Deelnemers",
+      "passed": "Voldoende",
+      "question_values": {
+        "duration_chart": {
+          "callback": "Studenten deden gemiddeld {{duration}} over {{question}}",
+          "title": "Duur per Vraag",
+          "x_label": "Vraag",
+          "y_label": "Duur (U:MM:SS)"
+        },
+        "p_value_chart": {
+          "callback": "{{value}}% van de studenten hebben {{question}} correct beantwoord",
+          "title": "P-Waarde per Vraag",
+          "x_label": "Vraag",
+          "y_label": "Procent Correct"
+        },
+        "rir_value_chart": {
+          "callback": "{{question}} heeft een Rir-waarde van {{value}}",
+          "title": "Rir-Waarde per Vraag",
+          "x_label": "Vraag",
+          "y_label": "Rir-Waarde"
+        },
+        "text": {
+          "high_low": "De vragen <span class=high_questions></span> zijn correct beantwoord door meer dan 80% van de studenten en de vragen <span class=low_questions></span> zijn correct beantwoord door minder dan 20% van de studenten en dus kunnen onbetrouwbare R<sub>ir</sub> waardes hebben.",
+          "high_mult": "De vragen <span class=high_questions></span> zijn correct beantwoord door meer dan 80% van de studenten en dus kunnen onbetrouwbare R<sub>ir</sub> waardes hebben.",
+          "high_sing": "De vraag <span class=high_questions></span> was correct beantwoord door meer dan 80% van de studenten en dus kan een onbetrouwbare R<sub>ir</sub> waarde hebben.",
+          "low_mult": "De vragen <span class=low_questions></span> zijn correct beantwoord door minder dan 20% van de studenten en dus kunnen onbetrouwbare R<sub>ir</sub> waardes hebben.",
+          "low_sing": "De vraag <span class=low_questions></span> was correct beantwoord door minder dan 20% van de studenten en dus kan een onbetrouwbare R<sub>ir</sub> waarde hebben.",
+          "none": "Alle vragen werden correct beantwoord door een aantal tussen 20% en 80% van de studenten."
+        },
+        "title": "Vragen"
+      },
+      "questions": "Questions",
+      "score_distribution": {
+        "chart": {
+          "title": "Cumulatieve Cijfers",
+          "x_label": "Cijfer",
+          "y_label": "Percentage van Studenten"
+        },
+        "text": "De gemiddelde student haalde een <b class=avg_grade></b> op deze toets. Het laagste cijfer was <b class=min_grade></b> en het hoogste cijfer was <b class=max_grade></b>. De standaardafwijking van de cijfers voor deze toets is <b class=std_dev></b>.",
+        "title": "Cijferverdeling"
+      }
+    },
+    "list": {
+      "administration_link": "Klik <a class='cursor-pointer administration-link'>hier</a> om toetsen te importeren.",
+      "section_title": "Toetslijst",
+      "table_title": "Toetsen"
+    },
+    "overview": {
+      "description": "Overzicht van alle toetsen.",
+      "grade_progress": {
+        "average_grade": "Gemiddeld Cijfer",
+        "card_title": "Cijfers per Toets",
+        "chart_title": "Cijfers per Toets",
+        "my_grade":"Mijn Cijfer",
+        "x_label": "Toets",
+        "y_label": "Cijfer"
+      },
+      "recent_table": "Recente Toetsen",
+      "section_title": "Recente Toetsen",
+      "statistics_grades_chart_title": "Cijfers per Toets",
+      "statistics_participants_chart_title": "Deelnemers per Toets",
+      "statistics_section_title": "Statistieken",
+      "title": "Overzicht Toetsen"
+    }
+  },
+  "form": {
+    "is_required": "{{tag}} is verplicht."
+  },
+  "global_activities": {
+    "section_title": "Alle Activiteiten",
+    "table_title": "Lijst van alle activiteiten"
+  },
+  "group": {
+    "entity": {
+      "average_grade": "Gemiddelde Cijfer",
+      "construct_progress": {
+        "chart": {
+          "callback": {
+            "cohort": "Alle studenten hadden op {{date}} een gemiddelde {{score}}%",
+            "group": "{{group_name}} had op {{date}} een gemiddelde {{score}}%"
+          },
+          "title": "Voortgang Onderwerp",
+          "x_label": "Tijd",
+          "y_label": "Score"
+        },
+        "cohort_average": "Cohort gemiddelde",
+        "construct_average": "Onderwerpgemiddelde",
+        "title": "Voortgang Onderwerpen"
+      },
+      "constructs": "Onderwerpen",
+      "exam_progress": {
+        "chart": {
+          "callback": {
+            "cohort": "Alle studenten haalden gemiddeld een {{grade}} voor {{exam}}",
+            "group": "{{group_name}} haalde gemiddeld een {{grade}} voor {{exam}}"
+          },
+          "title": "Voortgang Toetsen",
+          "x_label": "Toets",
+          "y_label": "Cijfer"
+        },
+        "title": "Voortgang Toetsen"
+      },
+      "exams": "Toetsen",
+      "general_information": "Algemene Informatie",
+      "member_count": "Leden",
+      "misconstruct_progress": {
+        "cohort_average": "Cohort gemiddelde",
+        "misconstruct_average": "Misconceptgemiddelde",
+        "title": "Voortgang Misconcepten"
+      },
+      "students": "Studenten"
+    },
+    "list": {
+      "administration_link": "Klik <a class='cursor-pointer administration-link'>hier</a> om groepen aan te maken.",
+      "section_title": "Groepenlijst",
+      "table_title": "Groepen"
+    }
+  },
+  "interface": {
+    "loading": "Aan het laden..."
+  },
+  "list": {
+    "none": "Geen"
+  },
+  "login": {
+    "back": "Terug",
+    "forgot_password": "Wachtwoord vergeten?",
+    "IE_warning": "Internet Explorer is niet ondersteund. Gebruik a.u.b. een andere browser, zoals <a target='_blank' href='https://www.google.com/chrome/'>Chrome</a>",
+    "login": "Inloggen",
+    "login_method": "Email of studentennummer",
+    "logout": "Uitloggen",
+    "no_account": "Heb je nog geen account?",
+    "or": "OF",
+    "password": "Wachtwoord",
+    "register": "Hier registreren",
+    "required_password": "Wachtwoord is verplicht.",
+    "required_username": "Gebruikersnaam is verplicht.",
+    "sign_in": "Ik heb de <a class='cursor-pointer privacy-statement-link'>gebruikersovereenkomst</a> gelezen",
+    "solis_login": "Met Solis inloggen",
+    "thermos": "Login met Thermos Account",
+    "title": "Inloggen"
+  },
+  "misconception": "misconcept",
+  "modal": {
+    "add": "Maak aan",
+    "cancel": "Annuleer",
+    "delete": "Verwijder",
+    "edit": "Pas aan",
+    "import": "Laad in",
+    "link": "Koppel"
+  },
+  "nav": {
+    "next": "Volgende",
+    "page": "Pagina {{current}} van {{total}}",
+    "previous": "Vorige",
+    "submit": "Verstuur"
+  },
+  "not_found": {
+    "description": "De verzochte pagina bestaat niet.",
+    "return_to_dashboard": "Ga terug naar de dashboard",
+    "title": "404"
+  },
+  "question": {
+    "entity": {
+      "alert": {
+        "less_correct": "Minder dan {{percent}}% van de studenten hebben deze vraag correct beantwoord.",
+        "popular_wrong_answer": "<b>{{answer}}</b> is een populair fout antwoord, omdat meer dan {{percent}}% van de studenten dit foute antwoord hebben gegeven.",
+        "popular_wrong_answers": "<b>{{answers}}</b> zijn populaire foute antwoorden, omdat deze antwoorden door meer dan {{percent}}% van de studenten zijn gegeven."
+      },
+      "answer": "Antwoord {{id}}",
+      "answer_distribution": {
+        "chart": {
+          "callback": "{{num_students}} studenten gaven {{answer}}",
+          "title": "Antwoordverdeling",
+          "x_label": "Antwoord",
+          "y_label": "Aantal Studenten"
+        },
+        "title": "Antwoordverdeling"
+      },
+      "answer_distribution_ms": {
+        "chart": {
+          "callback": "{{percent}}% van de studenten gaven {{response}}",
+          "title": "Antwoordverdeling",
+          "x_label": "Gegeven Antwoord (links vaker gegeven)",
+          "y_label": "Antwoord"
+        },
+        "title": "Antwoordverdeling"
+      },
+      "connected_constructs": "Gekoppelde Onderwerpen",
+      "constructs": "Onderwerpen",
+      "content": "Inhoud",
+      "explanation": "Uitleg",
+      "given": "Gegeven",
+      "info": "<b>{{null_responses}}</b> van de studenten gaven geen antwoord. De gemiddelde student deed <b>{{average_duration}}</b> over deze vraag. <b>{{percent}}</b> van de studenten heeft juist geantwoord.",
+      "my_answer": "Mijn Antwoord",
+      "nav": {
+        "next_question": "Volgende vraag",
+        "previous_question": "Vorige vraag"
+      },
+      "question_body": "Vraag",
+      "responses": "Antwoorden"
+    },
+    "likert": "Likertschaal Vraag",
+    "multiple_choice": "Meerkeuze Vraag",
+    "multiple_selection": "Meerkeuze Vraag (meerdere correct)",
+    "open": "Open Vraag",
+    "required": "Deze vraag is verplicht."
+  },
+  "register": {
+    "already_account": "Heb je al een account?",
+    "confirm_password": "Bevestig Wachtwoord",
+    "email": "Email",
+    "first_name": "Voornaam",
+    "is_invalid": "{{tag}} is ongeldig.",
+    "is_required": "{{tag}} is verplicht.",
+    "last_name": "Achternaam",
+    "login": "Hier inloggen",
+    "no_match": "Wachtwoorden komen niet overeen",
+    "password": "Wachtwoord",
+    "password_requirements": "Wachtwoorden moeten minsten {{requiredLength}} karakters bevatten",
+    "please_read": "Lees en ga akkoord met de gebruikersovereenkomst",
+    "read_agree": "Ik heb gelezen en ga akkoord met de",
+    "register": "Registreer",
+    "solve_recaptcha": "Los de reCAPTCHA op",
+    "student_number": "Studentennummer",
+    "title": "Registreren",
+    "user_agreement": "Gebruikersovereenkomst"
+  },
+  "relation": {
+    "construct": {
+      "concept_misconception_a": "{{aConstruct}} is een concept van {{bConstruct}}",
+      "concept_misconception_b": "{{aConstruct}} is een misconcept van {{bConstruct}}",
+      "meronomical_a": "{{aConstruct}} bestaat uit {{bConstruct}}",
+      "meronomical_b": "{{aConstruct}} is onderdeel van {{bConstruct}}",
+      "prerequisite_outcome_a": "{{aConstruct}} is een voorwaarde van {{bConstruct}}",
+      "prerequisite_outcome_b": "{{aConstruct}} is een gevolg van {{bConstruct}}",
+      "taxonomical_a": "{{aConstruct}} is een ouder van {{bConstruct}}",
+      "taxonomical_b": "{{aConstruct}} is een kind van {{bConstruct}}"
+    },
+    "study_material": {
+      "exhibits_a": "{{material}} vertoont {{construct}}",
+      "exhibits_b": "{{construct}} wordt vertoont door {{material}}",
+      "remedies_a": "{{material}} verhelpt {{construct}}",
+      "remedies_b": "{{construct}}  wordt verholpen door {{material}}",
+      "teaches_a": "{{material}} leert {{construct}}",
+      "teaches_b": "{{construct}}  wordt onderwezen door {{material}}",
+      "tests_a": "{{material}} toetst {{construct}}",
+      "tests_b": "{{construct}}  wordt getoetst door {{material}}"
+    }
+  },
+  "saml_logout": {
+    "description": "Je bent uitgelogd van {{projectName}}.<br/>Klik op de knop om van alle universiteitsdiensten uit te loggen.",
+    "logout": "Log uit",
+    "or": "of",
+    "return_to_dashboard": "ga terug naar het dashboard",
+    "title": "Voltooi Uitloggen"
+  },
+  "settings": {
+    "user": {
+      "global": {
+        "accepted_resouces": "Geaccepteerde externe bronnen:",
+        "card_title": "Globale instellingen",
+        "language": "taal"
+      },
+      "section_title": "Gebruikersinstellingen"
+    }
+  },
+  "sidebar": {
+    "actions": "Acties",
+    "administration": "Administratie",
+    "collections": "Collecties",
+    "connector": "Aansluitingen",
+    "constructs": "Onderwerpen",
+    "course": "Vak",
+    "exams": "Toetsen",
+    "groups": "Groepen",
+    "knowledge_map": "Kennismap",
+    "list": "Lijst",
+    "mapping": "Koppelingen",
+    "models": "Modellen",
+    "my-progress": "Voortgang",
+    "overview": "Overzicht",
+    "students": "Studenten",
+    "study_material": "Studiemateriaal",
+    "surveys": "Enquêtes"
+  },
+  "student": {
+    "entity": {
+      "average_grade": "Gemiddelde Cijfer",
+      "construct_progress": {
+        "chart": {
+          "callback": {
+            "cohort": "Alle studenten hadden op {{date}} een gemiddelde {{score}}%",
+            "student": "{{student_name}} had op {{date}} een gemiddelde {{score}}%"
+          },
+          "title": "Onderwerp Vooruitgang",
+          "x_label": "Tijd",
+          "y_label": "Score"
+        },
+        "cohort_average": "Cohort gemiddelde",
+        "construct_average": "Onderwerpgemiddelde",
+        "title": "Onderwerp Vooruitgang"
+      },
+      "constructs": "Onderwerpen",
+      "exam_progress": {
+        "chart": {
+          "callback": {
+            "cohort": "Alle studenten haalden gemiddeld een {{grade}} voor {{exam}}",
+            "student": "{{student_name}} haalde gemiddeld een {{grade}} voor {{exam}}"
+          },
+          "title": "Voortgang Toetsen",
+          "x_label": "Toets",
+          "y_label": "Cijfer"
+        },
+        "title": "Voortgang Toetsen"
+      },
+      "exams": "Toetsen",
+      "general_information": "Algemene Informatie",
+      "groups": "Groepen",
+      "misconstruct_progress": {
+        "cohort_average": "Cohort gemiddelde",
+        "misconstruct_average": "Misconceptgemiddelde",
+        "title": "Voortgang Misconcepten"
+      },
+      "student_number": "Studentennummer",
+      "study_material": "Studiemateriaal",
+      "study_material_progress": {
+        "chart": {
+          "callback": {
+            "completed": "{{student_name}} heeft {{num_material}} van de materialen voltooid",
+            "seen": "{{student_name}} heeft {{num_material}} van de materialen gezien maar nog niet voltooid",
+            "unseen": "{{student_name}} heeft {{num_material}} van de materialen nog niet gezien"
+          },
+          "completed": "Voltooid",
+          "seen": "Gezien",
+          "title": "Voortgang Studiemateriaal",
+          "unseen": "Ongezien",
+          "x_label": "Stand",
+          "y_label": "Aantal Materialen"
+        },
+        "title": "Voortgang Studiemateriaal"
+      }
+    },
+    "list": {
+      "section_title": "Studentenlijst",
+      "table_title": "Studenten"
+    },
+    "set": {
+      "section_title": {
+        "average_grade_distribution": "Studenten met een afgerond gemiddelde van {{var0}}",
+        "construct_distribution_score": "Studenten die {{var0}} of lager hebben gescoord op \"{{var1}}\"",
+        "question_answer_distribution": "Studenten die antwoord {{var0}} hebben gegeven op \"{{var1}}\"",
+        "study_material_completed": "Studenten die \"{{var0}}\" hebben voltooid",
+        "study_material_seen": "Studenten die \"{{var0}}\" hebben gezien",
+        "study_material_unseen": "Studenten die \"{{var0}}\" niet hebben gezien"
+      },
+      "table_title": "Studenten"
+    }
+  },
+  "studyMaterial.list.section_title": "Studiemateriaal",
+  "study_material": {
+    "entity": {
+      "connected_constructs": "Gekoppelde Onderwerpen",
+      "constructs": "Onderwerpen",
+      "general_information": "Algemene Informatie",
+      "progress": {
+        "chart": {
+          "callback": {
+            "completed": "{{num_students}} studenten hadden op {{date}} het materiaal voltooid",
+            "completed_sing": "{{num_students}} student had op {{date}} het materiaal voltooid",
+            "seen": "{{num_students}} studenten hadden op {{date}} het materiaal gezien maar nog niet voltooid",
+            "seen_sing": "{{num_students}}  student had op {{date}} het materiaal gezien maar nog niet voltooid",
+            "unseen": "{{num_students}} studenten hadden op {{date}} het materiaal nog niet gezien",
+            "unseen_sing": "{{num_students}} student had op {{date}} het materiaal nog niet gezien"
+          },
+          "completed": "Voltooid",
+          "seen": "Gezien",
+          "title": "Voortgang",
+          "unseen": "Ongezien",
+          "x_label": "Tijd",
+          "y_label": "Aantal Studenten"
+        },
+        "section_title": "Voortgang"
+      },
+      "properties": {
+        "authors": "Auteurs",
+        "edition": "Editie",
+        "end_time": "Eindtijd",
+        "index": "Index",
+        "isbn": "ISBN",
+        "publish_date": "Uitgebracht op",
+        "start_time": "Begintijd",
+        "url": "Url",
+        "video": "Video"
+      },
+      "question_duration.title": "Vraag Duur",
+      "source": "Bron: <a href='{{url}}' target='_blank'>{{url}}</a>",
+      "status": {
+        "completed": "Voltooid",
+        "completed_on": "Voltooid op {{date}}",
+        "seen": "Gezien",
+        "unseen": "Ongezien"
+      }
+    },
+    "list": {
+      "administration_link": "Klik <a class='cursor-pointer administration-link'>hier</a> om studiemateriaal toe te voegen.",
+      "section_title": "Studiemateriaallijst",
+      "table_title": "Studiemateriaal"
+    }
+  },
+  "survey": {
+    "list": {
+      "administration_link": "Klik <a class='cursor-pointer administration-link'>hier</a> om enquêtes aan te maken.",
+      "section_title": "Surveylijst",
+      "table_title": "Surveys"
+    }
+  },
+  "table": {
+    "action": {
+      "advanced_linking": "Geavanceerde Koppeling",
+      "delete": "Verwijder",
+      "edit": "Pas aan",
+      "import_results": "Laad Resultaten in",
+      "link_constructs": "Koppel Onderwerpen",
+      "link_questions": "Koppel Vragen",
+      "link_study_material": "Koppel Studiemateriaal"
+    },
+    "filter_placeholder": "Filter",
+    "filtered_from": "(van {{total}} totale items)",
+    "footer": "Rijen {{startNum}} t/m {{endNum}} van {{total}} worden weergegeven",
+    "headers": {
+      "activities": "Activiteiten",
+      "answer": "Antwoord",
+      "average": "Gemiddelde",
+      "average_grade": "Gemiddelde Cijfer",
+      "code": "Code",
+      "completed": "Voltooid",
+      "connectors": "Aansluitingen",
+      "construct_average": "Onderwerpgemiddelde",
+      "correct": "Correct",
+      "covered_on":"Behandeld op",
+      "description": "Beschrijving",
+      "display_name": "Naam",
+      "end": "Eind",
+      "exam": "Toets",
+      "first_name": "Voornaam",
+      "grade": "Cijfer",
+      "group_average": "Groepsgemiddelde",
+      "last_name": "Achternaam",
+      "length": "Lengte",
+      "members": "Leden",
+      "misconstruct_average": "Misconceptgemiddelde",
+      "models": "Modellen",
+      "name": "Naam",
+      "no_translation": "{{text}}",
+      "number": "Nummer",
+      "participants": "Deelnemers",
+      "percent_correct": "Procent correct",
+      "period": "Periode",
+      "question": "Vraag",
+      "questions": "Vragen",
+      "role": "Rol",
+      "score": "Score",
+      "seen": "Gezien",
+      "start": "Begin",
+      "status": "Staat",
+      "student_number": "Studentennummer",
+      "students": "Studenten",
+      "title": "Titel",
+      "type": "Type",
+      "updated": "Bijgewerkt op",
+      "visibility": "Zichtbaarheid"
+    },
+    "icons": {
+      "completed-icon": "Voltooid",
+      "invisible-icon": "Onzichtbaar",
+      "seen-icon": "Gezien",
+      "unseen-icon": "Ongezien",
+      "visible-icon": "Zichtbaar"
+    },
+    "no_entries": "Geen rijen om weer te geven.",
+    "no_matches": "Geen overeenkomende resultaten."
+  },
+  "thermos": {
+    "anxiety": {
+      "feedback": "heeft 2 belangrijkste aspecten: zenuwachtig zijn en zorgen maken. Zenuwachtig zijn is het ongemakkelijke of misselijke gevoel dat je krijgt wanneer je denkt aan studieopdrachten of tentamens.\nZorgen maken komt uit je angst om het niet goed te doen bij studieopdrachten of tentamens.",
+      "importance": "Een beetje Anxiety kan nuttig zijn, maar te veel kan je studie belemmeren. Het overwinnen van Anxiety kan zorgen dat je je makkelijker kunt concentreren of dingen kan onthouden. Als je hier zorgen over hebt, zoek dan iemand om erover te praten."
+    },
+    "contact": "Voor vragen of problemen, neem contact op met <a href='mailto:l.b.devreugd-2@umcutrecht.nl' title='l.b.devreugd-2@umcutrecht.nl'><i class='fas fa-envelope mx-2'></i>L.B. de Vreugd</a>",
+    "disengagement": {
+      "feedback": "is het gevoel van opgeven op een bepaald onderwerp op de universiteit of studeren in het algemeen",
+      "importance": "Als je je disengagement kan overwinnen, heb je waarschijnlijk meer vertrouwen in wat je kan doen om falen te voorkomen of succesvol te zijn. Ook word je meer geïnteresseerd in studeren aan een universiteit."
+    },
+    "empty_feedback": "Klik op een aspect in een van de visualisaties voor feedback.",
+    "failure_avoidance": {
+      "feedback": "houdt in dat je studieopdrachten voornamelijk doet om te voorkomen dat je het slecht doet, in plaats van streven naar succes of verbetering. Of, dat je wil voorkomen dat het eruit ziet alsof je het slecht doet.",
+      "importance": "Als je je failure avoidance kan overwinnen heb je waarschijnlijk minder angst om te falen, je pessimistisch te voelen, of zenuwachtig te voelen als je denkt aan studieopdrachten."
+    },
+    "feedback": {
+      "act": "Actie",
+      "additionalTitle": "Aanvullende ondersteuning voor {{constructName}}",
+      "exercises": "Oefeningen voor {{constructName}}",
+      "importance": "Waarom is dit belangrijk?",
+      "links": "Aanvullende ondersteuning",
+      "prepare": "Voorbereiden",
+      "reflect": "Reflecteren",
+      "score": "Gebaseerd op de vragenlijst scoorde <u>jij</u> <u>jezelf</u> op {{constructName}}: {{score}}.",
+      "score-criterion-norm": "</br>Voor {{constructName}} is het aanbevolen percentage om succesvol te studeren (criterion reference): {{norm}}%.",
+      "score-peer-norm": "</br>Voor {{constructName}} is het gemiddelde van je medestudenten (peer reference): {{norm}}%.",
+      "tips": "Voor tips en acties om te verbeteren, klik hieronder"
+    },
+    "interpersonal_group_work_skills": {
+      "feedback": "zijn de vaardigheden die je nodig hebt om met anderen of in een team samen te werken, bijvoorbeeld conflicten oplossen, informatie uitwisselen tussen netwerken, en sociale ondersteuning geven.",
+      "importance": "Betere interpersonal group work skills dragen bij aan beter samenwerken met anderen, door positieve sociale interacties en verbeterde communicatie."
+    },
+    "intro": {
+      "feedback": "Geef feedback over de Thermos tool",
+      "greeting": "Hoi {{name}},",
+      "message": "Deze visualisaties tonen jouw self-assessment scores op Motivation & Engagement, en Groupwork skills. Deze scores kunnen veranderen wanneer jij verandert, klik op een aspect om daarvoor tips en feedback te ontvangen.",
+      "message_no_results": "Er is nog geen data om weer te geven.",
+      "retake": "Vul de vragenlijst opnieuw in",
+      "rewatch": "Bekijk de introductievideo opnieuw",
+      "start": "Klik hier om de vragenlijst in te vullen"
+    },
+    "latest_result": "laatste",
+    "learning_focus": {
+      "feedback": " is de mate waarin je gefocust bent op leren, problemen oplossen en vaardigheden ontwikkelen. Het is ook je succesvol voelen en voldoening halen uit het beheersen van wat je wilde bereiken.",
+      "importance": "Als je meer een Learning Focus krijgt wordt het studeren waarschijnlijk leuker, studeer je voor je eigen voldoening i.p.v. voor een beloning, en geniet je van uitdagingen."
+    },
+    "mobile_warning": "The dashboard was designed for a desktop or laptop and may not work optimally on a smartphone.",
+    "persistence": {
+      "feedback": "(Doorzettingsvermogen) is hoe lang en hard je blijft proberen om een antwoord te formuleren of een probleem te begrijpen, zelfs als dat moeilijk of uitdagend is.",
+      "importance": "Als je meer doorzettingsvermogen hebt, haal je waarschijnlijk vaker wat je wilde bereiken, ben je gemotiveerder om te slagen, en ben je beter in probleem oplossen."
+    },
+    "planning": {
+      "feedback": "is hoeveel je het studeren en maken van opdrachten plant. Het gaat ook over het bijhouden van voortgang wanneer je opdrachten maakt of studeert.",
+      "importance": "Als je opdrachten en studeren plant is het waarschijnlijker dat je controle voelt over je voortgang, uitdagend werk succesvol afrond, en goed gebruik maakt van je tijd en vermogens."
+    },
+    "result_history.title": "Resultaat overzicht",
+    "self_belief": {
+      "feedback": "is, als het gaat over studeren, het geloof en vertrouwen in je eigen vermogen om het goed te doen op de universiteit, uitdagingen in je studie aan te gaan, leermogelijkheden aan te grijpen en op je beste kunnen te presteren.",
+      "importance": "Met een hoge mate van Self-belief ga je moeilijke opdrachten met zelfvertrouwen aan, voel je je optimistischer, probeer je harder en beleef je meer plezier aan studeren."
+    },
+    "self_sabotage": {
+      "feedback": "is dingen doen die je succes op de universiteit verminderen, zoals het uitstellen van studeren of tijdverspillen terwijl je zou moeten studeren voor een tentamen.",
+      "importance": "Als je je self-sabotage kan overwinnen benut je vaardigheden meer, voel je je beter over je studie, en bereik je wat je zou kunnen."
+    },
+    "study_progress.title": "Studievoortgang",
+    "task_group_work_skills": {
+      "feedback": "zijn de vaardigheden die je nodig hebt om een groepsopdracht succesvol te kunnen afronden, zoals doelen opstellen, een planning maken, of de samenwerking te coördineren.",
+      "importance": "Betere task group work skills dragen bij aan beter samenwerken met anderen, door de tijd beter en efficienter te gebruiken tijdens bijeenkomst. Ook kan ‘meeliften’ (social loafing) hiermee verminderd of voorkomen worden."
+    },
+    "task_management": {
+      "feedback": "is de manier waarop jij je studietijd indeelt, hoe je een studieschema organiseert, en hoe je je werkplek kiest en indeelt.",
+      "importance": "Wanneer je het studeren goed managed gaat dit waarschijnlijk efficiënter. Dit kan je doen door te studeren op plaatsen waar je je kan concentreren, je tijd goed te gebruiken zonder afgeleid te worden, en je te houden aan een studieschema."
+    },
+    "uncertain_control": {
+      "feedback": "is wanneer je niet zeker weet hoe je het goed kan doen in je studie, of kan vermijden het slecht te doen.",
+      "importance": "Als je niet het gevoel van controle hebt kan je je ietwat hulpeloos voelen wanneer je studieopdrachten doet, angst hebben voor falen, of negatieve gedachten hebben over je studieopdrachten."
+    },
+    "user_agreement": "<p>Dear student,</p><p>You’re about to use the THERMOS-tool. This tool is still under development so any help and feedback is greatly appreciated.</p><p>Please note that you should by no means feel pressured into using this tool. If so, do not continue and close this window. Furthermore, if you proceed to use the Thermos-dashboard, you confirm to have read and understand this statement, and agree to your (pseudonymized) data being stored and used to further develop this tool, the implementation in educational context, and/or for research purposes. If you do not agree, do not continue and close this window.</p><p>This text will briefly explain what data will be processed and stored, who will have access to it, and how this data helps the development of this tool.</p><h5>What data is collected, why, and with what purpose?</h5><p>With this tool we want to offer you support in studying at Utrecht University, by providing insight in your study behavior and helping you develop this. Your data is collected and processed for this purpose by Utrecht University and the principle behind the use of this information is the justified interest of Utrecht University.</p><p>We have composed a survey with questions about Motivation and Engagement, and Groupwork skills. Some questions are quite similar, which is not a trick but the way these surveys work. The survey used in this dashboard only measures aspects of your study behavior, not (e.g.) indications of your mental health.</p><p>After you’ve completed this survey, the data will be presented to you in a visualization. You can click on the topics you’re interested in to get feedback on how to work on these topics. After you’ve finished the survey and examined the tips and feedback, you can give us your opinion and feedback about this version of the tool. To do so, go to the ‘provide feedback’ section. We are curious to know how you’ve experienced the tool’s current look, the usefulness of the feedback and tips, and whatever comes to mind when you’re using the tool.</p><p>Apart from the personal data you provide in the surveys, the dashboard shows some personal (study progress) data from Osiris, specifically current study program, EC's obtained and average grade obtained in current study program. In order to show you this data in the dashboard, a SAML-token is used. By using this token, your SOLIS ID and the associated personal data cannot be traced within the Thermos dashboard. Lastly, while using the dashboard, your online behavior will be logged. </p><h5>Where is the data stored and for how long?</h5><p>The survey, feedback, and logdata are stored on a secured UU-server. To ensure protection of the data a penetration test was performed in 2019 by a third party, revealing minor issues that have been resolved. Only project members have access to the data. The data remains available until you are no longer a student at UU. After that, the data is pseudonymized and remains available for research purposes (for 10 years, <a href='www.vsnu.nl/files/documenten/Domeinen/Onderzoek/Code_wetenschapsbeoefening_2004_(2014).pdf' _target='_blank'>recommended by the VSNU</a>), in accordance with UU’s <a href='https://www.uu.nl/en/organisation/privacy-statement-utrecht-university' target='_blank'>privacy statement</a> (last modified on 17th of May 2018). UU has the right to update this statement when necessary.  The data is processed based on UU’s legitimate interest to improve provided education. Data will not be shared with third parties or with countries outside of the European Economic Area.</p><h5>Who has access to the data?</h5><p>Your teachers or tutors will not be able to view your data. You can, of course, show them your results if you want their help, but only if you want to. The stored data will only be accessible to THERMOS-project members and will be used to further develop the tool or for research purposes. Before your data is used for development and/or research purposes it will be pseudonymized. When pseudonymized, aggregated data can be used to give study programs an overarching view of the measured constructs for that specific study program.</p><h5>What rights do I have?</h5><p>You have several rights as a Thermos dashboard user; the right to inspect your data, to rectify data, to remove data, to limit data collection, to object data collection, and data portability. To exercise any of these rights, get in touch with <a href='mailto:l.b.devreugd-2@umcutrecht.nl'>l.b.devreugd-2@umcutrecht.nl</a>, or with <a href='mailto:privacy@uu.nl'>privacy@uu.nl</a> to do so anonymously.</p><h5>With whom can you get in touch for questions or complaints?</h5><p>For questions or complaints about the project, feel free to send an email to <a href='mailto:l.b.devreugd-2@umcutrecht.nl'>l.b.devreugd-2@umcutrecht.nl</a>. If you want to get in touch with the UU privacy officer, send an email to <a href='mailto:privacy@uu.nl'>privacy@uu.nl</a>.If you want to file an official complaint with the ‘Autoriteit Persoonsgegevens’, see <a href='https://www.rijksoverheid.nl/contact/contactgids/autoriteit-persoonsgegevens' target='_blank'>www.rijksoverheid.nl/contact/contactgids/autoriteit-persoonsgegevens</a>. Further information on the project can be found on <a href='https://thermos.sites.uu.nl' target='_blank'>thermos.sites.uu.nl</a>.</p><p>Responsible for the data processing is Utrecht University, Heidelberglaan 8, 3584 CS Utrecht, <a href='mailto:info@uu.nl'>info@uu.nl</a></p>",
+    "valuing": {
+      "feedback": "is de mate waarin jij gelooft dat wat je leert op de universiteit nuttig, belangrijk, en relevant is voor jou of de wereld in het algemeen.",
+      "importance": "Als je waarde hecht aan studeren aan een universiteit, ben je waarschijnlijk meer geïnteresseerd in wat je leert, heb je meer doorzettingsvermogen wanneer het moeilijk wordt, en is studeren leuker."
+    }
+  },
+  "toolbar": {
+    "history": {
+      "empty_message": "Niets om te tonen",
+      "recent": "Recent"
+    },
+    "powered_by": "powered by",
+    "user": {
+      "log_out": "Uitloggen",
+      "privacy": "Privacy",
+      "settings": "Instellingen"
+    }
+  },
+  "video": {
+    "invalid_url": "De bron van de video is onjuist. Probeer het later opnieuw.",
+    "privacy_warning": {
+      "message": "Het bekijken van deze video is mogelijk niet anoniem.<br/>De aanbieder van deze video kan jouw kijkgedrag bijhouden.",
+      "prompt": "Wil je deze video nog laden?",
+      "remember_choice": "Herinner mijn keuze (dit kun je in jouw <a href='/user-settings'>instellingen</a> aanpassen).",
+      "title": "Privacywaarschuwing",
+      "view_here": "Hier Bekijken"
+    }
+  }
+}

@@ -1,0 +1,281 @@
+<app-title-section
+  [title]="('admin.construct.section_title' | translate | titlecase)">
+</app-title-section>
+
+<app-card
+  [icon]="'construct-icon'"
+  [title]="'admin.construct.table_title' | translate | titlecase"
+  [actions]="constructTable.cardActions">
+  <app-construct-table #constructTable [constructs]="constructs" [limit]="10" [actions]="tableActions" [hierarchical]="true">
+  </app-construct-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.construct.create' | translate}}</p>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>{{'admin.construct.construct' | translate}}
+      </button>
+    </div>
+  </div>
+  <!-- <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-success" (click)="constructsFromCSV.open()">
+        <i class="upload-icon"></i>Import from csv
+      </button>
+    </div>
+  </div> -->
+
+  <p class="section-title">{{'admin.construct.linking' | translate}}</p>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="resetLinkConstructForm(); linkConstructModal.open()">
+        <i class="construct-link-icon"></i>{{'admin.construct.constructs' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="resetLinkMaterialForm(); linkMaterialModal.open()">
+        <i class="material-link-icon"></i>{{'admin.construct.study_material' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <!-- <p class="section-title">Export</p>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary">
+        <i class="download-icon"></i>Export as csv
+      </button>
+    </div>
+  </div> -->
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.construct.new_construct.modal_title' | translate">
+  <form id="add-construct-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addName">{{'admin.construct.new_construct.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="addName"
+             [placeholder]="'admin.construct.new_construct.name' | translate" [ngClass]="{'is-invalid': addName.invalid}">
+      <app-form-control-error [form]="addForm" controlName="name" #addName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addDescription">{{'admin.construct.new_construct.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="addDescription" rows="3" [placeholder]="'admin.construct.new_construct.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="addModel">{{'admin.construct.new_construct.model' | translate}} *</label>
+      <app-dropdown
+        [items]="models"
+        id="addModel"
+        [placeholder]="'admin.construct.new_construct.model' | translate"
+        formControlName="model"
+        (selectionChange)="resetControls(addForm, {type: null})"
+        [ngClass]="{'is-invalid': addModel.invalid}">
+      </app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="model" #addModel></app-form-control-error>
+    </div>
+    <div class="form-group" *ngIf="addC.model.valid">
+      <label for="addType">{{'admin.construct.new_construct.type' | translate}} *</label>
+      <app-dropdown
+        [items]="addC.model.value.supported_construct_types"
+        id="addType"
+        [placeholder]="'admin.construct.new_construct.type' | translate"
+        formControlName="type"
+        [ngClass]="{'is-invalid': addType.invalid}">
+      </app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="type" #addType></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-construct-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #constructsFromCSV [title]="'Upload Constructs'">
+  <p>Expected format: name, description, type</p>
+  <form [formGroup]="csvForm">
+    <div class="form-group">
+      <label for="csvConstructModel">Model *</label>
+      <app-dropdown [items]="models" formControlName="model" placeholder="Model" id="csvConstructModel" [ngClass]="{'is-invalid': csvModel.invalid}"></app-dropdown>
+      <app-form-control-error [form]="csvForm" controlName="model" #csvModel></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <app-file-upload accept=".csv, text/plain" formControlName="file"></app-file-upload>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="constructsFromCSV.close('Cancel click')">Cancel</button>
+    <button type="submit" class="btn btn-success" (click)="constructsFromCSV.close('Add click')"><i class="upload-icon"></i>Import</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.construct.edit_construct.modal_title' | translate:{constructName: editingItem?.name}" (closed)="resetFormValidation(editForm)">
+  <form [formGroup]="editForm" id="edit-construct-form" (ngSubmit)="edit()">
+    <ng-container *ngIf="editingItem">
+      <div class="form-group">
+        <label for="editName">{{'admin.construct.edit_construct.name' | translate}} *</label>
+        <input type="text" class="form-control" formControlName="name" id="editName"
+               [placeholder]="'admin.construct.edit_construct.name' | translate" [ngClass]="{'is-invalid': editName.invalid}">
+        <app-form-control-error [form]="editForm" controlName="name" #editName></app-form-control-error>
+      </div>
+      <div class="form-group">
+        <label for="editConstructDescription">{{'admin.construct.edit_construct.description' | translate}}</label>
+        <textarea class="form-control" formControlName="description" id="editConstructDescription" rows="3"
+                  [placeholder]="'admin.construct.edit_construct.description' | translate"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="editModel">{{'admin.construct.edit_construct.model' | translate}} *</label>
+        <app-dropdown
+          [items]="models"
+          id="editModel"
+          [placeholder]="'admin.construct.edit_construct.model' | translate"
+          formControlName="model"
+          (selectionChange)="resetControls(editForm, {type: null})"
+          [ngClass]="{'is-invalid': editModel.invalid}">
+        </app-dropdown>
+        <app-form-control-error [form]="editForm" controlName="model" #editModel></app-form-control-error>
+      </div>
+      <div class="form-group" *ngIf="editC.model.valid">
+        <label for="editType">{{'admin.construct.edit_construct.type' | translate}} *</label>
+        <app-dropdown
+          [items]="editC.model.value.supported_construct_types"
+          id="editType"
+          [placeholder]="'admin.construct.edit_construct.type' | translate"
+          formControlName="type"
+          [ngClass]="{'is-invalid': editType.invalid}">
+        </app-dropdown>
+        <app-form-control-error [form]="editForm" controlName="type" #editType></app-form-control-error>
+      </div>
+    </ng-container>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-construct-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #linkConstructModal [title]="'admin.construct.link_construct.modal_title' | translate" (closed)="resetFormValidation(linkConstructForm)" [size]="'lg'">
+  <form [formGroup]="linkConstructForm" id="link-construct-form" (ngSubmit)="linkConstructs()">
+    <div class="form-group">
+      <div class="mb-2" *ngIf="linkConstructC.aConstruct.value && (linkConstructC.aConstruct.value.head_constructs.length + linkConstructC.aConstruct.value.tail_constructs.length > 0)">
+        <p class="mb-2 font-weight-bold">{{'admin.construct.link_construct.existing' | translate}}</p>
+        <app-list
+          [items]="linkConstructC.aConstruct.value.tail_constructs"
+          [getLabel]="getExistingConstructLabels('_b')"
+          (delete)="deleteConstructLink(linkConstructC.aConstruct.value, $event)">
+        </app-list>
+        <app-list
+          [items]="linkConstructC.aConstruct.value.head_constructs"
+          [getLabel]="getExistingConstructLabels('_a')"
+          (delete)="deleteConstructLink(linkConstructC.aConstruct.value, $event)">
+        </app-list>
+        <!-- <div class="col-12" *ngIf="linkConstructC.aConstruct.value.head_constructs.length > 0">
+          <app-list
+            [items]="linkConstructC.aConstruct.value.head_constructs"
+            (delete)="deleteConstructLink($event, linkConstructC.aConstruct.value)">
+          </app-list>
+        </div> -->
+      </div>
+      <label class="mb-2 font-weight-bold">{{'admin.construct.link_construct.new' | translate}}</label>
+      <div class="row">
+        <div class="col-lg-4 inline-dropdown">
+          <app-construct-dropdown
+            [models]="models"
+            [constructs]="constructs"
+            (selectionChange)="setLinkConstructItem($event)"
+            id="aConstruct"
+            formControlName="aConstruct"
+            [placeholder]="'admin.construct.link_construct.construct' | translate">
+          </app-construct-dropdown>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-dropdown
+            [items]="constructLinkTypes"
+            id="linkConstructType"
+            [placeholder]="'admin.construct.link_construct.type' | translate"
+            formControlName="type">
+          </app-dropdown>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-construct-dropdown
+            [models]="models"
+            [constructs]="possibleConstructLinks"
+            id="bConstruct"
+            formControlName="bConstruct"
+            [placeholder]="'admin.construct.link_construct.construct' | translate">
+          </app-construct-dropdown>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="linkConstructModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="link-construct-form" class="btn btn-primary"><i class="construct-link-icon"></i>{{'modal.link' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #linkMaterialModal [title]="'admin.construct.link_study_material.modal_title' | translate" (closed)="resetFormValidation(linkMaterialForm)" [size]="'lg'">
+  <form [formGroup]="linkMaterialForm" id="link-material-form" (ngSubmit)="linkMaterial()">
+
+    <div class="form-group">
+      <div class="row" *ngIf="existingMaterialLinks.length > 0">
+        <div class="col-6 mb-2">
+          <p class="mb-2 font-weight-bold">{{'admin.construct.link_study_material.existing' | translate}}</p>
+          <app-list
+            [items]="existingMaterialLinks"
+            [getLabel]="existingMaterialLabels"
+            (delete)="deleteMaterialLink(linkMaterialC.construct.value, $event)">
+          </app-list>
+        </div>
+      </div>
+      <label class="mb-2 font-weight-bold">{{'admin.construct.link_study_material.new' | translate}}</label>
+      <div class="row">
+        <div class="col-lg-4 inline-dropdown">
+          <app-construct-dropdown
+            [models]="models"
+            [constructs]="constructs"
+            id="materialConstruct"
+            formControlName="construct"
+            [placeholder]="'admin.construct.link_study_material.construct' | translate"
+            (selectionChange)="setLinkMaterialItem($event)"
+            [ngClass]="{'is-invalid': materialConstruct.invalid}">
+          </app-construct-dropdown>
+          <app-form-control-error [form]="linkMaterialForm" controlName="construct" #materialConstruct></app-form-control-error>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-dropdown
+            [items]="materialLinkTypes"
+            id="linkMaterialType"
+            [placeholder]="'admin.construct.link_study_material.type' | translate"
+            formControlName="type"
+            [ngClass]="{'is-invalid': linkMaterialType.invalid}">
+          </app-dropdown>
+          <app-form-control-error [form]="linkMaterialForm" controlName="type" #linkMaterialType></app-form-control-error>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-dropdown
+            [items]="possibleMaterialLinks"
+            id="material"
+            bindLabel="title"
+            bindValue="id"
+            formControlName="material"
+            [placeholder]="'admin.construct.link_study_material.study_material' | translate"
+            [multiple]="true"
+            [ngClass]="{'is-invalid': material.invalid}">
+          </app-dropdown>
+          <app-form-control-error [form]="linkMaterialForm" controlName="material" displayName="Study material" #material></app-form-control-error>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="linkMaterialModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="link-material-form" class="btn btn-primary"><i class="material-link-icon"></i>{{'modal.link' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

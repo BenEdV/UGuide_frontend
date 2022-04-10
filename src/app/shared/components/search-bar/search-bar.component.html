@@ -1,0 +1,16 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      <i class="fas fa-search"></i>
+    </span>
+  </div>
+  <i class="close-icon search-bar-clear cursor-pointer"
+     *ngIf="text && text !== ''"
+     (click)="text = ''; updateText()"></i>
+  <input type="text"
+         class="form-control"
+         [placeholder]="placeholder"
+         [attr.aria-label]="placeholder"
+         [(ngModel)]="text"
+         (keyup)="keyUp($event)">
+</div>

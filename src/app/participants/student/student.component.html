@@ -1,0 +1,167 @@
+<app-title-section [title]="student.display_name"></app-title-section>
+
+<p class="section-title">{{'student.entity.general_information' | translate}}</p>
+<div class="card-grid">
+  <app-card [title]="'student.entity.student_number' | translate" highlight="primary">
+    <p class="minimal-card-text">{{student.institution_id}}</p>
+  </app-card>
+  <app-card [title]="'student.entity.average_grade' | translate" highlight="primary">
+    <p class="minimal-card-text">{{averageGrade | grade}}</p>
+  </app-card>
+  <app-card [title]="'student.entity.construct_progress.construct_average' | translate" highlight="primary" *ngIf="averageConstructScore !== undefined">
+    <p class="minimal-card-text">{{averageConstructScore | percent}}</p>
+  </app-card>
+  <app-card [title]="'student.entity.misconstruct_progress.misconstruct_average' | translate" highlight="primary" *ngIf="averageMisconstructScore !== undefined">
+    <p class="minimal-card-text">{{averageMisconstructScore | percent}}</p>
+  </app-card>
+</div>
+
+<p class="section-title">{{('student.entity.exams' | translate)}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'exam-icon'" [title]="'student.entity.exam_progress.title' | translate" [actions]="examChart.cardActions">
+      <app-line-chart
+        #examChart
+        [datasets]="examChartDatasets"
+        [labels]="examChartLabels"
+        [title]="'student.entity.exam_progress.chart.title' | translate"
+        [yLabel]="'student.entity.exam_progress.chart.y_label' | translate"
+        [xLabel]="'student.entity.exam_progress.chart.x_label' | translate"
+        [options]="examChartOptions"
+        [min]="0"
+        [max]="10"
+        (chartClick)="handleExamChartClick($event)"
+      ></app-line-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'exam-icon'" [title]="'student.entity.exams' | translate" [actions]="examTable.cardActions">
+      <app-exam-table
+        #examTable
+        [activities]="exams"
+        [userId]="student.id"
+        [sliderEnabled]="false"
+        [limit]="4"
+      ></app-exam-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'student.entity.constructs' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing" *ngIf="showConstructChart">
+    <app-card [icon]="'construct-icon'" [title]="'student.entity.construct_progress.title' | translate" [actions]="constructChart.cardActions">
+      <app-construct-chart
+        #constructChart
+        [constructs]="constructs"
+        [label]="constructChartLabel"
+        [userIds]="[student.id]"
+        [layer]="'root'"
+        [isNegative]="false"
+        (chartClick)="handleConstructChartClick($event)"
+      ></app-construct-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing" *ngIf="showMisconstructChart">
+    <app-card [icon]="'construct-icon'" [title]="'student.entity.misconstruct_progress.misconstruct_average' | translate" [actions]="misconstructChart.cardActions">
+      <app-construct-chart
+        #misconstructChart
+        [constructs]="constructs"
+        [label]="constructChartLabel"
+        [userIds]="[student.id]"
+        [layer]="'root'"
+        [isNegative]="true"
+        (chartClick)="handleConstructChartClick($event)"
+      ></app-construct-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing" *ngIf="showConstructChart">
+    <app-card [icon]="'construct-icon'" [title]="'student.entity.construct_progress.title' | translate" [actions]="constructProgressChart.cardActions">
+      <app-construct-progress-chart
+        #constructProgressChart
+        [title]="'student.entity.construct_progress.chart.title' | translate"
+        [yLabel]="'student.entity.construct_progress.chart.y_label' | translate"
+        [xLabel]="'student.entity.construct_progress.chart.x_label' | translate"
+        [options]="constructProgressChartOptions"
+        [constructDatasets]="positiveConstructProgressDatasets"
+      ></app-construct-progress-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing" *ngIf="showMisconstructChart">
+    <app-card [icon]="'construct-icon'" [title]="'student.entity.misconstruct_progress.title' | translate" [actions]="misconstructProgressChart.cardActions">
+      <app-construct-progress-chart
+        #misconstructProgressChart
+        [title]="'student.entity.construct_progress.chart.title' | translate"
+        [yLabel]="'student.entity.construct_progress.chart.y_label' | translate"
+        [xLabel]="'student.entity.construct_progress.chart.x_label' | translate"
+        [options]="constructProgressChartOptions"
+        [constructDatasets]="negativeConstructProgressDatasets"
+      ></app-construct-progress-chart>
+    </app-card>
+  </div>
+  <div class="col-lg card-spacing">
+    <app-card [icon]="'construct-icon'" [title]="'student.entity.constructs' | translate" [actions]="constructTable.cardActions">
+      <app-construct-table
+        #constructTable
+        [constructs]="constructs"
+        [sliderEnabled]="false"
+        [hierarchical]="true"
+        [userIds]="[student.id]"
+        [limit]="4"
+      ></app-construct-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'student.entity.study_material' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'study-material-icon'" [title]="'student.entity.study_material_progress.title' | translate" [actions]="studyMaterialChart.cardActions">
+      <app-distribution-chart
+        #studyMaterialChart
+        [items]="studyMaterial"
+        [valueLambda]="studyMaterialValueLambda"
+        [labels]="[
+          'student.entity.study_material_progress.chart.unseen' | translate,
+          'student.entity.study_material_progress.chart.seen' | translate,
+          'student.entity.study_material_progress.chart.completed' | translate
+        ]"
+        [labelLambda]="studyMaterialLabelLambda"
+        [title]="'student.entity.study_material_progress.chart.title' | translate"
+        [yLabel]="'student.entity.study_material_progress.chart.y_label' | translate"
+        [xLabel]="'student.entity.study_material_progress.chart.x_label' | translate"
+        [options]="studyMaterialChartOptions"
+        [cumulative]="false"
+        (chartClick)="handleStudyMaterialChartClick($event)"
+      ></app-distribution-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'study-material-icon'" [title]="'student.entity.study_material' | translate" [actions]="studyMaterialTable.cardActions">
+      <app-study-material-table
+        #studyMaterialTable
+        [activities]="studyMaterial"
+        [userId]="student.id"
+        [hierarchical]="true"
+        [hideInvisible]="true"
+        [limit]="4"
+        [(filter)]="studyMaterialFilter"
+      ></app-study-material-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'student.entity.groups' | translate}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'group-icon'" [title]="'student.entity.groups' | translate" [actions]="groupTable.cardActions">
+      <app-group-table
+        #groupTable
+        [groups]="studentGroups"
+        [constructs]="constructs"
+        [exams]="exams"
+        [limit]="4"
+      ></app-group-table>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-7 card-spacing">
+    <app-card [title]="'Concept Chart'" [icon]="'fas fa-chart-pie'" highlight="primary" [actions]="constructChart.cardActions">
+      <app-hierarchical-chart
+        #constructChart
+        [datasets]="testData.datasets"
+        [labels]="testData.labels">
+      </app-hierarchical-chart>
+    </app-card>
+  </div>
+  <div class="col card-spacing">
+    <app-card [icon]="'activity-icon'" [title]="'Related Study Material'" [actions]="positiveActivityTable.cardActions">
+      <app-table
+        #positiveActivityTable
+        [data]="[]">
+      </app-table>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-7 card-spacing">
+    <app-card [title]="'Misconcept Chart'" [icon]="'fas fa-chart-pie'" highlight="primary" [actions]="negativeConstructChart.cardActions">
+      <app-hierarchical-chart
+        #negativeConstructChart
+        [datasets]="testData.misconcept_datasets"
+        [labels]="testData.misconcept_labels"
+        [isNegative]="true">
+      </app-hierarchical-chart>
+    </app-card>
+  </div>
+  <div class="col card-spacing">
+    <app-card [icon]="'activity-icon'" [title]="'Related Study Material'" [actions]="negativeActivityTable.cardActions">
+      <app-table
+        #negativeActivityTable
+        [data]="[]">
+      </app-table>
+    </app-card>
+  </div>
+</div>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <div class="row">
+    <div class="col">
+      <div class="btn-group mb-3" role="group">
+        <button type="button" class="btn btn-primary"
+                [ngClass]="{'active': chartType === 'radar' }"
+                (click)="changeChartType('radar')" [disabled]="radarDisabled">
+          <i class="fas fa-chart-pie"></i>
+        </button>
+        <button type="button" class="btn btn-primary"
+                [ngClass]="{'active': chartType === 'bar' }"
+                (click)="changeChartType('bar')">
+          <i class="fas fa-chart-bar"></i>
+        </button>
+        <button type="button" class="btn btn-primary"
+                [ngClass]="{'active': chartType === 'horizontalBar' }"
+                (click)="changeChartType('horizontalBar')">
+          <i class="fas fa-chart-bar fa-rotate-90"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="btn-group mb-3" role="group">
+        <button type="button" class="btn btn-primary"
+                [ngClass]="{'active': !isNegative }"
+                (click)="setNegative(false)">
+          Positive
+        </button>
+        <button type="button" class="btn btn-primary"
+                [ngClass]="{'active': isNegative }"
+                (click)="setNegative(true)">
+          Negative
+        </button>
+      </div>
+    </div>
+  </div>
+</app-sidebar>

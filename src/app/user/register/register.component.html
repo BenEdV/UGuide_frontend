@@ -1,0 +1,112 @@
+<div class="row full-screen-center">
+  <app-card>
+    <div class="m-5">
+      <h2 class="card-title text-center">{{'register.title' | translate}}</h2>
+      <p class="card-subtitle text-danger text-center mb-0" *ngIf="errorMessage">{{errorMessage}}</p>
+      <form [formGroup]="registerForm" class="mt-4" id="register-form" (ngSubmit)="register()">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="firstName">{{'register.first_name' | translate}} *</label>
+              <input type="text" class="form-control w-100" id="firstName" formControlName="firstName" [placeholder]="'register.first_name' | translate" autocomplete="given-name" [ngClass]="{'is-invalid': submitted && c.firstName.invalid}"/>
+              <div *ngIf="c.firstName.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.firstName.errors.required">{{'register.is_required' | translate:{tag: 'register.first_name' | translate} }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="lastName">{{'register.last_name' | translate}} *</label>
+              <input type="text" class="form-control w-100" id="lastName" formControlName="lastName" [placeholder]="'register.last_name' | translate" autocomplete="family-name" [ngClass]="{'is-invalid': submitted && c.lastName.invalid}"/>
+              <div *ngIf="c.lastName.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.lastName.errors.required">{{'register.is_required' | translate:{tag: 'register.last_name' | translate} }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="institutionId">{{'register.student_number' | translate}} *</label>
+              <input type="text" class="form-control w-100" id="institutionId" formControlName="institutionId" [placeholder]="'register.student_number' | translate" [ngClass]="{'is-invalid': submitted && c.institutionId.invalid}"/>
+              <div *ngIf="c.institutionId.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.institutionId.errors.required">{{'register.is_required' | translate:{tag: 'register.student_number' | translate} }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="email">{{'register.email' | translate}}  *</label>
+              <input type="email" class="form-control w-100" id="email" formControlName="email" [placeholder]="'register.email' | translate" autocomplete="email" [ngClass]="{'is-invalid': submitted && c.email.invalid}"/>
+              <div *ngIf="c.email.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.email.errors.required">{{'register.is_required' | translate:{tag: 'register.email' | translate} }}</p>
+                <p *ngIf="c.email.errors.email">{{'register.is_invalid' | translate:{tag: 'register.email' | translate} }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="password">{{'register.password' | translate}} *</label>
+              <input type="password" class="form-control w-100" id="password" formControlName="password" [placeholder]="'register.password' | translate" autocomplete="new-password" [ngClass]="{'is-invalid': submitted && c.password.invalid}"/>
+              <div *ngIf="c.password.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.password.errors.required">{{'register.is_required' | translate:{tag: 'register.password' | translate} }}</p>
+                <p *ngIf="c.password.errors.minlength">{{'register.password_requirements' | translate:{requiredLength: c.password.errors.minlength.requiredLength} }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="passwordConf">{{'register.confirm_password' | translate}}  *</label>
+              <input type="password" class="form-control w-100" id="passwordConf" formControlName="passwordConf" [placeholder]="'register.confirm_password' | translate" autocomplete="new-password" [ngClass]="{'is-invalid': submitted && c.passwordConf.invalid}"/>
+              <div *ngIf="c.passwordConf.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.passwordConf.errors.mustMatch">{{'register.no_match' | translate}} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="userAgree" formControlName="userAgree">
+              <label class="form-check-label" for="userAgree">
+                {{'register.read_agree' | translate}} <a [routerLink]="" (click)="userAgreement.open()">{{'register.user_agreement' | translate}}</a>
+              </label>
+              <div *ngIf="c.userAgree.invalid && submitted" class="d-block invalid-feedback">
+                <p *ngIf="c.userAgree.errors.required">{{'register.please_read' | translate}} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <re-captcha (resolved)="resolved($event)" formControlName="recaptcha" [siteKey]="captchaSiteKey" #captcha></re-captcha>
+            <div *ngIf="c.recaptcha.invalid && submitted" class="d-block invalid-feedback">
+              <p *ngIf="c.recaptcha.errors.required">{{'register.solve_recaptcha' | translate}} </p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col text-center">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{'register.register' | translate}}
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="row mt-5">
+        <div class="col text-center">
+          <p>{{'register.already_account' | translate}} <a [routerLink]="['/', 'login']">{{'register.login' | translate}} </a></p>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</div>
+
+<app-modal [title]="'register.user_agreement' | translate" #userAgreement>
+  <p *appMultiline="let line of (userAgreementText | translate)" [innerHTML]="line"></p>
+</app-modal>

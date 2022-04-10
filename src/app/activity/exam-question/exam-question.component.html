@@ -1,0 +1,187 @@
+<app-title-section [item]="question" type="question">
+  <div class="title">
+    <div class="d-md-none d-flex align-items-center">
+      <i class="fas fa-chevron-left direction-btn"
+        [ngClass]="{'disabled': !this.prevQuestion}"
+        (click)="goToPreviousQuestion()"
+        [title]="'question.entity.nav.previous_question' | translate">
+      </i>
+      <div ngbDropdown placement="bottom-right" *ngIf="sortedQuestions.length > 0">
+        <span class="title-question-number" ngbDropdownToggle>{{getQuestionNumber(question)}}</span>
+        <div ngbDropdownMenu class="dropdown-menu">
+          <a ngbDropdownItem *ngFor="let question of sortedQuestions"
+          [routerLink]="['..', question.id]" routerLinkActive="active"
+          class="d-flex align-items-center">
+            <span class="mr-2">{{getQuestionNumber(question)}}.</span>
+            <span class="w-100">{{question.title}}</span>
+            <ng-container *ngIf="question.my_latest_result">
+              <i [ngClass]="answerGivenAndCorrect(question) ? 'true-icon' : 'false-icon'" class="ml-3 small"></i>
+            </ng-container>
+          </a>
+        </div>
+      </div>
+      <i class="fas fa-chevron-right direction-btn"
+        [ngClass]="{'disabled': !this.nextQuestion}"
+        (click)="goToNextQuestion()"
+        [title]="'question.entity.nav.next_question' | translate">
+      </i>
+    </div>
+    <div class="d-none d-md-flex unstyled-pagination">
+      <ngb-pagination [collectionSize]="getQuestions(exam).length" [page]="getQuestionNumber(question)" [maxSize]="3"
+                      [rotate]="true" [pageSize]="1" aria-label="current question" (pageChange)="gotoQuestion($event)">
+        <ng-template ngbPaginationPrevious>{{'nav.previous' | translate | titlecase}}</ng-template>
+        <ng-template ngbPaginationNumber let-p><span [ngClass]="{'positive-color': answerGivenAndCorrect(sortedQuestions[p - 1])}">{{p}}</span></ng-template>
+        <ng-template ngbPaginationNext>{{'nav.next' | translate | titlecase}}</ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  <app-read-more [content]="question.description"></app-read-more>
+</app-title-section>
+
+<ngb-alert [dismissible]="false" *ngIf="question.properties.avg_score < 0.3 && question.properties.avg_score >= 0.1">
+  {{'question.entity.alert.less_correct' | translate:{percent: "30"} }}
+</ngb-alert>
+<ngb-alert [dismissible]="false" *ngIf="question.properties.avg_score < 0.1">
+  {{'question.entity.alert.less_correct' | translate:{percent: "10"} }}
+</ngb-alert>
+
+<p class="section-title">{{'question.entity.content' | translate}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'question-icon'"
+              [title]="'question.entity.question_body' | translate">
+       <span [innerHTML]="question.properties.body"></span>
+       <span [innerHTML]="question.properties.prompt"></span>
+    </app-card>
+  </div>
+</div>
+<div class="card-grid" *ngIf="question.properties.answers?.length > 0">
+  <ng-container *ngFor="let answer of question.properties.answers">
+    <app-card
+      [title]="'question.entity.answer' | translate:{'id': answer.id}"
+      [highlight]="(answer.correct && 'correct') || (givenAnswers.includes(answer.id) && 'primary')">
+      <span [innerHTML]="answer.body"></span>
+      <div class="app-card-footer">
+        <span *ngIf="givenAnswers.includes(answer.id)">
+          {{'question.entity.given' | translate}}
+        </span>
+        <i [ngClass]="answer.correct + '-icon'" class="float-right"></i>
+      </div>
+    </app-card>
+  </ng-container>
+</div>
+<ng-container *ngIf="question.type === 'question.open'">
+  <div class="row" *appHasRole="['student']">
+    <div class="col card-spacing">
+      <app-card [icon]="'question-icon'"
+                [title]="'question.entity.my_answer' | translate"
+                [highlight]="question.my_latest_result.result.success ? 'correct' : 'incorrect'">
+        <p>{{question.my_latest_result.result.response}}</p>
+      </app-card>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *appHasPermission="['see_user_results'];">
+  <p [innerHTML]="'question.entity.info' | translate:{null_responses: question.properties.null_responses, average_duration: (question.properties.avg_duration | duration), percent: percentCorrect | percent}"></p>
+  <ng-container [ngSwitch]="question.type">
+    <p class="section-title">{{'question.entity.responses' | translate}}</p>
+    <ng-container *ngSwitchCase="'question.multiple_selection'">
+      <div class="row">
+        <div class="col-lg-6 card-spacing">
+          <app-card [icon]="'bar-chart-icon'" [title]="'question.entity.answer_distribution.title' | translate">
+            <app-heatmap-chart
+              #answerChart
+              [title]="'question.entity.answer_distribution_ms.chart.title' | translate"
+              [yLabel]="'question.entity.answer_distribution_ms.chart.y_label' | translate"
+              [xLabel]="'question.entity.answer_distribution_ms.chart.x_label' | translate"
+              [options]="answerMSOptions"
+              [items]="answerDist"
+              [labels]="answerLabels"
+              [legend]="false"
+              [yLetters]="true"
+              [hideZeroes]="true">
+            </app-heatmap-chart>
+            <ng-template *ngTemplateOutlet="popularWrongAnswer"></ng-template>
+          </app-card>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'question.multiple_choice'">
+      <div class="row">
+        <div class="col-lg-6 card-spacing">
+          <app-card [icon]="'chart-icon'"
+                    [title]="'question.entity.answer_distribution.title' | translate"
+                    [actions]="answerDistributionChart.cardActions">
+            <app-bar-chart
+              #answerDistributionChart
+              [title]="'question.entity.answer_distribution.chart.title' | translate"
+              [xLabel]="'question.entity.answer_distribution.chart.x_label' | translate"
+              [options]="answerOptions"
+              [datasets]="answerDist"
+              [labels]="answerLabels"
+              [legend]="false"
+              (chartClick)="handleAnswerDistributionChartClick($event)"
+            ></app-bar-chart>
+            <ng-template *ngTemplateOutlet="popularWrongAnswer"></ng-template>
+          </app-card>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'question.open'">
+      <div class="row" *ngFor="let tuple of nonNullResultsCount">
+        <div class="col card-spacing d-flex align-items-center">
+          <b class="mr-1">{{tuple.count}} ✖</b>
+          <app-card
+            [icon]=""
+            [highlight]="tuple.result.result.success ? 'correct' : 'incorrect'">
+            <div class="response">
+              {{tuple.result.result.response}}
+            </div>
+          </app-card>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #popularWrongAnswer>
+  <p
+    *ngIf="popularWrongAnswers.length === 1"
+    [innerHTML]="'question.entity.alert.popular_wrong_answer' | translate:{percent: '25', answer: popularWrongAnswers[0]}"
+  ></p>
+  <p
+    *ngIf="popularWrongAnswers.length > 1"
+    [innerHTML]="'question.entity.alert.popular_wrong_answers' | translate:{percent: '25', answers: popularWrongAnswers.join(', ')}"
+  ></p>
+</ng-template>
+
+<div class="row" *ngIf='question.properties.explanation'>
+  <div class="col card-spacing">
+    <app-card [icon]="'comment-icon'"
+              [title]="'question.entity.explanation' | translate">
+      <p *appMultiline="let explanationLine of question.properties.explanation">
+        {{explanationLine}}
+      </p>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'question.entity.constructs' | translate}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'construct-icon'"
+              [title]="'question.entity.connected_constructs' | translate"
+              [actions]="constructTable.cardActions">
+      <app-construct-table
+        #constructTable
+        [constructs]="question.constructs"
+        [keys]="constructKeys"
+        [searchEnabled]="false"
+        [sliderEnabled]="false"
+        [limit]="5"
+        [valueOverrides]="constructValueOverrides">
+      </app-construct-table>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<app-title-section *ngIf="showTitle"
+  [title]="survey.title + ' ' + ('questions' | translate | titlecase)">
+</app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card
+      [icon]="'survey-icon'"
+      [title]="'nav.page' | translate:{current: (currentPage + 1), total: pages.length}">
+      <form id="question-form" [formGroup]="pageForms[currentPage]" (ngSubmit)="onSubmit()" *ngIf="pageForms.length > 0; else noContent">
+        <ng-container *ngFor="let entry of pages[currentPage]">
+          <hr class="question-divider"/>
+          <ng-container *ngIf="entry.type === 'comment'; else question">
+            <p *appMultiline="let bodyLine of entry.properties.body | contentTranslate" class="comment-text">
+              <span [innerHTML]="bodyLine"></span>
+            </p>
+          </ng-container>
+          <ng-template #question>
+            <p class="question-text" [id]="entry.id">
+              {{entry.relation_properties.number >= 0 ? entry.relation_properties.number + 1 + '.' : null}}
+              <span [innerHTML]="entry.properties.body | contentTranslate"></span>
+              <span *ngIf="entry.properties.required">*</span>
+            </p>
+            <div *ngIf="submitted && f[entry.id].errors" class="invalid-entry text-danger">
+              <p *ngIf="f[entry.id].errors.required">{{'question.required' | translate}}</p>
+            </div>
+            <ng-container [ngSwitch]="entry.type">
+              <ng-template *ngSwitchCase="'question.likert'" [ngTemplateOutlet]="likertAnswers"
+                           [ngTemplateOutletContext]="{$implicit: entry}"></ng-template>
+              <ng-template *ngSwitchCase="'question.multiple_choice'" [ngTemplateOutlet]="multipleChoiceAnswers"
+                           [ngTemplateOutletContext]="{$implicit: entry}"></ng-template>
+              <ng-template *ngSwitchCase="'question.open'" [ngTemplateOutlet]="openAnswer"
+                           [ngTemplateOutletContext]="{$implicit: entry}"></ng-template>
+            </ng-container>
+          </ng-template>
+        </ng-container>
+      </form>
+      <hr class="question-divider mb-0"/>
+      <div class="app-card-footer">
+        <div class="d-flex align-items-center">
+          <a *ngIf="survey.properties.copyright" class="muted-link" (click)="copyrightModal.open()">&copy; Copyright</a>
+          <div class="btn-group ml-auto" role="group">
+            <button type="button" class="btn btn-primary" *ngIf="currentPage > 0" (click)="previousPage()">
+              {{'nav.previous' | translate}}
+            </button>
+            <button type="submit" form="question-form" class="btn btn-primary" *ngIf="currentPage < pages.length" [disabled]="addingResults">
+            <span *ngIf="addingResults" class="spinner-border spinner-border-sm mr-1"></span>
+              {{(currentPage === pages.length - 1 ? 'nav.submit' : 'nav.next') | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </app-card>
+    <ng-template #noContent>
+      <p>
+        No content to display.
+        <span *appHasPermission="['manage_activities']">
+          Click <a (click)="goToAdministration()" class="cursor-pointer">here</a> to add content to this survey.
+        </span>
+      </p>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #likertAnswers let-question>
+  <div class="row answer-block" [formGroup]="pageForms[currentPage]">
+    <div class="col-lg col-md-4" *ngFor="let answer of question.properties.answers">
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               [formControlName]="question.id"
+               [id]="'question' + question.id + 'answer' + answer.id" [value]="answer.id">
+        <label class="form-check-label answer-text" [for]="'question' + question.id + 'answer' + answer.id">
+          {{answer.body | contentTranslate}}
+        </label>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #multipleChoiceAnswers let-question>
+  <div class="row answer-block" [formGroup]="pageForms[currentPage]">
+    <div class="col-12" *ngFor="let answer of question.properties.answers">
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               [formControlName]="question.id"
+               [id]="'question' + question.id + 'answer' + answer.id" [value]="answer.id">
+        <label class="form-check-label answer-text" [for]="'question' + question.id + 'answer' + answer.id">
+          {{answer.body | contentTranslate}}
+        </label>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #openAnswer let-question>
+  <div class="row answer-block" [formGroup]="pageForms[currentPage]">
+    <div class="col-12">
+      <textarea class="form-control"
+                [formControlName]="question.id"
+                [id]="'question' + question.id + 'answer'" rows="3"></textarea>
+    </div>
+  </div>
+</ng-template>
+
+<app-modal #copyrightModal [title]="'Copyright Notice'">
+  <ng-container *ngIf="survey.properties.copyright">
+    <p [innerHTML]="survey.properties.copyright.raw"></p>
+  </ng-container>
+</app-modal>

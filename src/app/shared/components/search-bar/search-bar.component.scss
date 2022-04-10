@@ -1,0 +1,14 @@
+.search-bar-clear {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  bottom: 0;
+  height: 1rem;
+  margin: auto;
+  color: #777;
+  z-index: 4;
+
+  &:hover {
+    color: black;
+  }
+}

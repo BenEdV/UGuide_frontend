@@ -1,0 +1,8 @@
+<div class="row full-screen-center">
+  <div class="col-sm-auto">
+    <h2 class="mb-3" [innerHTML]="'saml_logout.title' | translate"></h2>
+    <p class="mb-3" [innerHTML]="'saml_logout.description' | translate:{projectName: projectName}"></p>
+    <button type="button" class="btn btn-primary" (click)="SAMLlogout()">{{'saml_logout.logout' | translate}}</button>
+    <span> {{'saml_logout.or' | translate}} <a [routerLink]="'/login'">{{'saml_logout.return_to_dashboard' | translate}}</a></span>
+  </div>
+</div>

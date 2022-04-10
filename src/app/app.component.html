@@ -1,0 +1,10 @@
+<ngx-loading-bar [includeSpinner]="false" ref="http"></ngx-loading-bar>
+<app-toast-global aria-live="polite" aria-atomic="true" class="app-toasts"></app-toast-global>
+<app-toolbar></app-toolbar>
+<app-sidenav></app-sidenav>
+<div class="content" #content [ngClass]="{'ml-0': !sidenavService.isVisible || sidenavService.isCollapsed}">
+  <div class="outlet-wrapper">
+    <app-breadcrumb *ngIf="showBreadcrumbs"></app-breadcrumb>
+    <router-outlet></router-outlet>
+  </div>
+</div>

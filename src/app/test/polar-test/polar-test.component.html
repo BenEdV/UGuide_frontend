@@ -1,0 +1,80 @@
+<div class="title-section">
+  <p class="title">Thermos Results</p>
+  <app-read-more [content]="'The thermos introduction text'"></app-read-more>
+</div>
+
+<p class="section-title">Group Skills</p>
+<div class="row">
+  <div class="col-lg-4 col-sm-6 mb-4">
+    <app-card
+      [icon]="'fas fa-users'"
+      [title]="'Group Skill 1'"
+      highlight="primary">
+      <app-gauge-chart
+        class="top-img"
+        [percentage]="10"
+        [fontSize]="20"
+        [labels]="['Group Skill 1']"
+        [colors]="[{backgroundColor: 'rgba(55, 126, 184, 0.6)'}]">
+      </app-gauge-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-sm-6 mb-4">
+    <app-card
+      [icon]="'fas fa-users'"
+      [title]="'Group Skill 2'"
+      highlight="primary">
+      <app-gauge-chart
+        class="top-img"
+        [percentage]="80"
+        [fontSize]="20"
+        [labels]="['Group Skill 2']"
+        [colors]="[{backgroundColor: 'rgba(55, 126, 184, 0.9)'}]">
+      </app-gauge-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-12 mb-4">
+    <app-card
+      [icon]="'fas fa-users'"
+      [title]="'Group Skill Feedback'">
+      <p>Some feedback.</p>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">Motivation & Engagement</p>
+<div class="row">
+  <div class="col-lg-8 mb-4">
+    <app-card
+      [icon]="'fas fa-chart-pie'"
+      [title]="'MES Constructs'"
+      highlight="primary"
+      [actions]="constructChart.cardActions">
+      <app-polar-chart
+        class="top-img"
+        #constructChart
+        [datasets]="chartDataset"
+        [labels]="chartLabels"
+        [legend]="false"
+        [startAngle]="3.1415"
+        [max]="100"
+        [stepSize]="25"
+        [angles]="angles"
+        [plugins]="plugins"
+        [options]="options"
+        (labelClick)="log($event)">
+      </app-polar-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <app-card
+      [icon]="'fas fa-chart-pie'"
+      [title]="'MES Feedback'"
+      [subtitle]="'Additional information in a subtitle.'">
+      <p>Some feedback.</p>
+      <div class="app-card-footer">
+        <button type="button" class="btn btn-primary">All Feedback</button>
+      </div>
+    </app-card>
+  </div>
+</div>

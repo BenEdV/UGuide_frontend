@@ -1,0 +1,60 @@
+<ng-container *ngIf="isValid">
+  <ng-container *ngIf="question.relation_type !== 'exam_comment'; else comment">
+    <p class="question-text" [id]="question.id">
+      {{question.relation_properties && question.relation_properties.number + 1 + '.'}}
+      <span [innerHTML]="question.properties.body | contentTranslate"></span>
+      <span *ngIf="question.properties.required">*</span>
+    </p>
+    <div *ngIf="submitted && f[question.id].errors" class="invalid-entry text-danger">
+      <p *ngIf="f[question.id].errors.required">{{'question.required' | translate}}</p>
+    </div>
+    <ng-container [ngSwitch]="question.type">
+      <ng-template *ngSwitchCase="'question.likert'" [ngTemplateOutlet]="likertAnswers"></ng-template>
+      <ng-template *ngSwitchCase="'question.multiple_choice'" [ngTemplateOutlet]="multipleChoiceAnswers"></ng-template>
+      <ng-template *ngSwitchCase="'question.open'" [ngTemplateOutlet]="openAnswer"></ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-template #comment>
+    <p class="question-text" [id]="question.id" [innerHTML]="question.properties.body | contentTranslate"></p>
+  </ng-template>
+</ng-container>
+
+<ng-template #likertAnswers>
+  <div class="row answer-block" [formGroup]="form">
+    <div class="col-lg col-md-4" *ngFor="let answer of question.properties.answers">
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               [formControlName]="formControlName"
+               [id]="id + answer.id" [value]="answer.id">
+        <label class="form-check-label answer-text" [for]="id + answer.id">
+          {{answer.body | contentTranslate}}
+        </label>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #multipleChoiceAnswers>
+  <div class="row answer-block" [formGroup]="form">
+    <div class="col-12" *ngFor="let answer of question.properties.answers">
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               [formControlName]="formControlName"
+               [id]="id + answer.id" [value]="answer.id">
+        <label class="form-check-label answer-text" [for]="id + answer.id">
+          {{answer.body | contentTranslate}}
+        </label>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #openAnswer>
+  <div class="row answer-block" [formGroup]="form">
+    <div class="col-12">
+      <textarea class="form-control"
+                [formControlName]="formControlName"
+                [id]="id" rows="3"></textarea>
+    </div>
+  </div>
+</ng-template>

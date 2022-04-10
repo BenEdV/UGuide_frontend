@@ -1,0 +1,72 @@
+<app-title-section
+  [title]="'exam.overview.title' | translate"
+  [description]="'exam.overview.description' | translate">
+</app-title-section>
+
+<p class="section-title">{{'exam.overview.section_title' | translate}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'exam-icon'"
+              [title]="'exam.overview.recent_table' | translate"
+              [actions]="recentExamsTable.cardActions">
+      <app-exam-table
+        #recentExamsTable
+        [activities]="exams"
+        [minimal]="true"
+        [limit]="5"
+        [sortKey]="'end_time'"
+        [sortReverse]="true">
+      </app-exam-table>
+    </app-card>
+  </div>
+</div>
+
+<ng-container *ngIf="showUserResults">
+  <p class="section-title">{{'exam.overview.statistics_section_title' | translate}}</p>
+  <div class="row">
+    <div class="col-lg-6 card-spacing">
+      <app-card [icon]="'line-chart-icon'" [title]="'exam.overview.statistics_grades_chart_title' | translate" [actions]="progressChart.cardActions">
+        <app-violin-chart
+            #progressChart
+            (chartClick)="examChartClick($event)"
+            [datasets]="grades"
+            [labels]="gradeLabels"
+            [max]="10"
+            [min]="0"
+            [legend]="false">
+        </app-violin-chart>
+      </app-card>
+    </div>
+    <div class="col-lg-6 card-spacing">
+      <app-card [icon]="'line-chart-icon'" [title]="'exam.overview.statistics_participants_chart_title' | translate" [actions]="progressChart.cardActions">
+        <app-line-chart
+            #participantsChart
+            (chartClick)="examChartClick($event)"
+            [datasets]="participantCount"
+            [labels]="gradeLabels"
+            [min]="0"
+            [legend]="false">
+        </app-line-chart>
+      </app-card>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="showMyResults">
+  <p class="section-title">{{'exam.overview.statistics_section_title' | translate}}</p>
+  <div class="row">
+    <div class="col-lg-6 card-spacing">
+      <app-card [icon]="'line-chart-icon'" [title]="'exam.overview.grade_progress.card_title' | translate" [actions]="gradeChart.cardActions">
+        <app-line-chart
+          #gradeChart
+          [datasets]="examProgressDatasets"
+          [labels]="examProgressLabels"
+          [title]="'exam.overview.grade_progress.chart_title' | translate"
+          [yLabel]="'exam.overview.grade_progress.y_label' | translate"
+          [xLabel]="'exam.overview.grade_progress.x_label' | translate"
+          (chartClick)="examChartClick($event)">
+        </app-line-chart>
+      </app-card>
+    </div>
+  </div>
+</ng-container>

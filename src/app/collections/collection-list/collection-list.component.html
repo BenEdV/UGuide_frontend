@@ -1,0 +1,10 @@
+<app-title-section [title]="'collection.list.section_title' | translate"></app-title-section>
+
+<app-card
+  [icon]="'fas fa-chalkboard'"
+  [title]="'collection.list.table_title' | translate">
+  <app-collection-table
+    [collections]="collections"
+    [limit]="10"
+  ></app-collection-table>
+</app-card>

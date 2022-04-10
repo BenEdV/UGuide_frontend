@@ -1,0 +1,162 @@
+<app-title-section [title]="collection.course_instance.course.name" [description]="'course.student_overview.description' | translate"></app-title-section>
+
+<p class="section-title">{{'course.student_overview.general.section_title' | translate}}</p>
+<div class="card-grid">
+  <app-card [title]="'course.student_overview.general.average_grade' | translate" highlight="primary" *ngIf="averageGrade">
+    <p class="minimal-card-text">{{averageGrade | grade}}</p>
+  </app-card>
+  <app-card [title]="'course.student_overview.general.average_construct_score' | translate" highlight="primary" *ngIf="showConstructs">
+    <p class="minimal-card-text">{{averageConstructScore | percent}}</p>
+  </app-card>
+  <app-card [title]="'course.student_overview.general.average_misconstruct_score' | translate" highlight="primary" *ngIf="showMisconstructs">
+    <p class="minimal-card-text">{{averageMisconstructScore | percent}}</p>
+  </app-card>
+  <app-card [title]="'course.student_overview.general.study_material.title' | translate" highlight="primary">
+    <span>{{studyMaterialCompletedPercentage | percent}} {{'course.student_overview.general.study_material.completed' | translate}}</span>
+    <div class="progress mb-3">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{'width': studyMaterialSeenPercentage | percent}" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" [ngbTooltip]="'course.student_overview.general.study_material.tooltip.seen' | translate:{percentage:(studyMaterialSeenPercentage | percent)}" openDelay="500"></div>
+      <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': studyMaterialCompletedPercentage | percent}" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" [ngbTooltip]="'course.student_overview.general.study_material.tooltip.completed' | translate:{percentage:(studyMaterialCompletedPercentage | percent)}" openDelay="500"></div>
+    </div>
+  </app-card>
+</div>
+
+<!-- <ng-container *ngIf="recommendedConstructs.length > 0 || recommendedMisconstructs.length > 0">
+  <p class="section-title">{{'recommended_constructs' | translate}}</p>
+  <div class="row">
+    <div class="col card-spacing">
+      <app-card [icon]="'construct-icon'"
+                [title]="'recommended_constructs.card_title' | translate">
+        <p>{{'recommended_construct.recommend_constructs' | translate:{threshold: constructScoreThreshold} }}
+          <ng-container *ngFor="let construct of recommendedConstructs; let i = index">
+            <a class="cursor-pointer" (click)="goToConstruct(construct)">{{construct.name}}</a>
+            <span *ngIf="i < recommendedConstructs.length - 1; else dot">, </span>
+            <ng-template #dot>.</ng-template>
+          </ng-container>
+        </p>
+      </app-card>
+    </div>
+  </div>
+</ng-container> -->
+
+<ng-container *ngIf="showConstructs || showMisconstructs">
+  <p class="section-title">{{'course.student_overview.constructs.section_title' | translate}}</p>
+  <div class="row">
+    <div class="col-lg-6 card-spacing" *ngIf="showConstructs">
+      <app-card [icon]="'positive-construct-icon'"
+                [title]="'course.student_overview.constructs.construct_chart_title' | translate"
+                [actions]="constructChart.cardActions">
+        <app-construct-chart
+          #constructChart
+          [constructs]="constructs"
+          [isNegative]="false"
+          [showScore]="true"
+          [layer]="'root'"
+          (chartClick)="handleConstructChartClick($event)"
+        ></app-construct-chart>
+        <ng-container *ngIf="recommendedConstructs.length > 0">
+          <p class="mt-3">{{'course.student_overview.constructs.recommended_constructs' | translate:{threshold: (constructScoreThreshold | percent)} }}
+            <ng-container *ngFor="let construct of recommendedConstructs; let i = index">
+              <a class="cursor-pointer" (click)="goToConstruct(construct)">{{construct.name}}</a>
+              <span *ngIf="i < recommendedConstructs.length - 1; else dot">, </span>
+              <ng-template #dot>.</ng-template>
+            </ng-container>
+          </p>
+        </ng-container>
+      </app-card>
+    </div>
+    <div class="col-lg-6 card-spacing" *ngIf="showMisconstructs">
+      <app-card [icon]="'negative-construct-icon'"
+                [title]="'course.student_overview.constructs.misconstruct_chart_title' | translate"
+                [actions]="misconstructChart.cardActions">
+        <app-construct-chart
+          #misconstructChart
+          [constructs]="constructs"
+          [isNegative]="true"
+          [showScore]="true"
+          [layer]="'root'"
+          (chartClick)="handleConstructChartClick($event)"
+        ></app-construct-chart>
+        <ng-container *ngIf="recommendedMisconstructs.length > 0">
+          <p class="mt-3">{{'course.student_overview.constructs.recommended_misconstructs' | translate:{threshold: (misconstructScoreThreshold | percent)} }}
+            <ng-container *ngFor="let construct of recommendedMisconstructs; let i = index">
+              <a class="cursor-pointer" (click)="goToConstruct(construct)">{{construct.name}}</a>
+              <span *ngIf="i < recommendedMisconstructs.length - 1; else dot">, </span>
+              <ng-template #dot>.</ng-template>
+            </ng-container>
+          </p>
+        </ng-container>
+      </app-card>
+    </div>
+  </div>
+</ng-container>
+
+<p class="section-title">{{'course.student_overview.exams.section_title' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'line-chart-icon'"
+              [title]="'course.student_overview.exams.chart.card_title' | translate"
+              [actions]="gradeChart.cardActions">
+     <app-line-chart
+        #gradeChart
+        [datasets]="examProgressDatasets"
+        [labels]="examProgressLabels"
+        [title]="'course.student_overview.exams.chart.title' | translate"
+        [yLabel]="'course.student_overview.exams.chart.y_label' | translate"
+        [xLabel]="'course.student_overview.exams.chart.x_label' | translate"
+        (chartClick)="handleExamProgressChartClick($event)">
+      </app-line-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'exam-icon'"
+              [title]="'course.student_overview.exams.table_title' | translate"
+              [actions]="examTable.cardActions">
+        <app-exam-table
+          #examTable
+          [activities]="exams"
+          [limit]="5"
+          [sortKey]="'end_time'"
+          [sortReverse]="true">
+        </app-exam-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'course.student_overview.material.section_title' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'bar-chart-icon'"
+              [title]="'course.student_overview.material.chart.card_title' | translate"
+              [actions]="studyMaterialChart.cardActions">
+      <app-bar-chart
+        #studyMaterialChart
+        [datasets]="studyMaterialChartDatasets"
+        [options]="studyMaterialChartOptions"
+        [labels]="[
+          'course.student_overview.material.chart.unseen' | translate,
+          'course.student_overview.material.chart.seen' | translate,
+          'course.student_overview.material.chart.completed' | translate
+        ]"
+        [title]="'course.student_overview.material.chart.title' | translate"
+        [yLabel]="'course.student_overview.material.chart.y_label' | translate"
+        [xLabel]="'course.student_overview.material.chart.x_label' | translate"
+        (chartClick)="handleStudyMaterialChartClick($event)"
+        [legend]="false"
+      ></app-bar-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'study-material-icon'"
+              [title]="'course.student_overview.material.table_title' | translate"
+              [actions]="studyMaterialTable.cardActions">
+        <app-study-material-table
+          #studyMaterialTable
+          [activities]="studyMaterial"
+          [limit]="5"
+          [sortKey]="'start_time'"
+          [sortReverse]="true"
+          [(filter)]="studyMaterialFilter">
+        </app-study-material-table>
+    </app-card>
+  </div>
+</div>

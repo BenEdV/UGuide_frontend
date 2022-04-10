@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-card [actions]="gradeChart.cardActions">
+      <app-grade-distribution-chart
+        #gradeChart
+        [items]="items"
+        [gradeKey]="'score'"
+        [cumulative]="true"
+        (chartClick)="log($event)">
+      </app-grade-distribution-chart>
+    </app-card>
+    <!--    <app-grade-distribution-chart-->
+    <!--      [items]="items"-->
+    <!--      [gradeKey]="'score'"-->
+    <!--      (chartClick)="log($event)" [cumulative]="false">-->
+    <!--    </app-grade-distribution-chart>-->
+  </div>
+  <div class="col-md-6">
+    <app-card [actions]="distChart.cardActions">
+      <app-distribution-chart
+        #distChart
+        [items]="[1,2,3,4,5,4,3,3,2]"
+        [valueLambda]="testLambda"
+        [labels]="[1, 2, 3, 4, 5, 6]"
+        [cumulative]="false"
+        (chartClick)="log($event)">
+      </app-distribution-chart>
+    </app-card>
+  </div>
+</div>

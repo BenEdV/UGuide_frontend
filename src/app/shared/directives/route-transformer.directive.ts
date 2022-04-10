@@ -1,0 +1,22 @@
+// https://stackoverflow.com/questions/44613069/angular4-routerlink-inside-innerhtml-turned-to-lowercase
+import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Directive({
+  selector: '[appRouteTransformer]'
+})
+export class RouteTransformerDirective {
+
+  constructor(private el: ElementRef, private router: Router) { }
+
+  @HostListener('click', ['$event'])
+  public onClick(event) {
+    if (event.target.tagName === 'A') {
+      this.router.navigate([event.target.getAttribute('href')]);
+      event.preventDefault();
+    } else {
+      return;
+    }
+  }
+
+}

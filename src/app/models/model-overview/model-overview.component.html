@@ -1,0 +1,29 @@
+<app-title-section [title]="'Models Overview'"></app-title-section>
+
+<p class="section-title">Scores</p>
+<div class="row">
+  <div class="col-md-6 card-spacing">
+    <app-card [title]="'Positive Construct Scores'" [icon]="'construct-icon'" highlight="primary" [actions]="positiveConstructChart.cardActions">
+      <app-bar-chart #positiveConstructChart></app-bar-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6 card-spacing">
+    <app-card [title]="'Negative Construct Scores'" [icon]="'construct-icon'" highlight="primary" [actions]="negativeConstructChart.cardActions">
+      <app-bar-chart #negativeConstructChart></app-bar-chart>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">Recently Updated</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'Recently Updated Models'" [icon]="'construct-icon'" [actions]="recentlyUpdatedTable.cardActions">
+      <app-table
+        #recentlyUpdatedTable
+        [data]="models"
+        [sortEnabled]="false"
+        [limit]="5"
+      ></app-table>
+    </app-card>
+  </div>
+</div>

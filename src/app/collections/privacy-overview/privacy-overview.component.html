@@ -1,0 +1,67 @@
+<app-title-section
+  [title]="'data_sharing' | translate | titlecase"
+  [description]="'The following users have access to your data pertaining to the current course.'">
+</app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h3>Teachers</h3>
+      Teachers can see your following personal data
+      <ul>
+        <li>Name</li>
+        <li>Email address</li>
+        <li>Student ID</li>
+      </ul>
+      Teachers can see your following result data
+      <ul>
+        <li>Scores on exams</li>
+        <li>Concept Scores</li>
+      </ul>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h3>Students</h3>
+      <p>
+        Students can see your aggregated results
+      </p>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h3>Researchers</h3>
+      Researchers can see your following personal data
+      <ul>
+        <li>A randomly generated unique identifier for you in this course</li>
+      </ul>
+      Researchers can see your following result data
+      <ul>
+        <li>Scores on exams</li>
+        <li>Concept Scores</li>
+      </ul>
+      <div *ngIf="collection.settings.logging">
+        Researchers can see your following activity data
+        <ul>
+          <li>Navigation in system</li>
+          <li>Downloads</li>
+          <li>Interactions with charts</li>
+        </ul>
+      </div>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h3>Developers</h3>
+      <p>
+        Students can see your individual results
+      </p>
+    </app-card>
+  </div>
+</div>

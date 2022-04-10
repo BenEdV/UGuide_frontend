@@ -1,0 +1,18 @@
+<app-title-section [title]="('construct.list.section_title' | translate | titlecase)"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'construct.list.table_title' | translate | titlecase" [icon]="'construct-icon'" [actions]="constructList.cardActions">
+      <app-construct-table
+        #constructList
+        [constructs]="constructs"
+        [hierarchical]="true"
+        [showTimestamp]="true"
+        [limit]="10">
+      </app-construct-table>
+      <ng-container *appHasPermission="['manage_constructs']">
+        <p *ngIf="constructs.length === 0" class="text-center" [innerHTML]="'construct.list.administration_link' | translate"></p>
+      </ng-container>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="row mb-3" [hidden]="!searchEnabled && !sliderKey || data.length === 0">
+  <div class="col-md my-auto" [hidden]="!searchEnabled">
+    <app-search-bar
+      [text]="filter"
+      (textChange)="setFilter($event)"
+      [placeholder]="'table.filter_placeholder' | translate">
+    </app-search-bar>
+  </div>
+  <div class="col-md" *ngIf="sliderKey">
+    <div class="row">
+      <div class="col-auto my-auto pr-1">
+        {{"table.headers." + (headerOverrides[sliderKey] || sliderKey) | translate:translateExtras[sliderKey]}}:
+      </div>
+      <div class="col custom-slider">
+        <ngx-slider [(value)]="sliderMin" [(highValue)]="sliderMax" [options]="sliderOptions"
+                    (userChangeEnd)="logSliderChange()" (userChange)="this.currentPage = 1; updateData()"></ngx-slider>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="table-responsive mb-1">
+  <table class="table table-striped table-borderless" *ngIf="data && data.length > 0">
+    <thead>
+    <tr>
+      <th scope="col" class="position-relative"
+          [ngClass]="{'text-primary cursor-pointer': sortEnabled}"
+          *ngFor="let key of keys"
+          (click)="sortEnabled ? setSort(key) : ''">
+        <span class="position-relative">
+          {{"table.headers." + (headerOverrides[key] || key) | translate:translateExtras[key]}}
+          <i class="th-caret fas"
+           [ngClass]="sortReverse ? 'fa-caret-up' : 'fa-caret-down'"
+           [hidden]="sortKey !== key"></i>
+        </span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-template #recursiveTemplateRef let-nodes let-depth="depth">
+      <ng-container *ngFor="let obj of nodes">
+        <tr>
+          <td *ngFor="let key of keys; let i = index">
+            <ng-container *ngIf="childKey && i == 0">
+              <span *ngIf="depth > 0" class="ml-icon-{{depth}}"></span>
+              <i *ngIf="obj[childKey] && obj[childKey].length > 0"
+                 (click)="obj.isExpanded = !obj.isExpanded"
+                 class="fas collapseIcon cursor-pointer"
+                 [ngClass]="obj.isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+            </ng-container>
+            <a *ngIf="routerLinks[key]; else noLink"
+               [routerLink]="routerLinks[key](obj)"
+               (click)="logClick(obj)"
+               [ngClass]="classes[key] ? classes[key](obj) : ''">
+              <ngb-highlight [result]="valueOverrides[key](obj)" [term]="dataFilter">{{valueOverrides[key](obj)}}</ngb-highlight>
+            </a>
+            <ng-template #noLink>
+            <span [ngClass]="classes[key] ? classes[key](obj) : ''">
+              <i *ngIf="iconify[key]; else noIcon" [ngClass]="iconify[key](obj)" [title]="iconify[key](obj) | translate"></i>
+              <ng-template #noIcon>
+                <ngb-highlight [result]="valueOverrides[key](obj)" [term]="dataFilter">{{valueOverrides[key](obj)}}</ngb-highlight>
+              </ng-template>
+            </span>
+            </ng-template>
+          </td>
+          <td *ngIf="actions.length > 0" class="text-right">
+            <div ngbDropdown placement="bottom-right" container="body" #actionList hidden="true">
+              <i class="dropdown-icon mr-1" ngbDropdownToggle></i>
+              <div ngbDropdownMenu class="action-list" >
+                <ng-container *ngFor="let action of actions">
+                  <button ngbDropdownItem *ngIf="showAction(actionList, action, obj)" (click)="action.callback(obj)" class="action">
+                    <i [ngClass]="action.icon" *ngIf="action.icon"></i>
+                    {{action.name | translate}}
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <ng-template
+          *ngIf="obj[childKey] && obj.isExpanded"
+          [ngTemplateOutlet]="recursiveTemplateRef"
+          [ngTemplateOutletContext]="{$implicit: obj[childKey], depth: depth + 1}">
+        </ng-template>
+      </ng-container>
+    </ng-template>
+    <ng-template [ngTemplateOutlet]="recursiveTemplateRef"
+                 [ngTemplateOutletContext]="{ $implicit: pages[currentPage - 1], depth: 0}"></ng-template>
+    </tbody>
+  </table>
+</div>
+<p class="text-center" *ngIf="data?.length === 0">{{'table.no_entries' | translate}}</p>
+<p class="text-center" *ngIf="data?.length > 0 && filteredData?.length === 0">{{'table.no_matches' | translate}}</p>
+<div class="row" *ngIf="pagesEnabled && (!minimal || (minimal && pages.length > 1))">
+  <div class="col">
+    <p class="text-muted">
+      <span *ngIf="filteredData?.length > 0; else noPages">
+        {{'table.footer' | translate:{
+          startNum: (currentPage - 1) * limit + 1,
+          endNum: (currentPage - 1) * limit + pages[currentPage - 1].length,
+          total: filteredData?.length
+        } }}
+      </span>
+      <ng-template #noPages>
+        {{'table.footer' | translate:{
+          startNum: 0,
+          endNum: 0,
+          total: 0
+        } }}
+      </ng-template>
+      <span *ngIf="filteredData?.length < data?.length">{{'table.filtered_from' | translate:{total: data?.length} }}</span>
+    </p>
+  </div>
+  <div class="col" *ngIf="filteredData?.length > 0">
+    <div class="float-right">
+      <ngb-pagination [collectionSize]="filteredData?.length" [(page)]="currentPage" [maxSize]="4" [rotate]="true"
+                      [pageSize]="this.limit" aria-label="Table page">
+        <ng-template ngbPaginationPrevious>{{'nav.previous' | translate | titlecase}}</ng-template>
+        <ng-template ngbPaginationNumber let-p>{{p}}</ng-template>
+        <ng-template ngbPaginationNext>{{'nav.next' | translate | titlecase}}</ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

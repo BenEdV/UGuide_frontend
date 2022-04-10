@@ -1,0 +1,36 @@
+<div class="embed-responsive embed-responsive-16by9 d-flex align-items-center justify-content-center">
+  <ng-container *ngIf="validUrl; else invalid">
+    <ng-container *ngIf="resourceAccepted; else privacyWarning">
+      <app-loading-icon *ngIf="!resourceLoaded"></app-loading-icon>
+      <iframe
+        class="embed-responsive-item" [src]="parsedSource | safe"
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+        [hidden]="!resourceLoaded" (load)="resourceLoaded = true"
+        sandbox="allow-same-origin allow-scripts allow-presentation">
+      </iframe>
+    </ng-container>
+    <ng-template #privacyWarning>
+      <div class="video-overlay">
+        <h2 class="warning-title">
+          <i class="privacy-icon"></i>
+          {{'video.privacy_warning.title' | translate}}
+        </h2>
+        <p>{{src}}</p>
+        <p class="text-center mb-4" [innerHTML]="'video.privacy_warning.message' | translate">
+        </p>
+        <p>{{'video.privacy_warning.prompt' | translate}}</p>
+        <button type="button" class="btn btn-secondary mb-4" (click)="acceptResource()">{{'video.privacy_warning.view_here' | translate}}</button>
+        <div class="form-check" appRouteTransformer>
+          <input class="form-check-input" type="checkbox" id="rememberCheck" [(ngModel)]="rememberResourceAccepted">
+          <label class="form-check-label"
+            for="rememberCheck"
+            [innerHTML]="'video.privacy_warning.remember_choice' | translate">
+          </label>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+  <ng-template #invalid>
+    <p>{{'video.invalid_url' | translate}}</p>
+  </ng-template>  
+</div>

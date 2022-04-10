@@ -1,0 +1,406 @@
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+@import 'variables';
+
+$sub-icon-size: 0.7rem;
+$material-icon: $fa-var-book;
+
+button i[class$="-icon"] {
+  margin-right: 0.4rem;
+}
+
+i[class$="true-icon"] {
+  @extend %fa-icon;
+  @extend .fas;
+  color: $positive-color;
+
+  &:before {
+    content: fa-content($fa-var-check);
+  }
+}
+
+.false-icon {
+  @extend %fa-icon;
+  @extend .fas;
+  color: $negative-color;
+
+  &:before {
+    content: fa-content($fa-var-times);
+  }
+}
+
+.bar-chart-icon, .chart-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-chart-bar);
+  }
+}
+
+.line-chart-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-chart-line);
+  }
+}
+
+.add-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-plus);
+  }
+}
+
+.remove-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-trash);
+  }
+}
+
+.close-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-times);
+  }
+}
+
+.download-icon, .import-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-download);
+  }
+}
+
+.upload-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-upload);
+  }
+}
+
+.edit-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-edit);
+  }
+}
+
+.delete-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-trash);
+  }
+}
+
+.dropdown-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-ellipsis-h);
+  }
+}
+
+.redo-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-redo);
+  }
+}
+
+.preview-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-eye);
+  }
+}
+
+i[class$="seen-icon"], i[class$="visible-icon"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-eye);
+  }
+}
+
+i[class$="unseen-icon"], i[class$="invisible-icon"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-eye-slash);
+  }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  @extend .fas;
+  content: fa-content($fa-var-chevron-right) !important;
+  font-size: 0.65rem !important;
+  line-height: 1rem !important;
+}
+
+.activity-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-pen-alt);
+  }
+}
+
+.construct-icon {
+  @extend %fa-icon;
+  @extend .fas;
+  position: relative;
+
+  &:before {
+    content: fa-content($fa-var-brain);
+  }
+}
+
+.positive-construct-icon {
+  @extend .construct-icon;
+
+  &:after {
+    content: fa-content($fa-var-plus-circle);
+    position: absolute;
+    font-size: $sub-icon-size;
+    right: 3px;
+  }
+}
+
+.negative-construct-icon {
+  @extend .positive-construct-icon;
+
+  &:after {
+    content: fa-content($fa-var-minus-circle);
+  }
+}
+
+.advanced-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-sliders-h);
+  }
+}
+
+.model-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-project-diagram);
+  }
+}
+
+.exam-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-pen);
+  }
+}
+
+.comment-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-comment-alt);
+  }
+}
+
+.question-icon, i[class^="question."] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-pen-alt);
+  }
+}
+
+.study-material-icon, i[class*="material."] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($material-icon);
+  }
+}
+
+.group-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-users);
+  }
+}
+
+.student-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-user-graduate);
+  }
+}
+
+.file-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-file);
+  }
+}
+
+.pdf-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-file-pdf);
+  }
+}
+
+i[class*="material.video"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-video);
+  }
+}
+
+i[class*="material.book"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-book);
+  }
+}
+
+i[class*="material.file.factsheet"] {
+  @extend .file-icon;
+}
+
+i[class*="material.article"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-newspaper);
+  }
+}
+
+i[class*="material.file.slides"] {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-file-video);
+  }
+}
+
+.survey-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-poll-h);
+  }
+}
+
+.privacy-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-lock);
+  }
+}
+
+.connector-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-plug);
+  }
+}
+
+.settings-icon {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-cog);
+  }
+}
+
+.link-icon {
+  @extend %fa-icon;
+  @extend .fas;
+  position: relative;
+
+  &:before {
+    content: fa-content($fa-var-link);
+  }
+}
+
+.construct-link-icon {
+  @extend .link-icon;
+
+  &:after {
+    content: fa-content($fa-var-brain);
+    font-size: $sub-icon-size;
+  }
+}
+
+.material-link-icon {
+  @extend .link-icon;
+
+  &:after {
+    content: fa-content($material-icon);
+    font-size: $sub-icon-size;
+  }
+}
+
+.question-link-icon {
+  @extend .link-icon;
+
+  &:after {
+    content: fa-content($fa-var-pen-alt);
+    font-size: $sub-icon-size;
+  }
+}

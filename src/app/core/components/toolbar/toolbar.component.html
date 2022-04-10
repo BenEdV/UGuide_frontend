@@ -1,0 +1,80 @@
+<header id="toolbar" class="navbar fixed-top navbar-expand-md navbar-light py-0" *ngIf="toolbarVisible">
+  <i class="custom-toggler-icon bars-menu-icon fas fa-bars toolbar-icon cursor-pointer"
+      *ngIf="sidenavService.isVisible"
+      (click)="toggleSidenav()"></i>
+  <a class="navbar-brand mr-0 cursor-pointer" (click)="goToHomepage(); sidenavService.hideNavIfMobile()">
+    <img src="/assets/env/project_logo.svg" height="30" [alt]="projectName || productName">
+    <span class="align-middle pl-2" *ngIf="showProjectName">{{projectName || productName}}</span>
+    <div *ngIf="showPoweredBy" class="d-none d-md-inline">
+      <span class="align-bottom pl-2 text-muted powered-by">{{'toolbar.powered_by' | translate}}</span>
+      <span class="align-bottom pl-1 powered-by-product-name">{{productName}}</span>
+    </div>
+  </a>
+  <i class="navbar-toggler custom-toggler-icon fas fa-ellipsis-h" (click)="toggleNavbar()"></i>
+  <div class="navbar-collapse collapse" [ngbCollapse]="isMenuCollapsed" *ngIf="user$ | async as user">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" ngbDropdown>
+        <a class="nav-link cursor-pointer" ngbDropdownToggle id="langDropdown" role="button">
+          <span class="toolbar-icon">{{translate.currentLang | uppercase}}</span>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="langDropdown" class="dropdown-menu dropdown-menu-right">
+          <a ngbDropdownItem href="#" *ngFor="let lang of translate.langs"
+            (click)="$event.preventDefault(); useLanguage(lang)"
+            [ngClass]="{'active': translate.currentLang === lang}">
+            {{lang | uppercase}}
+          </a>
+        </div>
+      </li>
+      <li class="nav-item" ngbDropdown>
+        <a class="nav-link cursor-pointer" ngbDropdownToggle id="historyDropdown" role="button">
+          <i class="fas fa-clock d-none d-md-inline toolbar-icon" [title]="'history' | translate | titlecase"></i>
+          <span class="d-inline d-md-none">{{'history' | translate | titlecase}}</span>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="historyDropdown" class="dropdown-menu dropdown-menu-right history-dropdown">
+          <h6 class="dropdown-header d-none d-md-block">{{'toolbar.history.recent' | translate}}</h6>
+          <a ngbDropdownItem href="#" *ngFor="let tab of toolbarService.historyTabs" [routerLink]="tab.link" class="history-link" (click)="isMenuCollapsed = true">
+            <span class="history-link-text">
+              <i class="dropdown-margin" [ngClass]="tab.iconClasses"></i>
+              {{tab.name}}
+            </span>
+            <small class="ml-4 text-muted history-link-collection">{{tab.collectionName}}</small>
+          </a>
+          <p *ngIf="toolbarService.historyTabs.length === 0" class="dropdown-text">{{'toolbar.history.empty_message' | translate}}</p>
+        </div>
+      </li>
+      <li class="nav-item" ngbDropdown>
+        <a class="nav-link cursor-pointer" ngbDropdownToggle id="userDropdown" role="button">
+          <span class="user-circle toolbar-full-icon d-none d-md-block" [title]="'user' | translate | titlecase">
+            {{((user.first_name && user.first_name[0]) + (user.last_name && user.last_name[0]) || user.display_name && user.display_name[0]) | uppercase}}
+          </span>
+          <span class="d-inline d-md-none">{{user.display_name}}</span>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right user-dropdown mb-2">
+          <div class="d-none d-md-block">
+            <p class="dropdown-text mb-2">
+              <b class="d-block">{{user.display_name}}</b>
+              <span class="text-muted" *ngIf="user.institution_id">{{user.institution_id}}</span>
+            </p>
+            <div class="dropdown-divider"></div>
+          </div>
+          <ng-container *ngIf="sidenavService.isVisible">
+            <a ngbDropdownItem [routerLink]="['/', 'collections', sidenavService.collection.id, 'privacy']" routerLinkActive="active" (click)="isMenuCollapsed = true">
+              <i class="privacy-icon dropdown-margin"></i>
+              {{'toolbar.user.privacy' | translate}}
+            </a>
+          </ng-container>
+          <a ngbDropdownItem [routerLink]="['/', 'user-settings']" routerLinkActive="active" (click)="isMenuCollapsed = true">
+            <i class="settings-icon dropdown-margin"></i>
+            {{'toolbar.user.settings' | translate}}
+          </a>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem href="#" (click)="$event.preventDefault(); isMenuCollapsed = true; authService.logout()">
+            <i class="fas fa-sign-out-alt dropdown-margin"></i>
+            {{'toolbar.user.log_out' | translate}}
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</header>
+<div class="overlay fadeIn" *ngIf="toolbarVisible && !isMenuCollapsed" (click)="toggleNavbar()"></div>

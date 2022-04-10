@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-card [actions]="heatmapChart.cardActions">
+      <app-heatmap-chart
+        #heatmapChart
+        [items]="items"
+        [labels]="labels">
+      </app-heatmap-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card [actions]="heatmapChart.cardActions">
+      <app-heatmap-chart
+        #heatmapChart
+        [items]="items2"
+        [labels]="labels">
+      </app-heatmap-chart>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <app-card [actions]="heatmapChart.cardActions">
+      <app-heatmap-chart
+        #heatmapChart
+        [items]="items3"
+        [labels]="labels">
+      </app-heatmap-chart>
+    </app-card>
+  </div>
+</div>

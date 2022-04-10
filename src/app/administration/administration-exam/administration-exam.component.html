@@ -1,0 +1,140 @@
+<app-title-section [title]="'admin.exam.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.exam.table_title' | translate" [icon]="'exam-icon'" [actions]="examTable.cardActions">
+  <app-exam-table
+    #examTable
+    [activities]="exams"
+    [limit]="10"
+    [actions]="tableActions"
+    [showVisibility]="true">
+  </app-exam-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.exam.import' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.exam.exam' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.exam.new_exam.modal_title' | translate">
+  <form id="add-exam-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addTitle">{{'admin.exam.new_exam.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="addTitle"
+             [placeholder]="'admin.exam.new_exam.title' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="title" #addTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addDescription">{{'admin.exam.new_exam.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="addDescription" rows="3" [placeholder]="'admin.exam.new_exam.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="addVisibility">{{'admin.exam.new_exam.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="name" id="addVisibility" formControlName="visibility"
+                    [placeholder]="'admin.exam.new_exam.visibility' | translate" [ngClass]="{'is-invalid': addVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="visibility" #addVisibility></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addRemote">{{'admin.exam.new_exam.remote' | translate}} *</label>
+      <app-dropdown [items]="remotes" bindLabel="title" id="addRemote" formControlName="remote"
+                    [placeholder]="'admin.exam.new_exam.remote' | translate" [ngClass]="{'is-invalid': addRemote.invalid}" (selectionChange)="setRemoteNames()"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="remote" #addRemote></app-form-control-error>
+    </div>
+    <div class="form-group" [hidden]="!addC.remote.valid">
+      <label for="addRemoteName">{{'admin.exam.new_exam.remote_name' | translate}} *</label>
+      <app-dropdown [items]="remoteNames$ | async" bindLabel="title" id="addRemoteName" (selectionChange)="setRemoteMoments()"
+      formControlName="remoteName" [placeholder]="'admin.exam.new_exam.remote_name' | translate" [ngClass]="{'is-invalid': addRemoteName.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="remoteName" #addRemoteName></app-form-control-error>
+    </div>
+    <div class="form-group" [hidden]="!addC.remoteName.valid">
+      <label for="addMoment">{{'admin.exam.new_exam.moment' | translate}} *</label>
+      <app-dropdown [items]="remoteMoments$ | async" bindLabel="display_time" id="addMoment"
+      formControlName="remoteMoment" [placeholder]="'admin.exam.new_exam.moment' | translate" [ngClass]="{'is-invalid': addMoment.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="remoteMoment" #addMoment></app-form-control-error>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="importExamResultsOnCompletionCheckbox" formControlName="importExamResultsOnCompletion">
+      <label class="form-check-label" for="importExamResultsOnCompletionCheckbox">
+        {{'admin.exam.new_exam.settings.import_exam_results' | translate}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="importQuestionResultsOnCompletionCheckbox" formControlName="importQuestionResultsOnCompletion">
+      <label class="form-check-label" for="importQuestionResultsOnCompletionCheckbox">
+        {{'admin.exam.new_exam.settings.import_question_results' | translate}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="importResultsOnCloseCheckbox" formControlName="importResultsOnClose">
+      <label class="form-check-label" for="importResultsOnCloseCheckbox">
+        {{'admin.exam.new_exam.settings.import_all_results' | translate}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="updateGroupScoresOnCloseCheckbox" formControlName="updateGroupScoresOnClose">
+      <label class="form-check-label" for="updateGroupScoresOnCloseCheckbox">
+        {{'admin.exam.new_exam.settings.update_group_scores' | translate}}
+      </label>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-exam-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.exam.edit_exam.modal_title' | translate:{examName: editingItem?.title}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-exam-form" [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="editTitle">{{'admin.exam.edit_exam.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="editTitle"
+             [placeholder]="'admin.exam.edit_exam.title' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="title" #editTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="editDescription">{{'admin.exam.edit_exam.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="editDescription" rows="3" [placeholder]="'admin.exam.edit_exam.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editVisibility">{{'admin.exam.edit_exam.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="value" id="editVisibility" formControlName="visibility"
+                    [placeholder]="'admin.exam.edit_exam.visibility' | translate" [ngClass]="{'is-invalid': editVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="editForm" controlName="visibility" #editVisibility></app-form-control-error>
+    </div>
+    <ng-container *ngIf="editingItem">
+      <p>{{'admin.exam.edit_exam.remote_info' | translate}}</p>
+      <ul>
+        <li>{{'admin.exam.edit_exam.remote' | translate}}</li>
+        <li>{{'admin.exam.edit_exam.remote_name' | translate}}</li>
+        <li>{{'admin.exam.edit_exam.remote_moment' | translate}}</li>
+      </ul>
+    </ng-container>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-exam-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #importResultsModal [title]="'admin.exam.import_results.modal_title' | translate:{examName: (importResultsItem && importResultsItem.title)}">
+  <ng-container *ngIf="importResultsItem">
+    <p>{{'admin.exam.import_results.remote_info' | translate}}</p>
+      <ul>
+        <li>{{'admin.exam.import_results.remote' | translate}}</li>
+        <li>{{'admin.exam.import_results.remote_name' | translate}}</li>
+        <li>{{'admin.exam.import_results.remote_moment' | translate}}</li>
+      </ul>
+  </ng-container>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="importResultsModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="importResults()"><i class="import-icon"></i>{{'modal.import' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

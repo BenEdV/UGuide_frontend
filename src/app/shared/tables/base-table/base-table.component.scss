@@ -1,0 +1,74 @@
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/mixins';
+@import '~bootstrap-scss/variables';
+
+@import 'src/variables';
+
+$collapse-icon-width: 18px;
+
+@include media-breakpoint-down(sm) {
+  .ngx-slider {
+    margin-top: 35px !important;
+  }
+}
+
+.th-caret {
+  position: absolute;
+  bottom: 8%;
+  margin-left: 3px;
+}
+
+::ng-deep {
+  .custom-slider {
+    .ngx-slider {
+      margin: 20px 0 15px 0;
+
+      .ngx-slider-pointer{
+        background-color: $sidenav-active-link-color;
+        width: 16px;
+        height: 16px;
+        top: -6px;
+        left: -6px;
+
+        &:after {
+          width: 8px;
+          height: 8px;
+          top: 4px;
+          left: 4px;
+        }
+      }
+
+      .ngx-slider-active:after {
+        background-color: $sidenav-active-link-color !important;
+      }
+
+      .ngx-slider-bubble {
+        bottom: 10px;
+      }
+
+      .ngx-slider-selection {
+        background: $sidenav-active-link-color;
+      }
+    }
+  }
+}
+
+.collapseIcon {
+  width: $collapse-icon-width;
+}
+
+.ml-icon-0, .ml-icon-1 {
+  margin-left: $collapse-icon-width;
+}
+
+.ml-icon-2 {
+  margin-left: calc(#{$collapse-icon-width} * 2);
+}
+
+.ml-icon-3 {
+  margin-left: calc(#{$collapse-icon-width} * 3);
+}
+
+.ml-icon-4 {
+  margin-left: calc(#{$collapse-icon-width} * 4);
+}

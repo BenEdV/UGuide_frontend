@@ -1,0 +1,110 @@
+<div class="row full-screen-center">
+  <ng-container *ngIf="!authService.user && !checkingToken; else loggingIn">
+    <img class="d-none d-lg-block mr-5" src="/assets/env/project_logo.svg" width="400" height="400" [alt]="projectName">
+    <div class="col-sm-9 col-md-7 col-lg-5 col-xl-4">
+      <app-card>
+        <div class="m-5 mb-3">
+          <h2 class="card-title text-center">{{'login.title' | translate}}</h2>
+          <!-- [ngClass]="{'is-invalid': submitted && !userAgreementCheck }" -->
+          <div class="d-flex mb-5 align-items-center">
+            <input type="checkbox" name="userAgreement" [checked]="userAgreementCheck" (change)="userAgreementCheck = !userAgreementCheck"/>
+            <span id="userAgreementText" class="text-muted flex-grow-1 pl-2" [ngClass]="{'is-invalid': submitted && !userAgreementCheck}" [innerHTML]="'login.sign_in' | translate:{projectName: projectName}"></span>
+          </div>
+          <div *ngIf="isIE" class="alert alert-danger mb-4" role="alert" [innerHTML]="'login.IE_warning' | translate"></div>
+          <ng-container *ngIf="!loginFormVisible">
+            <div class="row">
+              <div class="col text-center">
+                <button type="button" class="btn btn-primary w-100" (click)="loginWithSaml()">
+                  {{'login.solis_login' | translate}}
+                </button>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col text-center">
+                <span>{{'login.or' | translate}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <button type="button" class="btn btn-outline-primary w-100" (click)="loginFormVisible = true">
+                  {{'login.thermos' | translate}}
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <form [formGroup]="form" (ngSubmit)="login()" [hidden]="!loginFormVisible">
+            <div *ngIf="error" class="text-danger">{{error | translate}}</div>
+            <div class="form-group">
+              <label for="username">{{'login.login_method' | translate}}</label>
+              <input type="text" id="username" formControlName="username" [placeholder]="'login.login_method' | translate" autocomplete="username"
+                    autofocus class="form-control" [ngClass]="{'is-invalid': submitted && f.username.errors}"/>
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">{{'login.required_username' | translate}}</div>
+              </div>
+            </div>
+            <div class="form-group mb-0">
+              <label for="password">{{'login.password' | translate}}</label>
+              <div class="password-container">
+                <input type="password" id="password" formControlName="password" [placeholder]="'login.password' | translate"
+                        autocomplete="current-password" #passwordField
+                        class="form-control" [ngClass]="{'is-invalid': submitted && f.password.errors }"/>
+                  <i class="show-password-icon" [ngClass]="isPasswordVisible ? 'invisible-icon' : 'visible-icon'" (click)="togglePasswordVisibility()"></i>
+              </div>
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">{{'login.required_password' | translate}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-right"><a [routerLink]="" class="small">{{'login.forgot_password' | translate}}</a></div>
+            </div>
+            <div class="row mb-0 mt-4">
+              <div class="col-sm-3 pr-sm-0 mb-2 mb-sm-0">
+                <button type="button" class="btn btn-outline-secondary w-100" [disabled]="loading" (click)="loginFormVisible = false;">
+                  {{'login.back' | translate}}
+                </button>
+              </div>
+              <div class="col-sm-8 offset-sm-1">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  {{'login.login' | translate}}
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="row mt-5" *ngIf="allowRegistration && loginFormVisible">
+            <div class="col text-center">
+              <p>
+                {{'login.no_account' | translate}}
+                <a [routerLink]="['/', 'register']" [queryParams]="returnUrl !== '/' ? {returnUrl: returnUrl} : {}">
+                  {{'login.register' | translate}}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </app-card>
+      <div class="row mt-2">
+        <div class="col">
+            <p class="text-right contact-p">For problems or questions, <a href="mailto:l.b.devreugd-2@umcutrecht.nl" title="l.b.devreugd-2@umcutrecht.nl"><i class="fas fa-envelope mx-2"></i>contact L.B. de Vreugd</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loggingIn>
+    <div class="m-auto">
+      <div class="row">
+        <div class="col">
+          <img src="/assets/env/project_logo.svg" class="fadeIn" width="200" height="200" [alt]="projectName">
+        </div>
+      </div>
+    </div>
+    <button type="button"
+        class="btn btn-outline-primary logoutBtn"
+        *ngIf="showLogoutBtn"
+        (click)="logout()">{{'login.logout' | translate}}</button>
+  </ng-template>
+</div>
+
+<app-modal [title]="'register.user_agreement' | translate" #userAgreement>
+  <p *appMultiline="let line of (userAgreementText | translate)" [innerHTML]="line"></p>
+</app-modal>

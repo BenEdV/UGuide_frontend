@@ -1,0 +1,234 @@
+<app-title-section [item]="exam" type="exam"></app-title-section>
+
+<p class="section-title">{{'exam.entity.general_information' | translate | titlecase}}</p>
+<div class="card-grid">
+  <app-card [title]="'exam.entity.my_grade' | translate | titlecase" highlight="primary" *ngIf="exam.my_latest_result">
+    <p class="minimal-card-text">{{myGrade | grade}}</p>
+  </app-card>
+  <app-card [title]="'exam.entity.passed' | translate | titlecase" highlight="primary" *ngIf="exam.my_latest_result">
+    <p class="minimal-card-text">
+      <i [ngClass]="exam.my_latest_result.result.success ? 'true-icon' : 'false-icon'"></i>
+    </p>
+  </app-card>
+  <span *appHasPermission="['see_user_results']">
+    <app-card [title]="'exam.entity.passed' | translate | titlecase" highlight="primary" *ngIf="amountPassed != null">
+      <p class="minimal-card-text">{{amountPassed | percent}}</p>
+    </app-card>
+  </span>
+  <span *appHasPermission="['see_user_results']">
+    <app-card [title]="'exam.entity.participants' | translate | titlecase" highlight="primary" *ngIf="amountPassed != null">
+      <p class="minimal-card-text">{{grades && grades.length}}</p>
+    </app-card>
+  </span>
+  <app-card [title]="'exam.entity.course_average' | translate | titlecase" highlight="primary" *ngIf="exam.properties.average && exam.properties.average != 0">
+    <p class="minimal-card-text">{{exam.properties.average | grade}}</p>
+  </app-card>
+  <app-card [title]="'card.date' | translate | titlecase" highlight="primary">
+    <p class="minimal-card-text">{{exam.end_time | date}}</p>
+  </app-card>
+</div>
+
+<div class="row" *appHasPermission="['see_user_results'];">
+  <div class="col card-spacing">
+    <app-card
+      [icon]="'fas fa-chart-bar'"
+      [title]="'exam.entity.score_distribution.title' | translate | titlecase"
+      [actions]="gradeChart.cardActions">
+      <div class="row">
+        <div class="col">
+          <p id='gradeText'></p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-grade-distribution-chart
+            #gradeChart
+            [plugins]="pathPlugin"
+            [options]="{
+              aspectRatio: 1.4,
+              plugins: {
+                path: [
+                  gradeAveragePath
+                ]
+              }
+            }"
+            [title]="'exam.entity.score_distribution.chart.title' | translate"
+            [yLabel]="'exam.entity.score_distribution.chart.y_label' | translate"
+            [xLabel]="'exam.entity.score_distribution.chart.x_label' | translate"
+            [items]="grades"
+            [gradeKey]="'score'"
+            [cumulative]="true"
+            [maxX]="10.0">
+          </app-grade-distribution-chart>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row" *appHasPermission="['see_user_results'];">
+  <div class="col card-spacing">
+    <app-card [icon]="'fas fa-chart-bar'"
+      [title]="'exam.entity.exam_duration.title' | translate | titlecase"
+      [actions]="examDurationChart.cardActions">
+      <div class="row">
+        <div class="col">
+          <p id='examDurationText'></p>
+          <!-- <p>
+            A <select><option>Linear Regression</option></select> of the data shows a <b>positive correlation</b> (1.12 points per extra minute spent) between time spent on the exam and the grade achieved.
+            The R<sup>2</sup> value of this regression is <b>0.43</b>.
+          </p> -->
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-scatter-chart
+            #examDurationChart
+            [title]="'exam.entity.exam_duration.chart.title' | translate"
+            [yType]="'duration'"
+            [yLabel]="'exam.entity.exam_duration.chart.y_label' | translate"
+            [xLabel]="'exam.entity.exam_duration.chart.x_label' | translate"
+            [options]="examDurationOptions"
+            [yScale]="'time'"
+            [datasets]="examDurationDataset"
+            [legend]="false">
+          </app-scatter-chart>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row" *appHasPermission="['see_user_results'];">
+  <div class="col card-spacing">
+    <app-card
+      [icon]="'fas fa-chart-bar'"
+      [title]="'exam.entity.question_values.title' | translate | titlecase">
+      <div class="row">
+        <div class="col">
+          <p id='questionsText'></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-bar-chart
+            #questionPValueChart
+            [title]="'exam.entity.question_values.p_value_chart.title' | translate"
+            [yLabel]="'exam.entity.question_values.p_value_chart.y_label' | translate"
+            [xLabel]="'exam.entity.question_values.p_value_chart.x_label' | translate"
+            [options]="pValueOptions"
+            (chartClick)="questionChartClick($event)"
+            [datasets]="questionScoresDataset"
+            [labels]="questionLabels"
+            [max]="100"
+            [legend]="false">
+          </app-bar-chart>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-bar-chart
+            #questionRirValueChart
+            [title]="'exam.entity.question_values.rir_value_chart.title' | translate"
+            [yLabel]="'exam.entity.question_values.rir_value_chart.y_label' | translate"
+            [xLabel]="'exam.entity.question_values.rir_value_chart.x_label' | translate"
+            [options]="rirValueOptions"
+            (chartClick)="questionChartClick($event)"
+            [datasets]="questionRirs | async"
+            [labels]="questionLabels"
+            [min]="-1"
+            [max]="1"
+            [legend]="false">
+          </app-bar-chart>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-bar-chart
+            #questionDurationChart
+            (chartClick)="questionChartClick($event)"
+            [title]="'exam.entity.question_values.duration_chart.title' | translate"
+            [yType]="'duration'"
+            [yLabel]="'exam.entity.question_values.duration_chart.y_label' | translate"
+            [xLabel]="'exam.entity.question_values.duration_chart.x_label' | translate"
+            [options]="questionDurationOptions"
+            [yScale]="'time'"
+            [datasets]="questionAvgTimes"
+            [labels]="questionLabels"
+            [legend]="false">
+          </app-bar-chart>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row" *appHasPermission="['see_user_results'];">
+  <div class="col card-spacing">
+    <app-card
+      [icon]="'fas fa-chart-bar'"
+      [title]="'exam.entity.answer_distribution.title' | translate | titlecase">
+      <div class="row">
+        <div class="col">
+          <p id='answerDistText'></p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 card-spacing">
+          <app-heatmap-chart
+            #answerDistChart
+            [items]="answerDistItems"
+            [title]="'exam.entity.answer_distribution.chart.title' | translate"
+            [yLabel]="'exam.entity.answer_distribution.chart.y_label' | translate"
+            [xLabel]="'exam.entity.answer_distribution.chart.x_label' | translate"
+            [options]="answerDistOptions"
+            [labels]="questionLabels"
+            [legend]="false"
+            [yLetters]="true"
+            (chartClick)="answerDistributionChartClick($event)">
+          </app-heatmap-chart>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<!--<p class="section-title">Connected Constructs</p>-->
+<!--<div class="row">-->
+<!--  <div class="col-lg-6 card-spacing">-->
+<!--    <app-card [icon]="'construct-icon'" [title]="'Construct Scores'" [minimal]="true">-->
+<!--      <app-construct-chart></app-construct-chart>-->
+<!--    </app-card>-->
+<!--  </div>-->
+<!--  <div class="col-lg-6 card-spacing">-->
+<!--    <app-card [icon]="'construct-icon'" [title]="'Negative Construct Scores'" [minimal]="true">-->
+<!--      <app-construct-chart></app-construct-chart>-->
+<!--    </app-card>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--  <div class="col card-spacing">-->
+<!--    <app-card [icon]="'construct-icon'" [title]="'Related Constructs'" [actions]="constructTable.cardActions">-->
+<!--      <app-construct-table-->
+<!--        #constructTable-->
+<!--        [constructs]="allQuestionConstructs"-->
+<!--        [minimal]="true">-->
+<!--      </app-construct-table>-->
+<!--    </app-card>-->
+<!--  </div>-->
+<!--</div>-->
+
+<p class="section-title">{{'exam.entity.all_questions' | translate | titlecase}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'exam-icon'"
+              [title]="'exam.entity.questions' | translate | titlecase"
+              [actions]="activitiesTable.cardActions">
+      <app-question-table
+        #activitiesTable
+        [activities]="questions"
+        [searchEnabled]="false"
+        [limit]="5">
+      </app-question-table>
+    </app-card>
+  </div>
+</div>
+
+<ng-template #questionList let-questions="questions">
+  <span *ngIf="questions && questions.length > 0">
+    <ng-container *ngFor="let question of questions; index as i">
+      <a [routerLink]="'./questions/' + question.id">{{question.title}}</a>
+      <span *ngIf="i < questions.length - 1">, </span>
+    </ng-container>
+  </span>
+</ng-template>

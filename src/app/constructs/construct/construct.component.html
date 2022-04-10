@@ -1,0 +1,174 @@
+<app-title-section [item]="construct" type="construct"></app-title-section>
+
+<ng-container *ngIf="isPositive; else negativeWarning">
+  <ngb-alert [dismissible]="false" *ngIf="warningScore && warningScore.score < positiveHardConstructThreshold">
+    {{'construct.entity.score_too_low' | translate}} {{positiveHardConstructThreshold | percent}}.
+  </ngb-alert>
+</ng-container>
+<ng-template #negativeWarning>
+  <ngb-alert [dismissible]="false" *ngIf="warningScore && warningScore.score > negativeHardConstructThreshold">
+    {{'construct.entity.score_too_high' | translate}} {{negativeHardConstructThreshold | percent}}.
+  </ngb-alert>
+</ng-template>
+
+<p class="section-title">{{'construct.entity.general_information' | translate}}</p>
+<div class="card-grid">
+  <app-card [title]="'construct.entity.your_score' | translate" highlight="primary" *ngIf="construct.my_latest_score">
+    <p class="minimal-card-text">{{construct.my_latest_score.score | percent}}</p>
+  </app-card>
+  <app-card [title]="'construct.entity.course_average' | translate" highlight="primary" *ngIf="construct.latest_average_score">
+    <p class="minimal-card-text">{{construct.latest_average_score.score | percent}}</p>
+  </app-card>
+  <app-card [title]="'card.type' | translate" highlight="primary">
+    <p class="minimal-card-text">{{construct.type | translate | titlecase}}</p>
+  </app-card>
+  <app-card [title]="'card.updated' | translate" highlight="primary" *ngIf="construct.my_latest_score">
+    <p class="minimal-card-text">{{construct.my_latest_score.timestamp | date}}</p>
+  </app-card>
+  <app-card [title]="'construct.entity.study_material_progress' | translate" highlight="primary" *appHasRole="['student']">
+    <span>{{studyMaterialCompletedPercentage | percent}} {{'construct.entity.study_material_completed' | translate}}</span>
+    <div class="progress mb-3">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{'width': studyMaterialSeenPercentage | percent}" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" [ngbTooltip]="'construct.entity.study_material_progress_seen' | translate:{percent:(studyMaterialSeenPercentage | percent)}" openDelay="500"></div>
+      <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': studyMaterialCompletedPercentage | percent}" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" [ngbTooltip]="'construct.entity.study_material_progress_completed' | translate:{percent:(studyMaterialCompletedPercentage | percent)}" openDelay="500"></div>
+    </div>
+  </app-card>
+</div>
+
+<div class="chart-grid" *appHasPermission="['see_aggregated_results']">
+  <app-card
+    *appHasPermission="['see_users']; else distributionChartNoClick"
+    [icon]="'bar-chart-icon'"
+    [title]="'construct.entity.score_distribution.title' | translate"
+    [actions]="scoreDistributionChart.cardActions">
+    <app-distribution-chart
+      #scoreDistributionChart
+      [items]="construct.latest_user_scores"
+      [maxX]="1"
+      [cumulative]="true"
+      [title]="'construct.entity.score_distribution.chart.title' | translate"
+      [yLabel]="'construct.entity.score_distribution.chart.y_label' | translate"
+      [options]="{
+          aspectRatio: 1.4,
+          scales: {
+            xAxes: [{
+                scaleLabel: {display: true, labelString: 'construct.entity.score_distribution.chart.x_label' | translate},
+                ticks: {
+                  callback: scoreCallback
+                }
+            }]
+          }
+        }"
+      (chartClick)="handleDistributionChartClick($event)">
+    </app-distribution-chart>
+  </app-card>
+  <ng-template #distributionChartNoClick>
+    <app-card
+      [icon]="'bar-chart-icon'"
+      [title]="'construct.entity.score_distribution.title' | translate"
+      [actions]="scoreDistributionChart.cardActions">
+      <app-distribution-chart
+        #scoreDistributionChart
+        [items]="construct.latest_user_scores"
+        [plugins]="pathPlugin"
+        [maxX]="1"
+        [cumulative]="true"
+        [title]="'construct.entity.score_distribution.chart.title' | translate"
+        [yLabel]="'construct.entity.score_distribution.chart.y_label' | translate"
+        [xLabel]="'construct.entity.score_distribution.chart.x_label' | translate"
+        [options]="{
+          aspectRatio: 1.4,
+          plugins: {
+            path: [
+              myScorePath
+            ]
+          }
+        }">
+      </app-distribution-chart>
+    </app-card>
+  </ng-template>
+  <app-card *appHasPermission="['see_user_results']"
+    [icon]="'bar-chart-icon'"
+    [title]="'construct.entity.question_rir.title' | translate"
+    [actions]="questionChart.cardActions">
+    <app-bar-chart
+      #questionChart
+      [datasets]="questionRirs | async"
+      [labels]="questionLabels"
+      [min]="-1"
+      [max]="1"
+      [legend]="false"
+      [title]="'construct.entity.question_rir.chart.title' | translate"
+      [yLabel]="'construct.entity.question_rir.chart.y_label' | translate"
+      [xLabel]="'construct.entity.question_rir.chart.x_label' | translate"
+      [options]="rirValueOptions"
+      (chartClick)="handleRirChartClick($event)">
+    </app-bar-chart>
+  </app-card>
+  <app-card
+    [icon]="'line-chart-icon'"
+    [title]="'construct.entity.construct_progress.title' | translate"
+    [actions]="constructProgressChart.cardActions">
+    <app-construct-progress-chart
+      #constructProgressChart
+      [constructDatasets]="constructProgressDatasets"
+      [title]="'construct.entity.construct_progress.chart.title' | translate"
+      [yLabel]="'construct.entity.construct_progress.chart.y_label' | translate"
+      [xLabel]="'construct.entity.construct_progress.chart.x_label'| translate"
+      [options]="constructProgressOptions"
+    ></app-construct-progress-chart>
+  </app-card>
+</div>
+
+<ng-container *ngIf="construct.head_constructs.length > 0">
+  <p class="section-title">{{'construct.entity.subconstructs' | translate}}</p>
+  <div class="row">
+    <div class="col card-spacing">
+      <app-card [icon]="'construct-icon'"
+                [title]="'construct.entity.subconstructs' | translate"
+                [actions]="relatedConstructsTable.cardActions">
+        <app-construct-table
+          #relatedConstructsTable
+          [constructs]="construct.head_constructs"
+          [minimal]="true"
+          [pagesEnabled]="true">
+        </app-construct-table>
+      </app-card>
+    </div>
+  </div>
+</ng-container>
+
+<p class="section-title">{{'construct.entity.connected_questions' | translate}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'question-icon'"
+              [title]="'construct.entity.questions' | translate"
+              [actions]="questionTable.cardActions">
+      <app-question-table
+        #questionTable
+        [activities]="connectedQuestions"
+        [showExam]="true"
+        [sortKey]="'exam'"
+        [searchEnabled]="false"
+        [limit]="5">
+      </app-question-table>
+    </app-card>
+  </div>
+</div>
+
+<ng-container *ngIf="connectedStudyMaterial.length > 0">
+  <p class="section-title">{{'construct.entity.connected_study_material' | translate}}</p>
+  <div class="row">
+    <div class="col card-spacing">
+      <app-card [icon]="'study-material-icon'"
+                [title]="'construct.entity.study_material' | translate"
+                [actions]="connectedActivitiesTable.cardActions">
+        <app-study-material-table
+          #connectedActivitiesTable
+          [activities]="connectedStudyMaterial"
+          [searchEnabled]="false"
+          [limit]="5">
+        </app-study-material-table>
+      </app-card>
+    </div>
+  </div>
+</ng-container>

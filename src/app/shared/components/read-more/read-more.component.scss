@@ -1,0 +1,8 @@
+.wrap-line {
+  float: left;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  width: calc(100% - 75px);
+  overflow: hidden;
+}

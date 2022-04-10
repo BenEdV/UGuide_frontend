@@ -1,0 +1,103 @@
+<app-title-section [title]="'admin.connector.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.connector.table_title' | translate" [icon]="'connector-icon'" [actions]="connectorTable.cardActions">
+  <app-connector-table
+    #connectorTable
+    [connectors]="connectors"
+    [limit]="10"
+    [actions]="tableActions">
+  </app-connector-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.connector.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.connector.connector' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.connector.new_connector.modal_title' | translate">
+  <form id="add-connector-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addConnectorTitle">{{'admin.connector.new_connector.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="addConnectorTitle"
+             [placeholder]="'admin.connector.new_connector.title' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="title" #addTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addConnectorType">{{'admin.connector.new_connector.type' | translate}} *</label>
+      <app-dropdown [items]="connectorTypes" bindValue="name" id="addConnectorType" formControlName="type"
+                    [placeholder]="'admin.connector.new_connector.type' | translate" [ngClass]="{'is-invalid': addType.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="type" #addType></app-form-control-error>
+    </div>
+    <div class="form-group" formGroupName="remindo" *ngIf="addC.type.value && addC.type.value.name === 'remindo'">
+      <label for="addConnectorBaseURL">{{'admin.connector.new_connector.remindo.base_url' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="base_url" id="addConnectorBaseURL"
+             [placeholder]="'admin.connector.new_connector.remindo.base_url' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="base_url" #addType></app-form-control-error>
+
+      <label for="addConnectorUUID">{{'admin.connector.new_connector.remindo.uuid' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="uuid" id="addConnectorUUID"
+             [placeholder]="'admin.connector.new_connector.remindo.uuid' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="uuid" #addType></app-form-control-error>
+
+      <label for="addConnectorSecret">{{'admin.connector.new_connector.remindo.secret' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="secret" id="addConnectorSecret"
+             [placeholder]="'admin.connector.new_connector.remindo.secret' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="secret" #addType></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-connector-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.connector.edit_connector.modal_title' | translate:{connectorTitle: editingItem?.title}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-connector-form" [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="editConnectorTitle">{{'admin.connector.edit_connector.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="editConnectorTitle"
+             [placeholder]="'admin.connector.edit_connector.title' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="title" #editTitle></app-form-control-error>
+    </div>
+
+    <div class="form-group" formGroupName="lrs" *ngIf="editingItem && editingItem.type && editingItem.type === 'lrs'">
+      <ul>
+        <li>{{'admin.connector.edit_connector.lrs.xapi_url' | translate:{url: lrsInfo.url} }}</li>
+        <li>{{'admin.connector.edit_connector.lrs.key' | translate:{key: lrsInfo.key} }}</li>
+        <li>{{'admin.connector.edit_connector.lrs.secret' | translate:{secret: lrsInfo.secret} }}</li>
+      </ul>
+
+    </div>
+
+    <div class="form-group" formGroupName="remindo" *ngIf="editingItem && editingItem.type && editingItem.type === 'remindo'">
+      <p>{{'admin.connector.edit_connector.remindo.callback_url' | translate:{callbackURL: callbackURL} }}</p>
+      <label for="editConnectorBaseURL">{{'admin.connector.edit_connector.remindo.base_url' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="base_url" id="editConnectorBaseURL"
+             [placeholder]="'admin.connector.edit_connector.remindo.base_url' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="base_url" #editType></app-form-control-error>
+
+      <label for="editConnectorUUID">{{'admin.connector.edit_connector.remindo.uuid' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="uuid" id="editConnectorUUID"
+             [placeholder]="'admin.connector.edit_connector.remindo.uuid' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="uuid" #editType></app-form-control-error>
+
+      <label for="editConnectorSecret">{{'admin.connector.edit_connector.remindo.secret' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="secret" id="editConnectorSecret"
+             [placeholder]="'admin.connector.edit_connector.remindo.secret' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="secret" #editType></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-connector-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

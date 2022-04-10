@@ -1,0 +1,16 @@
+<app-modal #deleteModal [title]="'admin.delete_modal.modal_title' | translate:{entityName: (deletingItem && (deletingItem.name || deletingItem.title))}" loggingSubject="DeleteModal">
+  <ng-container *ngIf="deletingItem">
+    <p>{{'admin.delete_modal.confirmation' | translate:{entityName: deletingItem.name || deletingItem.title} }}</p>
+    <ng-container *ngIf="nLinkedConstructs || nLinkedActivities">
+      <p>{{'admin.delete_modal.removals' | translate}}</p>
+      <ul>
+        <li [hidden]="!nLinkedConstructs">{{'admin.delete_modal.linked_constructs' | translate:{numLinkedConstructs: nLinkedConstructs} }}</li>
+        <li [hidden]="!nLinkedActivities">{{'admin.delete_modal.linked_activities' | translate:{numLinkedActivities: nLinkedActivities} }}</li>
+      </ul>
+    </ng-container>
+  </ng-container>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="deleteModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" class="btn btn-danger" (click)="emitDelete(); deleteModal.close('Delete click')"><i class="delete-icon"></i>{{'modal.delete' | translate}}</button>
+  </div>
+</app-modal>

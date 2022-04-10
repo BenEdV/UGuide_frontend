@@ -1,0 +1,164 @@
+<app-title-section
+  [title]="'construct.overview.section_title' | translate"
+  [description]="'construct.overview.section_description' | translate">
+</app-title-section>
+
+<p class="section-title">{{'construct.overview.progress.section_title' | translate}}</p>
+<div class="row" *ngIf="showConstructs">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'positive-construct-icon'"
+              [title]="'construct.overview.concepts.title' | translate"
+              [actions]="constructChart.cardActions">
+      <app-construct-chart
+        #constructChart
+        [constructs]="constructs"
+        [isNegative]="false"
+        [showScore]="showScore"
+        [layer]="'root'"
+        (chartClick)="handleConstructChartClick($event)"
+      ></app-construct-chart>
+    </app-card>
+  </div>
+  <div class="col card-spacing">
+    <app-card [icon]="'positive-construct-icon'"
+              [title]="'construct.overview.recent_updated_concepts_table_title' | translate"
+              [actions]="constructTable.cardActions">
+      <app-construct-table
+        #constructTable
+        [constructs]="positiveLeafConstructs"
+        [minimal]="true"
+        [showTimestamp]="true"
+        [sortKey]="'timestamp'"
+        [limit]="5"
+        [sortReverse]="true">
+      </app-construct-table>
+    </app-card>
+  </div>
+</div>
+<div class="row" *ngIf="showMisconstructs">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'negative-construct-icon'"
+              [title]="'construct.overview.misconceptions' | translate"
+              [actions]="misconstructChart.cardActions">
+      <app-construct-chart
+        #misconstructChart
+        [constructs]="constructs"
+        [isNegative]="true"
+        [showScore]="showScore"
+        [layer]="'root'"
+        (chartClick)="handleConstructChartClick($event)"
+      ></app-construct-chart>
+    </app-card>
+  </div>
+  <div class="col card-spacing">
+    <app-card [icon]="'negative-construct-icon'"
+              [title]="'construct.overview.recent_updated_misconceptions_table_title' | translate"
+              [actions]="constructTable.cardActions">
+      <app-construct-table
+        #constructTable
+        [constructs]="negativeLeafConstructs"
+        [minimal]="true"
+        [showTimestamp]="true"
+        [sortKey]="'timestamp'"
+        [limit]="5"
+        [sortReverse]="true">
+      </app-construct-table>
+    </app-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'line-chart-icon'"
+              [title]="'construct.overview.construct_progress.title' | translate"
+              [actions]="constructProgressChart.cardActions">
+      <app-construct-progress-chart
+        #constructProgressChart
+        [title]="'construct.overview.construct_progress.chart.title' | translate"
+        [yLabel]="'construct.overview.construct_progress.chart.y_label' | translate"
+        [xLabel]="'construct.overview.construct_progress.chart.x_label' | translate"
+        [constructDatasets]="constructProgressDatasets"
+        [options]="constructProgressOptions"
+      ></app-construct-progress-chart>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'construct.overview.highest_scoring_section_title' | translate}}</p>
+<div class="row">
+  <div class="col-md-6 card-spacing" *ngIf="showConstructs">
+    <app-card [icon]="'positive-construct-icon'"
+              [title]="'construct.overview.concepts.title' | translate"
+              [actions]="bestConstructTable.cardActions">
+      <app-construct-table
+        #bestConstructTable
+        [constructs]="positiveLeafConstructs"
+        [minimal]="true"
+        [sortKey]="sortKey"
+        [sortReverse]="true"
+        [limit]="3"
+        [pagesEnabled]="true">
+      </app-construct-table>
+    </app-card>
+  </div>
+  <div class="col-md-6 card-spacing" *ngIf="showMisconstructs">
+    <app-card [icon]="'negative-construct-icon'"
+              [title]="'construct.overview.misconceptions' | translate"
+              [actions]="bestNegativeConstructTable.cardActions">
+      <app-construct-table
+        #bestNegativeConstructTable
+        [constructs]="negativeLeafConstructs"
+        [minimal]="true"
+        [sortKey]="sortKey"
+        [limit]="3"
+        [pagesEnabled]="true">
+      </app-construct-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'construct.overview.lowest_scoring_section_title' | translate}}</p>
+<div class="row">
+  <div class="col-md-6 card-spacing" *ngIf="showConstructs">
+    <app-card [icon]="'positive-construct-icon'"
+              [title]="'construct.overview.concepts.title' | translate"
+              [actions]="worstConstructTable.cardActions">
+      <app-construct-table
+        #worstConstructTable
+        [constructs]="positiveLeafConstructs"
+        [minimal]="true"
+        [sortKey]="sortKey"
+        [limit]="3"
+        [pagesEnabled]="true">
+      </app-construct-table>
+      <ng-container *ngTemplateOutlet="hardConstructWarning; context: {constructs: positiveHardConstructs, positive: true}"></ng-container>
+    </app-card>
+  </div>
+  <div class="col-md-6 card-spacing" *ngIf="showMisconstructs">
+    <app-card [icon]="'negative-construct-icon'"
+              [title]="'construct.overview.misconceptions' | translate"
+              [actions]="worstNegativeConstructTable.cardActions">
+      <app-construct-table
+        #worstNegativeConstructTable
+        [constructs]="negativeLeafConstructs"
+        [minimal]="true"
+        [sortKey]="sortKey"
+        [sortReverse]="true"
+        [limit]="3"
+        [pagesEnabled]="true">
+      </app-construct-table>
+      <ng-container *ngTemplateOutlet="hardConstructWarning; context: {constructs: negativeHardConstructs, positive: false}"></ng-container>
+    </app-card>
+  </div>
+</div>
+
+<ng-template #hardConstructWarning let-constructs="constructs" let-positive="positive">
+  <p *ngIf="constructs && constructs.length > 0">
+    {{'construct.overview.require_attention' | translate}}
+    <ng-container *ngFor="let construct of constructs; index as i">
+      <a [routerLink]="'../' + construct.id">{{construct.name}}</a>
+      <span *ngIf="i < constructs.length - 1">, </span>
+    </ng-container>
+      <span *ngIf="!positive"> {{'construct.overview.score_too_high' | translate}} {{negativeHardConstructThreshold | percent}}.</span>
+      <span *ngIf="positive"> {{'construct.overview.score_too_low' | translate}} {{positiveHardConstructThreshold | percent}}.</span>
+  </p>
+</ng-template>

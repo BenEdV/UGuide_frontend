@@ -1,0 +1,121 @@
+<app-title-section [item]="studyMaterial" type="studyMaterial">
+  <div class="title" *appHasRole="['student']">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-light" [ngClass]="{'active': status === 'unseen'}" (click)="markAsUnseen()">
+          <i class="unseen-icon"></i>
+          {{'study_material.entity.status.unseen' | translate }}
+        </button>
+        <button type="button" class="btn btn-light" [ngClass]="{'active': status === 'seen'}" (click)="markAsSeen()">
+          <i class="seen-icon"></i>
+          {{'study_material.entity.status.seen' | translate }}
+        </button>
+        <button type="button" class="btn btn-light" [ngClass]="{'active': status === 'completed'}" (click)="markAsCompleted()">
+          <i class="true-icon"></i>
+          <span *ngIf="status !== 'completed'; else completed">{{'study_material.entity.status.completed' | translate }}</span>
+          <ng-template #completed>{{'study_material.entity.status.completed_on' | translate:{date:completedTimestamp | date } }}</ng-template>
+        </button>
+      </div>
+  </div>
+</app-title-section>
+
+<p class="section-title">{{'study_material.entity.general_information' | translate | titlecase}}</p>
+<div class="card-grid">
+  <ng-container *ngFor="let key of defaultProperties">
+    <app-card [title]="'study_material.entity.properties.' + key | translate" highlight="primary">
+      <p class="minimal-card-text">{{studyMaterial.properties[key]}}</p>
+    </app-card>
+  </ng-container>
+  <ng-container *ngFor="let attachment of defaultAttachments">
+    <app-card icon="link-icon" [title]="'Attachment'" highlight="primary">
+      <a [href]="getDataUrl(attachment)" (click)="logAttachment(attachment)"class="minimal-card-text">
+        {{attachment.name}}
+      </a>
+    </app-card>
+  </ng-container>
+</div>
+
+<div class="row" *ngIf="defaultUrls.length > 0">
+  <div class="col-12 card-spacing" *ngFor="let url of defaultUrls">
+    <app-card [title]="'study_material.entity.properties.url' | translate" highlight="primary">
+      <a class="minimal-card-text" (click)="logURL(url)" [href]="url" target="_blank">{{url}}</a>
+    </app-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="pdfs.length > 0">
+  <div class="col-12 card-spacing" *ngFor="let attachment of pdfs">
+    <app-card [title]="attachment.name" icon="pdf-icon">
+      <div class="pdf-container">
+        <app-loading-icon *ngIf="!resourceLoaded"></app-loading-icon>
+        <ng2-pdfjs-viewer
+          [ngClass]="{'pdf-viewer-hidden': !resourceLoaded}"
+          [pdfSrc]="getDataUrl(attachment)"
+          viewerId="studyMaterialPDFViewerID"
+          [downloadFileName]="attachment.name"
+          [openFile]="false"
+          (onDocumentLoad)="resourceLoaded = true"
+          [viewBookmark]="false">
+        </ng2-pdfjs-viewer>
+      </div>
+      <p class="mt-2">Click <a [href]="getDataUrl(attachment)">here</a> to download {{attachment.name}}</p>
+    </app-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="videoUrls.length > 0">
+  <div class="col-12 card-spacing" *ngFor="let url of videoUrls">
+    <app-card [title]="'study_material.entity.properties.video' | translate | titlecase" highlight="primary">
+      <app-video [src]="url"></app-video>
+      <p class="mt-2" [innerHTML]="'study_material.entity.source' | translate:{url: url}"></p>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'study_material.entity.connected_constructs' | translate | titlecase}}</p>
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [icon]="'construct-icon'"
+              [title]="'study_material.entity.constructs' | translate | titlecase"
+              [actions]="constructList.cardActions">
+      <app-construct-table
+        #constructList
+        [constructs]="studyMaterial.constructs"
+        [minimal]="true">
+      </app-construct-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'study_material.entity.progress.section_title' | translate | titlecase}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card *appHasPermission="['see_users']; else progressChartNoChartClick"
+              [icon]="'line-chart-icon'"
+              [title]="'study_material.entity.progress.chart.title' | translate | titlecase"
+              [actions]="progressChart.cardActions">
+      <app-line-chart
+        #progressChart
+        [datasets]="progressDatasets"
+        [options]="progressOptions"
+        [yLabel]="'study_material.entity.progress.chart.y_label' | translate"
+        [xLabel]="'study_material.entity.progress.chart.x_label' | translate"
+        [timeXAxis]="true"
+        (chartClick)="progressChartClick($event)">
+      </app-line-chart>
+      <div class="loading-container" *ngIf="handlingProgressChartClick">
+        <app-loading-icon></app-loading-icon>
+      </div>
+    </app-card>
+    <ng-template #progressChartNoChartClick>
+      <app-card [icon]="'line-chart-icon'"
+                [title]="'study_material.entity.progress.chart.title' | translate | titlecase"
+                [actions]="progressChart.cardActions">
+        <app-line-chart
+          #progressChart
+          [datasets]="progressDatasets"
+          [options]="progressOptions">
+        </app-line-chart>
+      </app-card>
+    </ng-template>
+  </div>
+</div>

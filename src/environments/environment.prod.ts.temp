@@ -1,0 +1,19 @@
+export const environment = {
+  production: true,
+  api_url: "https://${DOMAIN_NAME}:${PUBLIC_PORT_HTTPS}/${API_PUBLIC_POSTFIX}/",
+  allow_registration: ${ALLOW_REGISTRATION},
+  hide_sidenav: ${HIDE_SIDENAV},
+  hide_breadcrumbs: ${HIDE_BREADCRUMBS},
+  collection_homepage: "${COLLECTION_HOMEPAGE}",
+  dashboard_homepage: "${DASHBOARD_HOMEPAGE}",
+  user_agreement_i18n_key: "${USER_AGREEMENT_I18N_KEY}",
+  captcha_site_key: "${CAPTCHA_SITE_KEY}",
+  product_name: "${PRODUCT_NAME}",
+  project_name: "${PROJECT_NAME}",
+  show_powered_by: ${SHOW_POWERED_BY},
+  show_project_name: ${SHOW_PROJECT_NAME},
+  saml_client_id: "${SAML_CLIENT_ID}",
+  saml_auth_url: "${SAML_AUTH_URL}",
+  saml_logout_url: "${SAML_LOGOUT_URL}",
+  hover_log_timeout: ${HOVER_LOG_TIMEOUT}
+};

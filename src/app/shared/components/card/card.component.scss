@@ -1,0 +1,75 @@
+@import 'src/variables';
+
+$highlight-border-width: .25rem;
+$highlight-border-style: solid;
+
+.card {
+  background-color: $card-background-color;
+  border: none;
+  box-shadow: 0 0 2px 0 rgba(6,30,43,.09);
+}
+
+.card-icon {
+  width: 30px;
+  font-size: 1.15rem;
+}
+
+.card-img, .card-body, .card-footer {
+  position: relative;
+  border: none;
+  border-radius: 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.card-icon-title {
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+
+.subtitle {
+  margin-top: 0.1rem;
+}
+
+.card-border-top {
+  border-top: 1px solid $card-border-color;
+}
+
+.dropdown-toggle {
+  color: #cbcbcb;
+  cursor: pointer;
+  width: 20px;
+  text-align: center;
+
+  &:hover{
+    color: black;
+  }
+
+  &:after {
+    display: none;
+  }
+}
+
+::ng-deep .minimal-card-text {
+  font-weight: 300;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+::ng-deep .card-spacing {
+  margin-bottom: 1.5rem;
+}
+
+.border-left-primary {
+  border-left: $highlight-border-width $highlight-border-style $highlight-color !important;
+}
+
+.border-left-correct {
+  border-left: $highlight-border-width $highlight-border-style $positive-color !important;
+}
+
+.border-left-incorrect {
+  border-left: $highlight-border-width $highlight-border-style $negative-color !important;
+}

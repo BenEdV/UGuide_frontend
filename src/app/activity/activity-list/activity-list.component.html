@@ -1,0 +1,63 @@
+<app-title-section
+  [title]="activityType + '.list.section_title' | translate | titlecase">
+</app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <ng-container [ngSwitch]="activityType">
+      <app-card *ngSwitchCase="'exam'"
+                [icon]="'exam-icon'"
+                [title]="'exam.list.table_title' | translate | titlecase"
+                [actions]="examList.cardActions">
+          <app-exam-table
+            #examList
+            [activities]="activities"
+            [limit]="10">
+          </app-exam-table>
+          <ng-container *appHasPermission="['manage_activities']">
+            <p *ngIf="activities.length === 0" class="text-center" [innerHTML]="'exam.list.administration_link' | translate"></p>
+          </ng-container>
+      </app-card>
+
+      <app-card *ngSwitchCase="'studyMaterial'"
+                [icon]="'study-material-icon'"
+                [title]="'study_material.list.table_title' | translate | titlecase"
+                [actions]="studyMaterialList.cardActions">
+          <app-study-material-table
+            #studyMaterialList
+            [hierarchical]="true"
+            [activities]="activities"
+            [limit]="10">
+          </app-study-material-table>
+          <ng-container *appHasPermission="['manage_activities']">
+            <p *ngIf="activities.length === 0" class="text-center" [innerHTML]="'study_material.list.administration_link' | translate"></p>
+          </ng-container>
+      </app-card>
+
+      <app-card *ngSwitchCase="'survey'"
+                [icon]="'survey-icon'"
+                [title]="'survey.list.table_title' | translate | titlecase"
+                [actions]="surveyList.cardActions">
+          <app-survey-table
+            #surveyList
+            [activities]="activities"
+            [limit]="10">
+          </app-survey-table>
+          <ng-container *appHasPermission="['manage_activities']">
+            <p *ngIf="activities.length === 0" class="text-center" [innerHTML]="'survey.list.administration_link' | translate"></p>
+          </ng-container>
+      </app-card>
+
+      <app-card *ngSwitchDefault
+                [icon]="'activity-icon'"
+                [title]="activityType + '.list.table_title' | translate | titlecase"
+                [actions]="activityList.cardActions">
+          <app-activity-table
+            #activityList
+            [activities]="activities"
+            [limit]="10">
+          </app-activity-table>
+      </app-card>
+    </ng-container>
+  </div>
+</div>

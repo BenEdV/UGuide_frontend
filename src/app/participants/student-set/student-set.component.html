@@ -1,0 +1,17 @@
+<app-title-section [title]="title | translate:titleExtras"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'student.set.table_title' | translate" [icon]="'student-icon'" [actions]="participantList.cardActions">
+      <app-participant-table
+        #participantList
+        [participants]="studentSet"
+        [exams]="exams"
+        [constructs]="constructs"
+        [examIds]="examIds"
+        [constructIds]="constructIds"
+        [limit]="10">
+      </app-participant-table>
+    </app-card>
+  </div>
+</div>

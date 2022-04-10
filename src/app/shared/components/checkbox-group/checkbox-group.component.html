@@ -1,0 +1,17 @@
+<label [hidden]="hideParent">
+  <input type="checkbox"
+         [checked]="parentCheckbox"
+         (change)="parentCheckbox = !parentCheckbox; updateChildCheckboxes()">
+  <ng-content></ng-content>
+</label>
+<div *ngFor="let obj of data; let i = index;">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox"
+             class="form-check-input"
+             [checked]="checked[i]"
+             (change)="checked[i] = !checked[i]; updateParentCheckbox(checked[i])">
+      {{nameKey ? obj[nameKey] : obj}}
+    </label>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6 card-spacing" *ngIf="courses.length > 0 || canCreateCourse">
+    <app-card [icon]="'fas fa-graduation-cap'" [title]="'dashboard.courses' | translate">
+      <app-course-table
+        [collections]="collections"
+        [minimal]="true"
+        [sortKey]="'period'"
+        [limit]="maxCardLength"
+        [sortReverse]="true">
+      </app-course-table>
+      <div class="app-card-footer">
+        <button type="button" class="btn btn-primary" *ngIf="courses.length > maxCardLength" (click)="gotoCourses()">
+          {{'dashboard.show_all' | translate}}
+        </button>
+        <button class="btn btn-success float-right" *ngIf="canCreateCourse" (click)="gotoCreateCourse()">
+          <i class="add-icon"></i>
+          {{'dashboard.create_course' | translate}}
+        </button>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-md-6 card-spacing" *ngIf="surveys.length > 0 || canCreateSurvey">
+    <app-card [icon]="'survey-icon'" [title]="'dashboard.surveys' | translate">
+      <app-survey-table
+        [activities]="surveys"
+        [minimal]="true"
+        [sortKey]="'status'"
+        [limit]="maxCardLength"
+        [sortReverse]="true">
+      </app-survey-table>
+      <div class="app-card-footer" >
+        <button type="button" class="btn btn-primary" *ngIf="surveys.length > maxCardLength" (click)="gotoActivities()">
+          {{'dashboard.show_all' | translate}}
+        </button>
+        <button class="btn btn-success float-right" *ngIf="canCreateSurvey" (click)="gotoCreateSurvey()">
+          <i class="add-icon"></i>
+          {{'dashboard.create_survey' | translate}}
+        </button>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row full-screen-center" *ngIf="courses.length === 0 && surveys.length === 0">
+  <p class="section-title mx-auto">{{'dashboard.not_enrolled' | translate }}</p>
+  <button class="btn btn-primary mx-auto" *ngIf="canCreateCourse" (click)="gotoCreateCourse()">{{'dashboard.create_course' | translate}}</button>
+</div>

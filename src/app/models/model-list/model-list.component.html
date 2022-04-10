@@ -1,0 +1,13 @@
+<app-title-section [title]="'Model List'"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'Model List'" [icon]="'model-icon'" [actions]="modelList.cardActions">
+      <app-model-table
+        #modelList
+        [models]="models"
+        [limit]="10">
+      </app-model-table>
+    </app-card>
+  </div>
+</div>

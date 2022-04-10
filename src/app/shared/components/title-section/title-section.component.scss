@@ -1,0 +1,28 @@
+.title-section {
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.title {
+  .text-container {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+
+  .administration-link {
+    color: #ddd;
+    display: none;
+    margin-left: 0.25rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  &:hover .administration-link {
+    display: inline-block;
+  }
+}

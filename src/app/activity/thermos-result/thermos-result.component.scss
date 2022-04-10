@@ -1,0 +1,106 @@
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/mixins';
+@import '~bootstrap-scss/variables';
+
+@import 'variables';
+
+@include media-breakpoint-down(md) {
+  .scrollable-body {
+    position: relative !important;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .timestamp-list-container {
+    max-height: 300px !important;
+  }
+}
+
+.highlight-circle {
+  display: block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border: 2px solid $highlight-color;
+  border-radius: 50px;
+
+  .highlight-circle-text {
+    position: absolute;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+  }
+}
+
+.scrollable-body {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(100% - 2.5rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 250px;
+}
+
+.hoverContent {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  left: 15px;
+  right: 15px;
+  top: 0;
+  background: rgba(0,0,0,0);
+
+  p {
+    color: white;
+    font-size: 1.2rem;
+  }
+}
+
+.showHover {
+  position: relative;
+
+  &:hover .hoverContent {
+    display: flex;
+    background: rgba(0,0,0,0.4);
+  }
+}
+
+.d-none-empty:empty {
+  display: none !important;
+}
+
+.force-a-styling {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+}
+
+.timestamp-list-container {
+  overflow-y: auto;
+  max-height: 130px;
+}
+
+.timestamp-list-item.active {
+  font-weight: bold;
+}
+
+.contact-p, .contact-p a {
+  color: #ddd;
+}
+
+.contact-p a:hover {
+  color: #007bff;
+}

@@ -1,0 +1,48 @@
+<div class="card h-100" [ngClass]="'border-left-' + highlight">
+  <div class="card-header bg-transparent border-0" *ngIf="title || icon || subtitle || actions">
+    <div class="row align-items-center">
+      <div class="col-auto pr-0">
+        <i *ngFor="let cardIcon of icons" [ngClass]="cardIcon" class="card-icon"></i>
+      </div>
+      <div class="col px-0">
+        <div class="row">
+          <div class="col-12">
+            <div *ngIf="title" class="card-icon-title" [innerHTML]='title'></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div *ngIf="subtitle" class="subtitle text-muted font-weight-light">
+              <app-read-more [content]="subtitle"></app-read-more>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto px-1" #actionList hidden="true">
+        <div ngbDropdown class="d-inline-block" placement="bottom-right" (click)="$event.stopPropagation()">
+          <i class="fa fa-ellipsis-v" aria-hidden="true" id="actionToggle" ngbDropdownToggle></i>
+          <div ngbDropdownMenu aria-labelledby="actionToggle" id="permittedActions" >
+            <ng-container *ngFor="let action of actions">
+              <button ngbDropdownItem
+                      class="action"
+                      *appHasPermission="action.permissions"
+                      (click)="action.callback()">
+                {{showActionList(actionList)}}
+                {{action.name | translate}}
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-img" [ngClass]="{'card-border-top': bordered}">
+    <ng-content select=".top-img"></ng-content>
+  </div>
+  <div class="card-body py-1" [ngClass]="{'card-border-top': bordered}">
+    <ng-content></ng-content>
+  </div>
+  <div class="card-footer bg-transparent" [ngClass]="{'card-border-top': bordered}">
+    <ng-content select=".app-card-footer"></ng-content>
+  </div>
+</div>

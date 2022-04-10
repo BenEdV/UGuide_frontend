@@ -1,0 +1,1203 @@
+{
+  "admin": {
+    "collection": {
+      "course": "Course",
+      "create": "Create",
+      "edit_course": {
+        "modal_title": "Edit {{collectionName}}"
+      },
+      "new_course": {
+        "code": "Code",
+        "modal_title": "New Course",
+        "name": "Name",
+        "parent": "Parent",
+        "period": "Period"
+      },
+      "section_title": "Administration Collections",
+      "table_title": "All Collections"
+    },
+    "connector": {
+      "connector": "Connector",
+      "create": "Create",
+      "edit_connector": {
+        "lrs": {
+          "key": "Key: {{key}}",
+          "secret": "Secret: {{secret}}",
+          "xapi_url": "URL: {{url}}"
+        },
+        "modal_title": "Edit {{connectorTitle}}",
+        "remindo": {
+          "base_url": "Base URL",
+          "callback_url": "Callback URL: {{callbackURL}}",
+          "secret": "Secret",
+          "uuid": "UUID"
+        },
+        "title": "Title",
+        "type": "Type"
+      },
+      "new_connector": {
+        "modal_title": "New Connector",
+        "remindo": {
+          "base_url": "Base URL",
+          "secret": "Secret",
+          "uuid": "UUID"
+        },
+        "title": "Title",
+        "type": "Type"
+      },
+      "section_title": "Administration Connectors",
+      "table_title": "All Connectors"
+    },
+    "construct": {
+      "construct": "Concept",
+      "constructs": "Concepts",
+      "create": "Create",
+      "edit_construct": {
+        "description": "Description",
+        "modal_title": "Edit {{constructName}}",
+        "model": "Model",
+        "name": "Name",
+        "type": "Type"
+      },
+      "link_construct": {
+        "construct": "Construct",
+        "existing": "Existing Links",
+        "modal_title": "Link Constructs",
+        "new": "New",
+        "type": "Type"
+      },
+      "link_study_material": {
+        "construct": "Construct",
+        "existing": "Existing Links",
+        "modal_title": "Link Study Material",
+        "new": "New",
+        "study_material": "Study Material",
+        "type": "Type"
+      },
+      "linking": "Linking",
+      "new_construct": {
+        "description": "Description",
+        "modal_title": "New Construct",
+        "model": "Model",
+        "name": "Name",
+        "type": "Type"
+      },
+      "section_title": "Administration Concepts",
+      "study_material": "Study Material",
+      "table_title": "All Concepts"
+    },
+    "course": {
+      "experimental": {
+        "section_title": "Experimental",
+        "see_subgroup_results": "Students will see the results of subgroups of students.",
+        "shift_comparison": "Shift the default comparison for the students on the Knowledge Map page when updating new exam results."
+      },
+      "logging": {
+        "allow_student_interaction": "Allow logging of students' interactions within the system.",
+        "section_title": "Logging"
+      },
+      "save_changes": "Save changes",
+      "section_title": "Administration Course",
+      "social_comparison": {
+        "allow_see_course_average": "Allow students to see course averages.",
+        "section_title": "Social Comparison"
+      },
+      "widgets": {
+        "allow_widgets": "Allow external services to see information of this course in widgets. (BETA)",
+        "section_title": "Widgets API"
+      }
+    },
+    "delete_modal": {
+      "confirmation": "Are you sure you want to delete {{entityName}}?",
+      "linked_activities": "Links to {{numLinkedActivities}} activities",
+      "linked_constructs": "Links to {{numLinkedConstructs}} constructs",
+      "modal_title": "Delete {{entityName}}",
+      "removals": "This will also remove: "
+    },
+    "exam": {
+      "edit_exam": {
+        "description": "Description",
+        "modal_title": "Edit {{examName}}",
+        "remote": "Remote",
+        "remote_info": "Remote Info:",
+        "remote_moment": "Remote Moment",
+        "remote_name": "Remote Name",
+        "title": "Title",
+        "visibility": "Visibility"
+      },
+      "exam": "Exam",
+      "import": "Import",
+      "import_results": {
+        "description": "Description",
+        "modal_title": "Import Results of {{examName}}",
+        "remote": "Remote",
+        "remote_info": "Remote Info:",
+        "remote_moment": "Remote Moment",
+        "remote_name": "Remote Name",
+        "title": "Title",
+        "visibility": "Visibility"
+      },
+      "new_exam": {
+        "description": "Description",
+        "modal_title": "New Exam",
+        "moment": "Moment",
+        "remote": "Remote",
+        "remote_name": "Remote Name",
+        "settings": {
+          "import_all_results": "Import all results when the exam closes.",
+          "import_exam_results": "When a student completes their exam the exam result (grade and duration) will be imported.",
+          "import_question_results": "When a student completes their exam the question results will be imported.",
+          "update_group_scores": "Update the group scores when the exam closes."
+        },
+        "title": "Title",
+        "visibility": "Visibility"
+      },
+      "section_title": "Administration Exam",
+      "table_title": "All Exams",
+      "visibility": {
+        "f": "Invisible",
+        "t": "Visible"
+      }
+    },
+    "group": {
+      "create": "Create",
+      "edit_group": {
+        "add": "Add",
+        "add_members": "Add new member(s)",
+        "as": "as",
+        "existing": "Exisiting members",
+        "members": "Members(s)",
+        "modal_title": "Edit {{groupName}}",
+        "name": "Name"
+      },
+      "group": "Group",
+      "new_group": {
+        "add": "Add",
+        "add_members": "Add new member(s)",
+        "as": "as",
+        "members": "Members(s)",
+        "modal_title": "New Group",
+        "name": "Name"
+      },
+      "roles": {
+        "admin": "Admin",
+        "developer": "Developer",
+        "manager": "Manager",
+        "member": "Member",
+        "researcher": "Researcher",
+        "role": "Role",
+        "student": "Student",
+        "teacher": "Teacher",
+        "teaching_assistant": "Teaching assistant"
+      },
+      "section_title": "Administration Groups",
+      "table_title": "All Groups"
+    },
+    "mapping": {
+      "advanced_linking": {
+        "construct": "Concept",
+        "modal_title": "Link {{questionTitle}}",
+        "weight": "Weight"
+      },
+      "card_title": "Connect",
+      "exam": "Exam",
+      "exam_level": {
+        "construct": "Concept",
+        "existing_links": "Exisiting Links",
+        "explanation": "Please select the concept you would like to link to the result of the entire exam.",
+        "link": "Link",
+        "new_link": "New Concept Link:"
+      },
+      "level": "Level",
+      "question_level": {
+        "answers": "Answers",
+        "construct": "Concept",
+        "explanation": "Please provide a construct per question.",
+        "preview_no_question": "Please hover over a question to view its content.",
+        "question": "Question"
+      },
+      "section_title": "Connect Constructs to Questions",
+      "switch_exam": "Exam",
+      "switch_exam_explanation": "Connect constructs to an exam",
+      "switch_question": "Question",
+      "switch_question_explanation": "Connect constructs to a question"
+    },
+    "model": {
+      "create": "Create",
+      "edit_model": {
+        "description": "Description",
+        "method": "Method",
+        "modal_title": "Edit {{modelName}}",
+        "name": "Name"
+      },
+      "model": "Model",
+      "new_model": {
+        "description": "Description",
+        "method": "Method",
+        "modal_title": "New Model",
+        "name": "Name"
+      },
+      "section_title": "Administration Models",
+      "table_title": "All Models"
+    },
+    "study_material": {
+      "constructs": "Concepts",
+      "create": "Create",
+      "edit_study_material": {
+        "covered_on": "Covered on",
+        "description": "Description",
+        "existing_attachments": "Exisiting Attachment(s)",
+        "modal_title": "Edit {{materialTitle}}",
+        "new_attachments": "New Attachment(s)",
+        "title": "Title",
+        "type": "Type",
+        "url": "URL",
+        "visibility": "Visibility"
+      },
+      "link_construct": {
+        "construct": "Construct",
+        "existing": "Existing Links",
+        "modal_title": "Link Construct",
+        "new": "New",
+        "study_material": "Study Material",
+        "type": "Type"
+      },
+      "linking": "Linking",
+      "material": {
+        "article": {
+          "article": "Article",
+          "wikipedia": "Wikipedia"
+        },
+        "book": {
+          "book": "Book",
+          "chapter": "Chapter"
+        },
+        "file": {
+          "factsheet": "Factsheet",
+          "slides": "Slides"
+        },
+        "video": {
+          "unspecified": "Video",
+          "youtube": "YouTube video"
+        }
+      },
+      "new_study_material": {
+        "attachments": "Attachment(s)",
+        "covered_on": "Covered on",
+        "description": "Description",
+        "modal_title": "New Study Material",
+        "title": "Title",
+        "type": "Type",
+        "url": "URL",
+        "visibility": "Visibility"
+      },
+      "section_title": "Administration Study Material",
+      "study_material": "Study Material",
+      "table_title": "All Study Material",
+      "visibility": {
+        "f": "Invisible",
+        "t": "Visible"
+      }
+    },
+    "survey": {
+      "create": "Create",
+      "edit_survey": {
+        "description": "Description",
+        "modal_title": "Edit {{surveyTitle}}",
+        "title": "Title",
+        "visibility": "Visibility"
+      },
+      "manage_content": "Manage Content",
+      "new_survey": {
+        "description": "Description",
+        "modal_title": "New Survey",
+        "title": "Title",
+        "visibility": "Visibility"
+      },
+      "section_title": "Administration Surveys",
+      "survey": "Survey",
+      "table_title": "All Surveys",
+      "visibility": {
+        "f": "Invisible",
+        "t": "Visible"
+      }
+    }
+  },
+  "breadcrumb": {
+    "administration": "Administration",
+    "collections": "Collections",
+    "constructs": "Concepts",
+    "courses": "Courses",
+    "exams": "Exams",
+    "groups": "Groups",
+    "material": "Study Material",
+    "students": "Students",
+    "surveys": "Surveys"
+  },
+  "card": {
+    "action": {
+      "export_png": "Export as .png",
+      "toggle_cumulative": "Toggle Cumulative"
+    },
+    "date": "Date",
+    "type": "Type",
+    "updated": "Updated on"
+  },
+  "chart": {
+    "distribution": {
+      "and_n_more": " and {{n}} more...",
+      "students_scored_lower": "{{studentCount}}% of students scored a {{grade}} or lower"
+    },
+    "error": {
+      "cannot_display": "Cannot display chart. Please try again later.",
+      "not_enough_data": "There are not enough data points to show this visualisation."
+    }
+  },
+  "collection": {
+    "list": {
+      "section_title": "All Collections",
+      "table_title": "Collections"
+    }
+  },
+  "construct": {
+    "entity": {
+      "connected_questions": "Connected Questions",
+      "connected_study_material": "Connected Study Material",
+      "construct_progress": {
+        "chart": {
+          "callback": "The average score was {{score}}% on {{date}}",
+          "title": "Concept Progress",
+          "x_label": "Time",
+          "y_label": "Concept Score"
+        },
+        "construct_average": "Concept Average",
+        "label": "{{constructName}} Average",
+        "misconstruct_average": "Misconception Average",
+        "title": "Concept Progress"
+      },
+      "course_average": "Course Average",
+      "general_information": "General Information",
+      "question_rir": {
+        "chart": {
+          "callback": "{{question}} has a Rir-value of {{value}}",
+          "title": "Rir-Value per Question",
+          "x_label": "Question Number",
+          "y_label": "Rir-Value"
+        },
+        "title": "Question R<sub>ir</sub> Value"
+      },
+      "questions": "Questions",
+      "score_distribution": {
+        "chart": {
+          "my_score": "My Score",
+          "title": "Score Distribution",
+          "x_label": "Score",
+          "y_label": "Percentage of Students"
+        },
+        "title": "Score Distribution"
+      },
+      "score_too_high": "This concept has a score higher than",
+      "score_too_low": "This concept has a score lower than",
+      "study_material": "Study Material",
+      "study_material_completed": "Completed",
+      "study_material_progress": "Study Material Progress",
+      "study_material_progress_completed": "You have completed {{percent}} of the study material inked to this subject.",
+      "study_material_progress_seen": "You have seen {{percent}} of the study material linked to this subject.",
+      "subconstructs": "Subconcepts",
+      "your_score": "Your Score"
+    },
+    "knowledge": {
+      "chart_title": {
+        "concept": "Concepts Chart",
+        "misconception": "Misconceptions Chart"
+      },
+      "compare_results_with": "Compare your results with",
+      "course_average": "Course average",
+      "current_comparison": "Your results are displayed in comparison to: {{comparisonGroup}}",
+      "hover_request": "Please hover over an item",
+      "lower_50": "Lower 50% of the course",
+      "no_study_material": "No connected study material",
+      "section_title": "Comparison",
+      "study_material_table_title": "Study Material",
+      "study_material_table_title_construct": "Study Material of {{construct}}",
+      "switch_to_compare": "Switch to compare your results against: {{comparisonGroup}}",
+      "upper_50": "Upper 50% of the course"
+    },
+    "list": {
+      "administration_link": "Click <a class='cursor-pointer administration-link'>here</a> to create constructs.",
+      "section_title": "Concepts List",
+      "table_title": "Concepts"
+    },
+    "overview": {
+      "concepts": {
+        "chart": {
+          "average_label": "Average",
+          "title": "Concepts"
+        },
+        "title": "Concepts"
+      },
+      "construct_progress": {
+        "chart": {
+          "callback": "The average score was {{score}}% on {{date}}",
+          "title": "Concept Progress",
+          "x_label": "Time",
+          "y_label": "Concept Score"
+        },
+        "construct_average": "Concept Average",
+        "misconstruct_average": "Misconception Average",
+        "title": "Concept Progress"
+      },
+      "highest_scoring_section_title": "Highest Scoring",
+      "lowest_scoring_section_title": "Lowest Scoring",
+      "misconceptions": "Misconceptions",
+      "progress.section_title": "Overall Progress",
+      "recent_updated_concepts_table_title": "Recently updated concepts",
+      "recent_updated_misconceptions_table_title": "Recently updated misconceptions",
+      "recent_updated_section_title": "Recently updated",
+      "require_attention": "The following concepts may require extra attention:",
+      "score_too_high": "since their score exceeds",
+      "score_too_low": "since their score is lower than",
+      "section_description": "General overview page for concepts.",
+      "section_title": "Concepts Overview"
+    }
+  },
+  "content_interface": {
+    "read_less": "Read Less",
+    "read_more": "Read More"
+  },
+  "course": {
+    "list": {
+      "section_title": "All Courses",
+      "table_subtitle": "List of all courses.",
+      "table_title": "Courses"
+    },
+    "overview": {
+      "constructs": {
+        "construct_chart_title": "Cocept Scores",
+        "misconstruct_chart_title": "Misconception Scores",
+        "section_title": "Concepts"
+      },
+      "exams": {
+        "chart": {
+          "card_title": "Average Grade Distribution",
+          "title": "Average Grade Distribution",
+          "x_label": "Average Grade",
+          "y_label": "Number of Students"
+        },
+        "section_title": "Exams",
+        "table_title": "All Exams"
+      },
+      "general": {
+        "average_construct_score": "Average Concept Score",
+        "average_grade": "Average Grade",
+        "average_misconstruct_score": "Average Misconcept Score",
+        "section_title": "General Information",
+        "student_count": "Number of Students"
+      },
+      "material": {
+        "chart": {
+          "card_title": "Study Material Interactivity",
+          "completed": "Completed",
+          "seen": "Seen",
+          "title": "Study Material Interactivity",
+          "tooltip": {
+            "completed": "{{percentage}} of all study material has been marked as completed on {{date}}",
+            "seen": "{{percentage}} of all study material has been seen on {{date}}",
+            "unseen": "{{percentage}} of all study material has not been seen on {{date}}"
+          },
+          "unseen": "Unseen",
+          "x_label": "Date",
+          "y_label": "Percentage"
+        },
+        "section_title": "Study Material",
+        "table_title": "All Study Material"
+      },
+      "section_description": {
+        "collection": "General overview of the collection.",
+        "course": "General overview of the course."
+      }
+    },
+    "student_overview": {
+      "constructs": {
+        "construct_chart_title": "Concept Scores",
+        "misconstruct_chart_title": "Misconception Scores",
+        "recommended_constructs": "It is recommended you take a look at the following constructs, because your score on them is lower than {{threshold}}:",
+        "recommended_misconstructs": "It is recommended you take a look at the following constructs, because your score on them is high than {{threshold}}:",
+        "section_title": "Concepts"
+      },
+      "description": "This page provides an overview of your performance for this course.",
+      "exams": {
+        "chart": {
+          "average_grade":"Average Grade",
+          "card_title": "Grade per Exam",
+          "my_grade":"My Grade",
+          "title": "Grade per Exam",
+          "x_label": "Exam",
+          "y_label": "Grade"
+        },
+        "section_title": "Exams",
+        "table_title": "All Exams"
+      },
+      "general": {
+        "average_construct_score": "Average Concept Score",
+        "average_grade": "Average Grade",
+        "average_misconstruct_score": "Average Misconcept Score",
+        "section_title": "General Information",
+        "study_material": {
+          "completed": "Completed",
+          "tooltip": {
+            "completed": "{{percentage}} of all study material has been marked as completed",
+            "seen": "{{percentage}} of all study material has been seen"
+          },
+          "title": "Study Material Progress"
+        }
+      },
+      "material": {
+        "chart": {
+          "card_title": "Study Material Progress",
+          "completed": "Completed",
+          "seen": "Seen",
+          "title": "Study Material Progress",
+          "unseen": "Unseen",
+          "x_label": "Status",
+          "y_label": "Number of study material"
+        },
+        "section_title": "Study Material",
+        "table_title": "All Study Material"
+      }
+    }
+  },
+  "dashboard": {
+    "courses": "Courses",
+    "create_course": "Add Course",
+    "create_survey": "Add Survey",
+    "not_enrolled": "You are currently not enrolled in any courses.",
+    "show_all": "Show all",
+    "surveys": "All Surveys"
+  },
+  "error": {
+    "could_not_convert_png": "The chart could not be converted to a png file.",
+    "standard": "Something went wrong; please try again later."
+  },
+  "exam": {
+    "entity": {
+      "all_questions": "All Questions",
+      "answer_distribution": {
+        "chart": {
+          "callback": "{{percent}}% of students gave {{answer}} on {{question}}",
+          "title": "Answer Distribution",
+          "x_label": "Question Number",
+          "y_label": "Answer"
+        },
+        "text": {
+          "not_given_mult": "There were <b class=num_not_given></b> answers which were given by none of the students.",
+          "not_given_sing": "There was <b class=num_not_given></b> answer which was given by none of the students.",
+          "pop_wrong_mult": "There were <b class=num_pop_wrong></b> incorrect answers which were given by more than 20% of the students.",
+          "pop_wrong_sing": "There was <b class=num_pop_wrong></b> incorrect answer which was given by more than 20% of the students."
+        },
+        "title": "Answer Distribution"
+      },
+      "course_average": "Course average",
+      "exam_duration": {
+        "chart": {
+          "callback": "{{student}} received a {{grade}} and took {{duration}}",
+          "title": "Grade and Duration",
+          "x_label": "Grade",
+          "y_label": "Duration (H:MM:SS)"
+        },
+        "text": "Students took an average of <b class=avg_duration></b> to complete the exam. Those who passed the exam took an average of <b class=avg_duration_passed></b>. There were <b class=outliers></b> students whose exam lasted a duration that was 2 or more standard deviations from the mean.",
+        "title": "Exam Duration"
+      },
+      "general_information": "General Information",
+      "my_grade": "My Grade",
+      "participants": "Participants",
+      "passed": "Passed",
+      "question_values": {
+        "duration_chart": {
+          "callback": "Students took an average of {{duration}} to complete {{question}}",
+          "title": "Duration per Question",
+          "x_label": "Question Number",
+          "y_label": "Duration (H:MM:SS)"
+        },
+        "p_value_chart": {
+          "callback": "{{value}}% of students answered {{question}} correctly",
+          "title": "P-Value per Question",
+          "x_label": "Question Number",
+          "y_label": "Percent Correct"
+        },
+        "rir_value_chart": {
+          "callback": "{{question}} has a Rir-value of {{value}}",
+          "title": "Rir-Value per Question",
+          "x_label": "Question Number",
+          "y_label": "Rir-Value"
+        },
+        "text": {
+          "high_low": "Questions <span class=high_questions></span> were answered correctly by more than 80% of the students and questions <span class=low_questions></span> were answered correctly by less than 20% of the students and thus can have unreliable R<sub>ir</sub> values.",
+          "high_mult": "Questions <span class=high_questions></span> were answered correctly by more than 80% of the students and thus can have unreliable R<sub>ir</sub> values.",
+          "high_sing": "Question <span class=high_questions></span> was answered correctly by more than 80% of the students and thus can have an unreliable R<sub>ir</sub> value.",
+          "low_mult": "Questions <span class=low_questions></span> were answered correctly by less than 20% of the students and thus can have unreliable R<sub>ir</sub> values.",
+          "low_sing": "Question <span class=low_questions></span> was answered correctly by less than 20% of the students and thus can have an unreliable R<sub>ir</sub> value.",
+          "none": "All questions were answered correctly by between 20% and 80% of the students."
+        },
+        "title": "Questions"
+      },
+      "questions": "Questions",
+      "score_distribution": {
+        "chart": {
+          "title": "Cumulative Grades",
+          "x_label": "Grade",
+          "y_label": "Percentage of Students"
+        },
+        "text": "The average student scored a <b class=avg_grade></b> on this exam. The lowest grade was a <b class=min_grade></b> and the highest grade was a <b class=max_grade></b>. The standard deviation for the score was <b class=std_dev></b>.",
+        "title": "Grade Distribution"
+      }
+    },
+    "list": {
+      "administration_link": "Click <a class='cursor-pointer administration-link'>here</a> to import exams.",
+      "section_title": "Exam List",
+      "table_title": "Exams"
+    },
+    "overview": {
+      "description": "Overview of all exams.",
+      "grade_progress": {
+        "average_grade": "Average Grade",
+        "card_title": "Grade per Exam",
+        "chart_title": "Grade per Exam",
+        "my_grade":"My Grade",
+        "x_label": "Exam",
+        "y_label": "Grade"
+      },
+      "recent_table": "Recent Exams",
+      "section_title": "Recent Exams",
+      "statistics_grades_chart_title": "Grades per Exam",
+      "statistics_participants_chart_title": "Participants per Exam",
+      "statistics_section_title": "Statistics",
+      "title": "Exams Overview"
+    }
+  },
+  "form": {
+    "is_required": "{{tag}} is required."
+  },
+  "global_activities": {
+    "section_title": "All Activities",
+    "table_title": "List of all activities"
+  },
+  "group": {
+    "entity": {
+      "average_grade": "Average Grade",
+      "construct_progress": {
+        "chart": {
+          "callback": {
+            "group": "{{group_name}} had an average score of {{score}}% on {{date}}",
+            "cohort": "All students had an average score of {{score}}% on {{date}}"
+          },
+          "title": "Concept Progress",
+          "x_label": "Time",
+          "y_label": "Score"
+        },
+        "cohort_average": "Cohort Average",
+        "construct_average": "Concept Average",
+        "title": "Concept Progress"
+      },
+      "constructs": "Concepts",
+      "exam_progress": {
+        "chart": {
+          "callback": {
+            "group": "{{group_name}} had an average of {{grade}} for {{exam}}",
+            "cohort": "All students had an average of {{grade}} for {{exam}}"
+          },
+          "title": "Exam Progress",
+          "x_label": "Exam",
+          "y_label": "Grade"
+        },
+        "title": "Exam Progress"
+      },
+      "exams": "Exams",
+      "general_information": "General Information",
+      "member_count": "Members",
+      "misconstruct_progress": {
+        "cohort_average": "Cohort Average",
+        "misconstruct_average": "Misconception Average",
+        "title": "Misconception Progress"
+      },
+      "students": "Students"
+    },
+    "list": {
+      "administration_link": "Click <a class='cursor-pointer administration-link'>here</a> to create groups.",
+      "section_title": "Group List",
+      "table_title": "Groups"
+    }
+  },
+  "interface": {
+    "loading": "Loading..."
+  },
+  "list": {
+    "none": "None"
+  },
+  "login": {
+    "back": "Back",
+    "forgot_password": "Forgot password?",
+    "IE_warning": "Internet Explorer is not supported. Please use a different browser, such as <a target='_blank' href='https://www.google.com/chrome/'>Chrome</a>",
+    "login": "Log in",
+    "login_method": "Email or student number",
+    "logout": "Log out",
+    "no_account": "Don't have an account?",
+    "or": "OR",
+    "password": "Password",
+    "register": "Register here",
+    "required_password": "Password is required.",
+    "required_username": "Username is required.",
+    "sign_in": "I have read the <a class='cursor-pointer privacy-statement-link'>privacy statement</a>",
+    "solis_login": "Login with Solis",
+    "thermos": "Login with Thermos Account",
+    "title": "Login"
+  },
+  "misconception": "misconception",
+  "modal": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "import": "Import",
+    "link": "Link"
+  },
+  "nav": {
+    "next": "Next",
+    "page": "Page {{current}} of {{total}}",
+    "previous": "Previous",
+    "submit": "Submit"
+  },
+  "not_found": {
+    "description": "It appears the page you are looking for does not exist.",
+    "return_to_dashboard": "Return to dashboard",
+    "title": "404"
+  },
+  "question": {
+    "entity": {
+      "alert": {
+        "less_correct": "Less than {{percent}}% of students answered this question correctly.",
+        "popular_wrong_answer": "<b>{{answer}}</b> is a popular wrong answer, because more than {{percent}}% of students gave this wrong answer.",
+        "popular_wrong_answers": "<b>{{answers}}</b> are popular wrong answers, because more than {{percent}}% of students gave these wrong answers."
+      },
+      "answer": "Answer {{id}}",
+      "answer_distribution": {
+        "chart": {
+          "callback": "{{num_students}} students gave {{answer}}",
+          "title": "Answer Distribution",
+          "x_label": "Answer",
+          "y_label": "Number of Students"
+        },
+        "title": "Answer Distribution"
+      },
+      "answer_distribution_ms": {
+        "chart": {
+          "callback": "{{percent}}% of students gave {{response}}",
+          "title": "Answer Distribution",
+          "x_label": "Responses (left given more often)",
+          "y_label": "Answer"
+        },
+        "title": "Answer Distribution"
+      },
+      "connected_constructs": "Connected Concepts",
+      "constructs": "Concepts",
+      "content": "Content",
+      "explanation": "Explanation",
+      "given": "Given",
+      "info": "<b>{{null_responses}}</b> of the students did not give a response. The average student spent <b>{{average_duration}}</b> on this question. <b>{{percent}}</b> of students answered correctly.",
+      "my_answer": "My Answer",
+      "nav": {
+        "next_question": "Next question",
+        "previous_question": "Previous question"
+      },
+      "question_body": "Question",
+      "responses": "Responses"
+    },
+    "likert": "Likert Scale Question",
+    "multiple_choice": "Multiple Choice",
+    "multiple_selection": "Multiple Selection",
+    "open": "Open Question",
+    "required": "This question is required."
+
+  },
+  "register": {
+    "already_account": "Already have an account?",
+    "confirm_password": "Confirm Password",
+    "email": "Email",
+    "first_name": "First Name",
+    "is_invalid": "{{tag}} is invalid.",
+    "is_required": "{{tag}} is required.",
+    "last_name": "Last Name",
+    "login": "Login here",
+    "no_match": "Passwords do not match",
+    "password": "Password",
+    "password_requirements": "Passwords must be at least {{requiredLength}} characters in length",
+    "please_read": "Please read and agree with the User Agreement",
+    "read_agree": "I have read and agree to the",
+    "register": "Register",
+    "solve_recaptcha": "Please solve the reCAPTCHA",
+    "student_number": "Student Number",
+    "title": "Register",
+    "user_agreement": "User Agreement"
+  },
+  "relation": {
+    "construct": {
+      "concept_misconception_a": "{{aConstruct}} is a concept of {{bConstruct}}",
+      "concept_misconception_b": "{{aConstruct}} is a misconception of {{bConstruct}}",
+      "meronomical_a": "{{aConstruct}} consists of {{bConstruct}}",
+      "meronomical_b": "{{aConstruct}} is a part of {{bConstruct}}",
+      "prerequisite_outcome_a": "{{aConstruct}} is a prerequisite of {{bConstruct}}",
+      "prerequisite_outcome_b": "{{aConstruct}} is an outcome of {{bConstruct}}",
+      "taxonomical_a": "{{aConstruct}} is a parent of {{bConstruct}}",
+      "taxonomical_b": "{{aConstruct}} is a child of {{bConstruct}}"
+    },
+    "study_material": {
+      "exhibits_a": "{{material}} exhibits {{construct}}",
+      "exhibits_b": "{{construct}} is exhibited by {{material}}",
+      "remedies_a": "{{material}} remedies {{construct}}",
+      "remedies_b": "{{construct}} is remedied by {{material}}",
+      "teaches_a": "{{material}} teaches {{construct}}",
+      "teaches_b": "{{construct}} is taught by {{material}}",
+      "tests_a": "{{material}} tests {{construct}}",
+      "tests_b": "{{construct}} is tested by {{material}}"
+    }
+  },
+  "saml_logout": {
+    "description": "You have been logged out from {{projectName}}.<br/>Click the button below to logout from all university services.",
+    "logout": "Logout",
+    "or": "or",
+    "return_to_dashboard": "return to dashboard",
+    "title": "Complete Logout"
+  },
+  "settings": {
+    "user": {
+      "global": {
+        "accepted_resouces": "Accepted External Resources:",
+        "card_title": "Global settings",
+        "language": "language"
+      },
+      "section_title": "User Settings"
+    }
+  },
+  "sidebar": {
+    "actions": "Actions",
+    "administration": "Administration",
+    "collections": "Collections",
+    "connector": "Connectors",
+    "constructs": "Concepts",
+    "course": "Course",
+    "exams": "Exams",
+    "groups": "Groups",
+    "knowledge_map": "Knowledge Map",
+    "list": "List",
+    "mapping": "Mapping",
+    "models": "Models",
+    "my-progress": "Progress",
+    "overview": "Overview",
+    "students": "Students",
+    "study_material": "Study Material",
+    "surveys": "Surveys"
+  },
+  "student": {
+    "entity": {
+      "average_grade": "Average Grade",
+      "construct_progress": {
+        "chart": {
+          "callback": {
+            "student": "{{student_name}} had an average score of {{score}}% on {{date}}",
+            "cohort": "All students had an average score of {{score}}% on {{date}}"
+          },
+          "title": "Concept Progress",
+          "x_label": "Time",
+          "y_label": "Score"
+        },
+        "cohort_average": "Cohort Average",
+        "construct_average": "Concept Average",
+        "title": "Concept Progress"
+      },
+      "constructs": "Concepts",
+      "exam_progress": {
+        "chart": {
+          "callback": {
+            "student": "{{student_name}} had an average of {{grade}} for {{exam}}",
+            "cohort": "All students had an average of {{grade}} for {{exam}}"
+          },
+          "title": "Exam Progress",
+          "x_label": "Exam",
+          "y_label": "Grade"
+        },
+        "title": "Exam Progress"
+      },
+      "exams": "Exams",
+      "general_information": "General Information",
+      "groups": "Groups",
+      "misconstruct_progress": {
+        "cohort_average": "Cohort Average",
+        "misconstruct_average": "Misconception Average",
+        "title": "Misconception Progress"
+      },
+      "student_number": "Student Number",
+      "study_material": "Study Material",
+      "study_material_progress": {
+        "chart": {
+          "callback": {
+            "seen": "{{student_name}} has seen but not yet completed {{num_material}} of the materials",
+            "unseen": "{{student_name}} has not seen {{num_material}} of the materials",
+            "completed": "{{student_name}} has completed {{num_material}} of the materials"
+          },
+          "title": "Study Material Progress",
+          "x_label": "Status",
+          "y_label": "Number of Materials",
+          "unseen": "Unseen",
+          "seen": "Seen",
+          "completed": "Completed"
+        },
+        "title": "Study Material Progress"
+      }
+    },
+    "list": {
+      "section_title": "Student List",
+      "table_title": "Students"
+    },
+    "set": {
+      "section_title": {
+        "average_grade_distribution": "Students with a rounded average grade of {{var0}}",
+        "construct_distribution_score": "Students that scored {{var0}} or lower on \"{{var1}}\"",
+        "question_answer_distribution": "Students that answered {{var0}} on \"{{var1}}\"",
+        "study_material_completed": "Students that have completed \"{{var0}}\" before {{var1}}",
+        "study_material_seen": "Students that have seen \"{{var0}}\" before {{var1}}",
+        "study_material_unseen": "Students that have not seen \"{{var0}}\" before {{var1}}"
+      },
+      "table_title": "Students"
+    }
+  },
+  "studyMaterial.list.section_title": "Study Material",
+  "study_material": {
+    "entity": {
+      "connected_constructs": "Connected Concepts",
+      "constructs": "Concepts",
+      "general_information": "General Information",
+      "progress": {
+        "chart": {
+          "callback": {
+            "unseen": "{{num_students}} students had not yet seen this material on {{date}}",
+            "unseen_sing": "{{num_students}} student had not yet seen this material on {{date}}",
+            "seen": "{{num_students}} students had seen but not yet completed this material on {{date}}",
+            "seen_sing": "{{num_students}} student had seen but not yet completed this material on {{date}}",
+            "completed": "{{num_students}} students had completed this material on {{date}}",
+            "completed_sing": "{{num_students}} student had completed this material on {{date}}"
+          },
+          "completed": "Completed",
+          "seen": "Seen",
+          "title": "Progress",
+          "unseen": "Unseen",
+          "x_label": "Time",
+          "y_label": "Number of Students"
+        },
+        "section_title": "Progress"
+      },
+      "properties": {
+        "authors": "Authors",
+        "edition": "Edition",
+        "end_time": "End Time",
+        "index": "Index",
+        "isbn": "ISBN",
+        "publish_date": "Published on",
+        "start_time": "Start Time",
+        "url": "Url",
+        "video": "Video"
+      },
+      "question_duration.title": "Question Duration",
+      "source": "Source: <a href='{{url}}' target='_blank'>{{url}}</a>",
+      "status": {
+        "completed": "Completed",
+        "completed_on": "Completed on {{date}}",
+        "seen": "Seen",
+        "unseen": "Unseen"
+      }
+    },
+    "list": {
+      "administration_link": "Click <a class='cursor-pointer administration-link'>here</a> to add study material.",
+      "section_title": "Study Material List",
+      "table_title": "Study Material"
+    }
+  },
+  "survey": {
+    "list": {
+      "administration_link": "Click <a class='cursor-pointer administration-link'>here</a> to create surveys.",
+      "section_title": "Survey list",
+      "table_title": "Surveys"
+    }
+  },
+  "table": {
+    "action": {
+      "advanced_linking": "Advanced Linking",
+      "delete": "Delete",
+      "edit": "Edit",
+      "import_results": "Import Results",
+      "link_constructs": "Link Constructs",
+      "link_questions": "Link Questions",
+      "link_study_material": "Link Study Material"
+    },
+    "filter_placeholder": "Filter",
+    "filtered_from": " (filtered from {{total}} total entries)",
+    "footer": "Showing {{startNum}} to {{endNum}} of {{total}} entries",
+    "headers": {
+      "activities": "Activities",
+      "answer": "Answer",
+      "average": "Average",
+      "average_grade": "Average Grade",
+      "code": "Code",
+      "completed": "Completed",
+      "connectors": "Connectors",
+      "construct_average": "Concept Average",
+      "correct": "Correct",
+      "covered_on":"Covered on",
+      "description": "Description",
+      "display_name": "Name",
+      "end": "End",
+      "exam": "Exam",
+      "first_name": "First Name",
+      "grade": "Grade",
+      "group_average": "Group Average",
+      "last_name": "Last Name",
+      "length": "Length",
+      "members": "Members",
+      "misconstruct_average": "Misconception Average",
+      "models": "Models",
+      "name": "Name",
+      "no_translation": "{{text}}",
+      "number": "Number",
+      "participants": "Participants",
+      "percent_correct": "Percent Correct",
+      "period": "Period",
+      "question": "Question",
+      "questions": "Questions",
+      "role": "Role",
+      "score": "Score",
+      "seen": "Seen",
+      "start": "Start",
+      "status": "Status",
+      "student_number": "Student Number",
+      "students": "Students",
+      "title": "Title",
+      "type": "Type",
+      "updated": "Updated on",
+      "visibility": "Visibility"
+    },
+    "icons": {
+      "completed-icon": "Completed",
+      "invisible-icon": "Invisible",
+      "seen-icon": "Seen",
+      "unseen-icon": "Unseen",
+      "visible-icon": "Visible"
+    },
+    "no_entries": "No entries to show.",
+    "no_matches": "No matching results found."
+  },
+  "thermos": {
+    "anxiety": {
+      "feedback": "has two main aspects: feeling nervous and worrying.\nFeeling nervous is the uneasy or sick feeling you get when you think about your university work, assignments, or exams.\nWorrying is your fear about not doing very well in your university work, assignments, or exams.",
+      "importance": "A bit of anxiety can be helpful, but too much can hinder you in your study. Overcoming your anxiety may lead to an easier time concentrating or remembering things. If your anxiety worries you, don’t hesitate to reach out for support."
+    },
+    "contact": "For problems or questions, <a href='mailto:l.b.devreugd-2@umcutrecht.nl' title='l.b.devreugd-2@umcutrecht.nl'><i class='fas fa-envelope mx-2'></i>contact L.B. de Vreugd</a>",
+    "disengagement": {
+      "feedback": "is the feeling of giving up on a particular university subject or studying in general.",
+      "importance": "If you can overcome your disengagement, you are more likely to believe there is more you can do to avoid failure or attain success. As well as, become more interested in university or university work."
+    },
+    "empty_feedback": "Please click on an aspect in a graph for feedback.",
+    "feedback": {
+      "act": "Act",
+      "additionalTitle": "Additional Support for {{constructName}}",
+      "exercises": "Exercises of {{constructName}}",
+      "importance": "Why is it important?",
+      "links": "Additional Support",
+      "prepare": "Prepare",
+      "reflect": "Reflect",
+      "score": "Based on this survey, <u>you</u> scored <u>yourself</u> on {{constructName}}: {{score}}.",
+      "score-criterion-norm": "</br>For {{constructName}}, the recommended percentage for studying successfully (criterion reference) is: {{norm}}%.",
+      "score-peer-norm": "</br>For {{constructName}}, the average score of your peers (peer reference) is: {{norm}}%.",
+      "tips": "For tips and activities on how to improve, click below"
+    },
+    "failure_avoidance": {
+      "feedback": "is when you do your university work mainly to avoid doing poorly, rather than to aim for success or improvement. Or that you avoid being seen as doing poorly.",
+      "importance": "If you can overcome failure avoidance you tend to no longer fear failure, feel pessimistic, or feel anxious when thinking about or doing your university work."
+    },
+    "interpersonal_group_work_skills": {
+      "feedback": "are those skills necessary for working with others or in a team e.g. effectively resolving conflict, understanding information exchange networks, and providing social support.",
+      "importance": "Advanced interpersonal group work skills will likely improve the experience of working with others, through positive and supportive social interactions and enhanced communication."
+    },
+    "intro": {
+      "feedback": "Give feedback about the Thermos tool. ",
+      "greeting": "Hi {{name}},",
+      "message": "These visualizations show your self-assessment on Motivation and Engagement, and Groupwork skills. The scores can change as you change, click on an aspect to receive tips and feedback.",
+      "message_no_results": "There is no data to display yet.",
+      "retake": "Retake the survey.",
+      "rewatch": "Rewatch the introduction video.",
+      "start": "Click here to complete the survey"
+    },
+    "intro_no_results": "There is no data to display yet.",
+    "latest_result": "latest",
+    "learning_focus": {
+      "feedback": "is the extent to which you are focused on learning, solving problems, and developing skills. If you feel successful and gain satisfaction in mastering what you have set out to do.",
+      "importance": "If your learning focus increases, you tend to enjoy learning more, study for your own satisfaction and not just for rewards and enjoy challenges."
+    },
+    "mobile_warning": "The dashboard was designed for a desktop or laptop and may not work optimally on a smartphone.",
+    "persistence": {
+      "feedback": "is how long and how hard you keep trying to work out an answer or to understand a problem even when that problem is difficult or challenging.",
+      "importance": "If you are persistent you tend to achieve what you set out to do more often, be more motivated to succeed, and be good at problem solving."
+    },
+    "planning": {
+      "feedback": "is how much you plan your assignments and study. It is also about whether you keep track of your progress as you are doing your university work.",
+      "importance": "If you plan your university work you are more likely to feel in control of your progress, succeed in challenging university work, and make good use of your time and your abilities."
+    },
+    "result_history.title": "Results history",
+    "self_belief": {
+      "feedback": "is, with regard to your studies, your belief and confidence in your ability to succeed in university, meet the study challenges, utilize learning opportunities, and perform to the best of your ability.",
+      "importance": "If you have positive self-belief you tend to do difficult study tasks confidently, feel optimistic, try hard, and enjoy university."
+    },
+    "self_sabotage": {
+      "feedback": "is when you do things that reduce your success at university e.g. procrastinating or wasting time when you are meant to be studying for an exam.",
+      "importance": "If you overcome your self-sabotage, you tend to make the most of your ability, feel good about being at university, and achieve as highly as you are able."
+    },
+    "study_progress.title": "Study progress",
+    "task_group_work_skills": {
+      "feedback": "are those skills necessary for the successful completion of group assignments e.g. establishing goals, planning and sequencing activities, or coordinating group interdependencies.",
+      "importance": "Advanced task group work skills will likely improve the experience of working with others, through the efficient use of time and productive meetings. As well as, reducing social loafing (‘free-riding’ or ‘meeliften’)."
+    },
+    "task_management": {
+      "feedback": "is the way you use your study time, organize your study timetable, and choose and arrange where you study.",
+      "importance": "If you manage your study well, you tend to be more efficient. This can be done by studying in places where you can concentrate, using your study time well without getting distracted, and sticking to a study timetable."
+    },
+    "uncertain_control": {
+      "feedback": "is when you are unsure about how to do well or how to avoid doing poorly.",
+      "importance": "If you are uncertain in control you can feel somewhat helpless when doing your university work, fear failure, or have negative thoughts about your university work."
+    },
+    "user_agreement": "<p>Dear student,</p><p>You’re about to use the THERMOS-tool. This tool is still under development so any help and feedback is greatly appreciated.</p><p>Please note that you should by no means feel pressured into using this tool. If so, do not continue and close this window. Furthermore, if you proceed to use the Thermos-dashboard, you confirm to have read and understand this statement, and agree to your (pseudonymized) data being stored and used to further develop this tool, the implementation in educational context, and/or for research purposes. If you do not agree, do not continue and close this window.</p><p>This text will briefly explain what data will be processed and stored, who will have access to it, and how this data helps the development of this tool.</p><h5>What data is collected, why, and with what purpose?</h5><p>With this tool we want to offer you support in studying at Utrecht University, by providing insight in your study behavior and helping you develop this. Your data is collected and processed for this purpose by Utrecht University and the principle behind the use of this information is the justified interest of Utrecht University.</p><p>We have composed a survey with questions about Motivation and Engagement, and Groupwork skills. Some questions are quite similar, which is not a trick but the way these surveys work. The survey used in this dashboard only measures aspects of your study behavior, not (e.g.) indications of your mental health.</p><p>After you’ve completed this survey, the data will be presented to you in a visualization. You can click on the topics you’re interested in to get feedback on how to work on these topics. After you’ve finished the survey and examined the tips and feedback, you can give us your opinion and feedback about this version of the tool. To do so, go to the ‘provide feedback’ section. We are curious to know how you’ve experienced the tool’s current look, the usefulness of the feedback and tips, and whatever comes to mind when you’re using the tool.</p><p>Apart from the personal data you provide in the surveys, the dashboard shows some personal (study progress) data from Osiris, specifically current study program, EC's obtained and average grade obtained in current study program. In order to show you this data in the dashboard, a SAML-token is used. By using this token, your SOLIS ID and the associated personal data cannot be traced within the Thermos dashboard. Lastly, while using the dashboard, your online behavior will be logged. </p><h5>Where is the data stored and for how long?</h5><p>The survey, feedback, and logdata are stored on a secured UU-server. To ensure protection of the data a penetration test was performed in 2019 by a third party, revealing minor issues that have been resolved. Only project members have access to the data. The data remains available until you are no longer a student at UU. After that, the data is pseudonymized and remains available for research purposes (for 10 years, <a href='www.vsnu.nl/files/documenten/Domeinen/Onderzoek/Code_wetenschapsbeoefening_2004_(2014).pdf' _target='_blank'>recommended by the VSNU</a>), in accordance with UU’s <a href='https://www.uu.nl/en/organisation/privacy-statement-utrecht-university' target='_blank'>privacy statement</a> (last modified on 17th of May 2018). UU has the right to update this statement when necessary.  The data is processed based on UU’s legitimate interest to improve provided education. Data will not be shared with third parties or with countries outside of the European Economic Area.</p><h5>Who has access to the data?</h5><p>Your teachers or tutors will not be able to view your data. You can, of course, show them your results if you want their help, but only if you want to. The stored data will only be accessible to THERMOS-project members and will be used to further develop the tool or for research purposes. Before your data is used for development and/or research purposes it will be pseudonymized. When pseudonymized, aggregated data can be used to give study programs an overarching view of the measured constructs for that specific study program.</p><h5>What rights do I have?</h5><p>You have several rights as a Thermos dashboard user; the right to inspect your data, to rectify data, to remove data, to limit data collection, to object data collection, and data portability. To exercise any of these rights, get in touch with <a href='mailto:l.b.devreugd-2@umcutrecht.nl'>l.b.devreugd-2@umcutrecht.nl</a>, or with <a href='mailto:privacy@uu.nl'>privacy@uu.nl</a> to do so anonymously.</p><h5>With whom can you get in touch for questions or complaints?</h5><p>For questions or complaints about the project, feel free to send an email to <a href='mailto:l.b.devreugd-2@umcutrecht.nl'>l.b.devreugd-2@umcutrecht.nl</a>. If you want to get in touch with the UU privacy officer, send an email to <a href='mailto:privacy@uu.nl'>privacy@uu.nl</a>.If you want to file an official complaint with the ‘Autoriteit Persoonsgegevens’, see <a href='https://www.rijksoverheid.nl/contact/contactgids/autoriteit-persoonsgegevens' target='_blank'>www.rijksoverheid.nl/contact/contactgids/autoriteit-persoonsgegevens</a>. Further information on the project can be found on <a href='https://thermos.sites.uu.nl' target='_blank'>thermos.sites.uu.nl</a>.</p><p>Responsible for the data processing is Utrecht University, Heidelberglaan 8, 3584 CS Utrecht, <a href='mailto:info@uu.nl'>info@uu.nl</a></p>",
+    "valuing": {
+      "feedback": "is how much you believe what you learn at university is useful, important, and relevant to you or the world in general.",
+      "importance": "If you value university, you tend to be interested in what you learn, persist when university work gets difficult, and enjoy university."
+    }
+  },
+  "toolbar": {
+    "history": {
+      "empty_message": "Nothing to show.",
+      "recent": "Recent"
+    },
+    "powered_by": "powered by",
+    "user": {
+      "log_out": "Log out",
+      "privacy": "Privacy",
+      "settings": "Settings"
+    }
+  },
+  "video": {
+    "invalid_url": "Resource is invalid and could therefore not be loaded. Please try again later.",
+    "privacy_warning": {
+      "message": "You may not be anonymous when watching this video.<br/>The host of the video may track your viewing behaviour.",
+      "prompt": "Do you still want to load the video?",
+      "remember_choice": "Remember my choice (this can be changed in the <a href='/user-settings'>settings</a>).",
+      "title": "Privacy Warning",
+      "view_here": "View Here"
+    }
+  }
+}

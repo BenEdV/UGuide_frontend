@@ -1,0 +1,3 @@
+<div *ngIf="c && c.invalid && (c.dirty || c.touched)" class="d-block invalid-feedback">
+  <p *ngIf="c.errors.required">{{'form.is_required' | translate:{tag: displayName | titlecase} }}</p>
+</div>

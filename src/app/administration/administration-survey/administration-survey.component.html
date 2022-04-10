@@ -1,0 +1,76 @@
+<app-title-section [title]="'admin.survey.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.survey.table_title' | translate" [icon]="'survey-icon'" [actions]="surveyTable.cardActions">
+  <app-survey-table
+    #surveyTable
+    [activities]="surveys"
+    [limit]="10"
+    [actions]="tableActions"
+    [showVisibility]="true">
+  </app-survey-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.survey.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.survey.survey' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.survey.new_survey.modal_title' | translate">
+  <form id="add-study-material-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addTitle">{{'admin.survey.new_survey.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="addTitle"
+             [placeholder]="'admin.survey.new_survey.title' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="title" #addTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addDescription">{{'admin.survey.new_survey.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="addDescription" rows="3" [placeholder]="'admin.survey.new_survey.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="addVisibility">{{'admin.survey.new_survey.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="name" id="addVisibility" formControlName="visibility"
+                    [placeholder]="'admin.survey.new_survey.visibility' | translate" [ngClass]="{'is-invalid': addVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="visibility" #addVisibility></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-study-material-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.survey.edit_survey.modal_title' | translate:{surveyTitle: editingItem?.title}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-study-material-form" [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="editTitle">{{'admin.study_material.edit_study_material.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="editTitle"
+             [placeholder]="'admin.study_material.edit_study_material.title' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="title" #editTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="editDescription">{{'admin.study_material.edit_study_material.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="editDescription" rows="3" [placeholder]="'admin.study_material.edit_study_material.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editVisibility">{{'admin.study_material.edit_study_material.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="value" id="editVisibility" formControlName="visibility"
+                    [placeholder]="'admin.study_material.edit_study_material.visibility' | translate" [ngClass]="{'is-invalid': editVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="editForm" controlName="visibility" #editVisibility></app-form-control-error>
+    </div>
+  </form>
+  Click <a (click)="goToQuestionsFromEdit()" class="cursor-pointer">here</a> to edit the questions of this survey.
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-study-material-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

@@ -1,0 +1,82 @@
+<app-title-section [title]="'admin.course.section_title' | translate"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h4>{{'admin.course.logging.section_title' | translate}}</h4>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="logging"
+          [checked]="settings.logging"
+          (change)="settings.logging = !settings.logging">
+        <label class="custom-control-label" for="logging">{{'admin.course.logging.allow_student_interaction' | translate}}</label>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h4>{{'admin.course.social_comparison.section_title' | translate}}</h4>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="social"
+          [checked]="settings.social.see_averages"
+          (change)="settings.social.see_averages = !settings.social.see_averages">
+        <label class="custom-control-label" for="social">{{'admin.course.social_comparison.allow_see_course_average' | translate}}</label>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h4>{{'admin.course.experimental.section_title' | translate}}</h4>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="abtesting"
+          [checked]="settings.experimental.results"
+          (change)="settings.experimental.results = !settings.experimental.results">
+        <label class="custom-control-label" for="abtesting">{{'admin.course.experimental.see_subgroup_results' | translate}}</label>
+      </div>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="abtestingShift"
+          [checked]="settings.experimental.shift"
+          (change)="settings.experimental.shift = !settings.experimental.shift">
+        <label class="custom-control-label" for="abtestingShift">{{'admin.course.experimental.shift_comparison' | translate}}</label>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card>
+      <h4>{{'admin.course.widgets.section_title' | translate}}</h4>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="widgets"
+          [checked]="settings.allow_widgets"
+          (change)="settings.allow_widgets = !settings.allow_widgets">
+        <label class="custom-control-label" for="widgets">{{'admin.course.widgets.allow_widgets' | translate}}</label>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<button type="button" class="btn btn-success" (click)="saveChanges()">
+  <i class="true-icon text-light"></i> {{'admin.course.save_changes' | translate}}
+</button>

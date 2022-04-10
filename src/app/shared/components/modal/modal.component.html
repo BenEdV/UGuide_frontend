@@ -1,0 +1,12 @@
+<ng-template #modalTmpl>
+  <div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close('CrossClick')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <ng-content></ng-content>
+  </div>
+  <div class="modal-footer">
+    <ng-content select=".app-modal-footer"></ng-content>
+  </div>
+</ng-template>

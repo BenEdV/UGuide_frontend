@@ -1,0 +1,25 @@
+.social-comparison-text {
+  line-height: 44px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: auto 1rem;
+}
+
+.study-material-text {
+  font-weight: 300;
+  font-size: 1.25rem;
+}
+
+.social-comparison-group {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1),
+              0 11px 22px 0px rgba(0, 0, 0, 0.04),
+              0 1px 18px 0px rgba(0, 0, 0, 0.04);
+}
+
+.chart-container {
+  overflow-y: auto;
+}
+
+.chart-container-height {
+  height: 300px;
+}

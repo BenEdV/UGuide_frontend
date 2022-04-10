@@ -1,0 +1,20 @@
+<app-card
+  [title]="'Table Test'"
+  [subtitle]="'List of all models that are part of this course.'"
+  [icon]="'fas fa-table'"
+  [actions]="table.cardActions">
+  <app-table
+    #table
+    [data]="fakeData"
+    [classes]="fakeClasses"
+    [keys]="fakeKeys"
+    [limit]="10"
+    [routerLinks]="fakeLinks"
+    [iconify]="fakeIconify"
+    [headerOverrides]="headerOverrides"
+    [sortEnabled]="true"
+    [searchEnabled]="true"
+    [pagesEnabled]="true"
+    [sliderKey]="fakeKeys[0]">
+  </app-table>
+</app-card>

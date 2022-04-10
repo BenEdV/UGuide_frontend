@@ -1,0 +1,78 @@
+<app-title-section [title]="'construct.knowledge.section_title' | translate | titlecase"></app-title-section>
+
+<div class="row card-spacing">
+  <span class="social-comparison-text">{{'construct.knowledge.compare_results_with' | translate}}: </span>
+  <div class="col">
+    <ul class="list-group list-group-horizontal social-comparison-group">
+      <li
+        *ngFor="let comparison of socialComparisonGroups"
+        class="list-group-item list-group-item-action cursor-pointer"
+        [ngClass]="{'active': comparison.active}"
+        (click)="setSocialComparison(comparison)"
+        placement="bottom"
+        [ngbTooltip]="!comparison.active && 'construct.knowledge.switch_to_compare' | translate:{comparisonGroup: comparison.name | translate}">
+          {{comparison.name | translate}}
+        <div
+          *ngIf="comparison.active"
+          [ngbTooltip]="'construct.knowledge.current_comparison' | translate:{comparisonGroup: comparison.name | translate}"
+          triggers="manual"
+          placement="bottom"
+          #tooltip="ngbTooltip">
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 card-spacing" *ngFor="let constructType of constructTypes">
+    <app-card
+      [icon]="'bar-chart-icon'"
+      [title]="'construct.knowledge.chart_title.' + constructType.type | translate | titlecase"
+      highlight="primary">
+      <div class="chart-container"
+           [ngClass]="{'chart-container-height': labelsByType[constructType.type] &&
+                                                 labelsByType[constructType.type].length > 0}">
+        <app-hierarchical-chart
+          #constructChart
+          *ngIf="datasetsByType[constructType.type] | async as data; else loading"
+          [datasets]="data"
+          [labels]="labelsByType[constructType.type]"
+          [containerHeight]="containerHeightByType[constructType.type]"
+          [loggingSubject]="(constructType.type | titlecase) + 'Chart'"
+          [isNegative]="constructType.isNegative"
+          (labelHover)="labelHover($event)"
+          (chartHover)="chartHover($event)"
+          (labelClick)="labelClick($event)"
+          (chartClick)="chartClick($event, constructType.type)">
+        </app-hierarchical-chart>
+        <ng-template #loading>
+          <app-loading-icon></app-loading-icon>
+        </ng-template>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card
+      [icon]="'study-material-icon'"
+      [title]="selectedConstruct ? ('construct.knowledge.study_material_table_title_construct' | translate:{construct: selectedConstruct.name}) : ('construct.knowledge.study_material_table_title' | translate)">
+      <div class="study-material-text">
+        <ul class="list-unstyled list-inline"
+            [hidden]="!selectedConstruct || selectedActivities.length === 0">
+          <li *ngFor="let activity of selectedActivities" class="list-inline-item mr-4">
+            <i class="{{activity.type}}-icon mr-2"></i>
+            <a [routerLink]="routerLinkHelper(activity, route.snapshot.params.collectionId)"
+               (click)="logActivityClick(activity)">
+              {{activity.title}}
+            </a>
+          </li>
+        </ul>
+        <p [hidden]="!selectedConstruct || (selectedActivities && selectedActivities.length > 0)">{{'construct.knowledge.no_study_material' | translate}}</p>
+        <p [hidden]="selectedConstruct">{{'construct.knowledge.hover_request' | translate}}.</p>
+      </div>
+    </app-card>
+  </div>
+</div>

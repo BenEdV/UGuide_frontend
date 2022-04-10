@@ -1,0 +1,26 @@
+<ng-select [items]="items"
+           [placeholder]="placeholder"
+           [bindLabel]="bindLabel"
+           [bindValue]="bindValue"
+           [groupBy]="groupByFn"
+           [multiple]="multiple"
+           [(ngModel)]="selectedItem"
+           (remove)="propagateRemove($event)"
+           (blur)="propagateTouch($event)"
+           (change)="registerChange($event)">
+  <!-- Selected item in input field -->
+  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+    <span [ngClass]="{'px-2': multiple}" [class]="getCSS(item)"><b>{{getLabel(item)}}</b></span>
+    <span *ngIf="multiple" class="ng-value-icon right" (click)="clear(item)">×</span>
+  </ng-template>
+  <!-- Group item -->
+  <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+    {{getLabel(item)}}
+  </ng-template>
+  <!-- Items in dropdown -->
+  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+    <span [class]="getCSS(item)">
+      <ngb-highlight [result]="getLabel(item)" [term]="search">{{getLabel(item)}}</ngb-highlight>
+    </span>
+  </ng-template>
+</ng-select>

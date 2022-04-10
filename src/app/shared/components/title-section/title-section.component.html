@@ -1,0 +1,17 @@
+<div class="title-section">
+  <div class="title d-flex align-items-baseline justify-content-between">
+    <div class="text-container">
+      <span [innerHTML]="displayTitle" class="mr-1"></span>
+      <ng-container *ngIf="item && type && administrationLink">
+        <a *appHasPermission="administrationPermissions"
+           [routerLink]="administrationLink"
+           [queryParams]="administrationQueryParams">
+           <i class="settings-icon administration-link"></i>
+        </a>
+      </ng-container>
+    </div>
+    <ng-content select=".title"></ng-content>
+  </div>
+  <ng-content></ng-content>
+  <app-read-more *ngIf="description && description.length > 0" [content]="description"></app-read-more>
+</div>

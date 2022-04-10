@@ -1,0 +1,10 @@
+<p *appHasPermission="['see_own_results', 'something']; op 'OR'">You need can_write or something to see this</p>
+<p>You need can_write to see the button.</p>
+<button (click)="triggerChangeDetection()">{{counter}}</button>
+<br/>
+<button type="button"
+        class="btn btn-primary"
+        *appHasPermission="['see_own_results', 'x']"
+        (click)="goToChart()">Go to chart</button>
+<p *appHasPermission="permissions; op 'OR'; else test">Do you see this?</p>
+<ng-template #test>Else paragraph</ng-template>

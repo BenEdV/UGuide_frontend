@@ -1,0 +1,88 @@
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/mixins';
+@import '~bootstrap-scss/variables';
+
+@import 'src/variables';
+
+@include media-breakpoint-up(lg) {
+  .overlay {
+    display: none !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .overlay {
+    display: block;
+  }
+}
+
+.sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  right: 0;
+  top: $header-height;
+  background: $sidebar-background-color;
+  border-left: 1px solid $sidebar-border-color;
+  width: $sidebar-width;
+  height: 100%;
+  z-index: 1000;
+  font-weight: 300;
+  padding: 15px 25px 25px 25px;
+  box-shadow: rgba(0, 0, 0, 0.133) 0px 1.6px 3.6px 0px, rgba(0, 0, 0, 0.11) 0px 0.3px 0.9px 0px;
+}
+
+::ng-deep .sidebar .btn {
+  width: 100%;
+}
+
+.sidebar-transition {
+  transition: 0.2s ease margin-right;
+}
+
+.btn-raised {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+              0 6px 10px 0px rgba(0, 0, 0, 0.14),
+              0 1px 18px 0px rgba(0,0,0,.12);
+  border-radius: 50%;
+  font-size: 1rem;
+  background-color: $btn-raised-background-color;
+  border-color: $btn-raised-border-color;
+  transition: 0.3s ease all;
+}
+
+.sidebar-close {
+  margin-left: auto;
+  padding: 10px;
+  color: $sidenav-inactive-link-color;
+  z-index: 1010;
+
+  &:hover {
+    color: black;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+}
+
+.sidebar-open {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 980;
+  width: 40px;
+  height: 40px;
+}
+
+.mr-sidebar {
+  margin-right: -$sidebar-width;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.scroll-padding {
+  height: 40px; // add extra height to the page so that btn-raised has room to scroll below the content
+}

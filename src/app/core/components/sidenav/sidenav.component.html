@@ -1,0 +1,63 @@
+<ng-template #recursiveTemplateRef let-nodes let-depth="depth">
+  <ng-container *ngFor="let node of nodes">
+    <ng-container *appHasPermission="node.permissions">
+      <li *appHasRole="node.roles"
+          [routerLink]="['collections', sidenavService.collection.id].concat(node.link)"
+          [ngClass]="isRouteActive(node, rlaTop.isActive) ? (depth === 0 ? 'active' : 'subActive') : ''"
+          [routerLinkActive]=""
+          #rlaTop="routerLinkActive"
+          (click)="$event.stopPropagation(); sidenavService.hideNavIfMobile();">
+        <a [ngClass]="isRouteActive(node, rlaTop.isActive) ? 'active-link' : 'inactive-link'">
+          <i *ngIf="node.iconClasses" [ngClass]="node.iconClasses" class="sidenav-left-icon mr-2"></i>
+          {{'sidebar.' + node.name | translate | titlecase}}
+        </a>
+        <ng-container *ngIf="node.tabs.length > 0 || node.children.length > 0">
+          <i class="fas sidenav-right-icon"
+          [ngClass]="isSubmenuOpen(node, rlaTop.isActive) ? 'fa-chevron-down' : 'fa-chevron-right'"
+          (click)="$event.stopPropagation(); toggleNavItemCollapse(node.key)"></i>
+          <ul [hidden]="!isSubmenuOpen(node, rlaTop.isActive)">
+            <ng-template
+              [ngTemplateOutlet]="recursiveTemplateRef"
+              [ngTemplateOutletContext]="{$implicit: node.children, depth: depth + 1}">
+            </ng-template>
+            <li *ngFor="let tab of node.tabs; let i = index"
+                [routerLink]="tab.link"
+                routerLinkActive="subActive"
+                #rla="routerLinkActive"
+                (click)="$event.stopPropagation(); sidenavService.hideNavIfMobile()">
+              <a class="tab-with-ellipsis"
+                [title]="tab.name"
+                [ngClass]="rla.isActive ? 'active-link' : 'inactive-link'">
+                {{tab.name}}
+              </a>
+              <i class="close-icon sidenav-right-icon" *ngIf="tab.removable"
+                (click)="$event.stopPropagation(); sidenavService.removeTab(node.key, i, rla.isActive)"></i>
+            </li>
+          </ul>
+        </ng-container>
+      </li>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<nav id="sidenav" role="navigation"
+     [ngClass]="{'ml-sidenav': sidenavService.isCollapsed}"
+     *ngIf="sidenavService.isVisible">
+  <div class="sidenav-header" *ngIf="sidenavService.collection">
+    <ng-container *ngIf="sidenavService.collection.course_instance as courseInstance; else noCourse">
+      <p>{{courseInstance.course.name}}</p>
+      <p class="sidenav-subheader">
+        {{courseInstance.course.code}}
+      </p>
+    </ng-container>
+    <ng-template #noCourse>
+      <p>{{sidenavService.collection.name}}</p>
+    </ng-template>
+  </div>
+  <ul class="mb-5">
+    <ng-template [ngTemplateOutlet]="recursiveTemplateRef"
+                 [ngTemplateOutletContext]="{ $implicit: sidenavService.visibleNavItems, depth: 0}"></ng-template>
+  </ul>
+</nav>
+<div class="overlay fadeIn" *ngIf="sidenavService.isVisible && !sidenavService.isCollapsed"
+     (click)="sidenavService.hideNavIfMobile()"></div>

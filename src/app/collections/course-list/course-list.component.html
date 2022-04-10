@@ -1,0 +1,11 @@
+<app-title-section [title]="'course.list.section_title' | translate"></app-title-section>
+
+<app-card
+  [icon]="'fas fa-chalkboard'"
+  [title]="'course.list.table_title' | translate"
+  [subtitle]="'course.list.table_subtitle' | translate">
+  <app-course-table
+    [collections]="collections"
+    [limit]="10">
+  </app-course-table>
+</app-card>

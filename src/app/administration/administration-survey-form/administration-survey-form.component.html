@@ -1,0 +1,96 @@
+<app-title-section [title]="'admin.survey_content.section_title' | translate:{surveyTitle: survey.title}"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'admin.survey_content.card_title' | translate" icon="survey-icon">
+      <!-- <p *ngFor="let activity of survey.head_activities">
+        {{activity.title}} {{activity.id}}
+      </p> -->
+      <ng-container *ngFor="let activity of survey.head_activities">
+        <hr class="question-divider"/>
+        <app-survey-form-question [question]="activity"></app-survey-form-question>
+        <i class="cursor-pointer edit-icon" (click)="editQuestion(activity.id)"></i>
+        <i class="cursor-pointer delete-icon" (click)="deleteQuestion(activity.id)"></i>
+      </ng-container>
+    </app-card>
+  </div>
+</div>
+
+<div class="row justify-content-center" [hidden]="showNewQuestion">
+  <button class="btn btn-success" (click)="showNewQuestion = true">
+    <i class="add-icon"></i>
+    {{'admin.survey_content.add_question' | translate}}
+  </button>
+</div>
+
+<div class="row" [hidden]="!showNewQuestion">
+  <div class="col card-spacing">
+    <app-card [title]="'admin.survey_content.add_card_title' | translate" icon="add-icon">
+      <form id="addForm" [formGroup]="addForm" (ngSubmit)="addQuestion()">
+        <div class="row">
+          <div class="col-md-8 mb-2">
+            <label for="questionBody">{{'admin.survey_content.question_body' | translate}}</label>
+            <textarea class="form-control" formControlName="body" rows="1"
+              [placeholder]="'admin.survey_content.question_body' | translate" [ngClass]="{'is-invalid': addBody.invalid}"></textarea>
+            <app-form-control-error [form]="addForm" controlName="body" #addBody></app-form-control-error>
+          </div>
+          <div class="col-md-4 mb-2">
+            <label for="questionTypes">{{'admin.survey_content.question_type' | translate}}</label>
+            <app-dropdown
+              id="questionTypes"
+              [items]="questionTypes"
+              formControlName="type"
+              [getLabel]="questionTypeLabelFn"
+              (selectionChange)="updateQuestionType($event)"
+              [placeholder]="'admin.survey_content.question_type' | translate"
+              [ngClass]="{'is-invalid': addType.invalid}"
+            ></app-dropdown>
+            <app-form-control-error [form]="addForm" controlName="type" #addType></app-form-control-error>
+          </div>
+        </div>
+        <ng-container *ngIf="c.type.value?.name !== null && !isType('comment')">
+          <hr class="question-divider"/>
+          <ng-container *ngIf="!isType('open')">
+            <ng-container formArrayName="answers">
+              <div class="row align-items-center mb-2" *ngFor="let answer of c.answers['controls']; index as j">
+                <div class="col-auto" *ngIf="isType('multiple_choice')">
+                  <input type="radio" disabled/>
+                </div>
+                <div class="col-auto" *ngIf="isType('multiple_selection')">
+                  <input type="checkbox" disabled/>
+                </div>
+                <div class="col">
+                  <textarea class="form-control" [formControlName]="j" rows="1"></textarea>
+                </div>
+                <div class="col-auto">
+                  <i class="delete-icon cursor-pointer" (click)="deleteAnswer(j)"></i>
+                </div>
+              </div>
+            </ng-container>
+            <div class="row justify-content-center mt-4">
+              <button type="button" class="btn btn-primary" (click)="addAnswer()">
+                <i class="add-icon"></i>
+                {{'admin.survey_content.add_answer' | translate}}
+              </button>
+            </div>
+          </ng-container>
+          <div class="form-check mt-3">
+            <input type="checkbox" class="form-check-input" id="requiredCheckbox" formControlName="required">
+            <label class="form-check-label" for="requiredCheckbox">{{'admin.survey_content.question_required'}}</label>
+          </div>
+        </ng-container>
+        <hr class="question-divider"/>
+      </form>
+      <div class="app-card-footer">
+        <div class="btn-group float-right" role="group">
+          <button type="button" class="btn btn-outline-dark" (click)="showNewQuestion = false">{{'admin.survey_content.cancel' | translate}}</button>
+          <button type="submit" form="addForm" class="btn btn-success float-right" [disabled]="adding">
+            <span *ngIf="adding" class="spinner-border spinner-border-sm mr-1"></span>
+            <i class="add-icon" *ngIf="!adding"></i>
+            {{'admin.survey_content.add_question' | translate}}
+          </button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

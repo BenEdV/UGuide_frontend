@@ -1,0 +1,24 @@
+<ng-container *ngIf="isCollapsed; else readingMore">
+  <ng-container *ngIf="limit !== 'line'; else lineLimit">
+    <span *appMultiline="let line of content.slice(0, charLimit)" [innerHTML]="line"></span>
+  </ng-container>
+  <span *ngIf="content.length > limit">
+    ...
+    <span (click)="toggleView()" class="text-primary cursor-pointer ml-1">{{'content_interface.read_more' | translate}}</span>
+  </span>
+  <ng-template #lineLimit>
+    <div class="clearfix">
+      <span class="wrap-line" #ellipsisElement>
+        <span *appMultiline="let line of content" [innerHTML]="line"></span>
+      </span>
+      <span [hidden]="hideReadMore"
+            (window:resize)="updateShowReadMore()"
+            (click)="toggleView()"
+            class="text-primary cursor-pointer ml-1"> {{'content_interface.read_more' | translate}}</span>
+    </div>
+  </ng-template>
+</ng-container>
+<ng-template #readingMore>
+  <p *appMultiline="let line of content" [innerHTML]="line"></p>
+  <span (click)="toggleView()" class="text-primary cursor-pointer">{{'content_interface.read_less' | translate}}</span>
+</ng-template>

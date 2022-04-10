@@ -1,0 +1,12 @@
+<app-title-section [title]="'global_activities.section_title' | translate"></app-title-section>
+
+<app-card
+  [icon]="'activity-icon'"
+  [title]="'global_activities.table_title' | translate">
+  <app-activity-table
+    [activities]="activities"
+    [sortKey]="'end_time'"
+    [sortReverse]="true"
+    [limit]="10">
+  </app-activity-table>
+</app-card>

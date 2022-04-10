@@ -1,0 +1,18 @@
+<app-title-section [title]="'group.list.section_title' | translate | titlecase"></app-title-section>
+
+<div class="row">
+  <div class="col card-spacing">
+    <app-card [title]="'group.list.table_title' | translate | titlecase" [icon]="'group-icon'" [actions]="groupList.cardActions">
+      <app-group-table
+        #groupList
+        [groups]="groups"
+        [constructs]="constructs"
+        [exams]="exams"
+        [limit]="10">
+      </app-group-table>
+      <ng-container *appHasPermission="['manage_collection']">
+        <p *ngIf="groups.length === 0" class="text-center" [innerHTML]="'group.list.administration_link' | translate"></p>
+      </ng-container>
+    </app-card>
+  </div>
+</div>

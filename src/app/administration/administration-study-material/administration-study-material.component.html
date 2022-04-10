@@ -1,0 +1,180 @@
+<app-title-section [title]="'admin.study_material.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.study_material.table_title' | translate" [icon]="'study-material-icon'" [actions]="studyMaterialTable.cardActions">
+  <app-study-material-table
+    #studyMaterialTable
+    [activities]="studyMaterial"
+    [limit]="10"
+    [actions]="tableActions"
+    [showVisibility]="true">
+  </app-study-material-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.study_material.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.study_material.study_material' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <p class="section-title">{{'admin.study_material.linking' | translate}}</p>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="resetLinkConstructForm(); linkConstructModal.open()">
+        <i class="construct-link-icon"></i>{{'admin.study_material.constructs' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.study_material.new_study_material.modal_title' | translate">
+  <form id="add-study-material-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addTitle">{{'admin.study_material.new_study_material.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="addTitle"
+             [placeholder]="'admin.study_material.new_study_material.title' | translate" [ngClass]="{'is-invalid': addTitle.invalid}">
+      <app-form-control-error [form]="addForm" controlName="title" #addTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addDescription">{{'admin.study_material.new_study_material.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="addDescription" rows="3" [placeholder]="'admin.study_material.new_study_material.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="addType">{{'admin.study_material.new_study_material.type' | translate}} *</label>
+      <app-dropdown [items]="activityTypes" [getLabel]="typeLabel" bindValue="name" id="addType" formControlName="type" (selectionChange)="addC.properties.reset()"
+                    [placeholder]="'admin.study_material.new_study_material.type' | translate" [ngClass]="{'is-invalid': addType.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="type" #addType></app-form-control-error>
+    </div>
+    <div class="form-group" formGroupName="properties" *ngIf="addC.type.value && addC.type.value.name?.includes('material.video')">
+      <label for="addUrl">{{'admin.study_material.new_study_material.url' | translate}}</label>
+      <input type="url" class="form-control" id="addUrl" formControlName="url"/>
+    </div>
+    <div class="form-group">
+      <label for="addVisibility">{{'admin.study_material.new_study_material.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="name" id="addVisibility" formControlName="visibility"
+                    [placeholder]="'admin.study_material.new_study_material.visibility' | translate" [ngClass]="{'is-invalid': addVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="visibility" #addVisibility></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addStartTime">{{'admin.study_material.new_study_material.covered_on' | translate}}</label>
+      <input type="date" class="form-control" id="addStartTime" formControlName="start_time"/>
+    </div>
+    <div class="form-group">
+      <label>{{'admin.study_material.new_study_material.attachments' | translate}}</label>
+      <app-file-upload formControlName="attachments" multiple="true"></app-file-upload>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-study-material-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.study_material.edit_study_material.modal_title' | translate:{materialTitle: editingItem?.title}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-study-material-form" [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="editTitle">{{'admin.study_material.edit_study_material.title' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="title" id="editTitle"
+             [placeholder]="'admin.study_material.edit_study_material.title' | translate" [ngClass]="{'is-invalid': editTitle.invalid}">
+      <app-form-control-error [form]="editForm" controlName="title" #editTitle></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="editDescription">{{'admin.study_material.edit_study_material.description' | translate}}</label>
+      <textarea class="form-control" formControlName="description" id="editDescription" rows="3" [placeholder]="'admin.study_material.edit_study_material.description' | translate"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editType">{{'admin.study_material.edit_study_material.type' | translate}} *</label>
+      <app-dropdown [items]="activityTypes" [getLabel]="typeLabel" id="editType" formControlName="type"
+                    [placeholder]="'admin.study_material.edit_study_material.type' | translate" [ngClass]="{'is-invalid': editType.invalid}"></app-dropdown>
+      <app-form-control-error [form]="editForm" controlName="type" #editType></app-form-control-error>
+    </div>
+    <div class="form-group" formGroupName="properties" *ngIf="editC.type.value && editC.type.value.name?.includes('material.video')">
+      <label for="editUrl">{{'admin.study_material.edit_study_material.url' | translate}}</label>
+      <input type="url" class="form-control" id="editUrl" formControlName="url"/>
+    </div>
+    <div class="form-group">
+      <label for="editVisibility">{{'admin.study_material.edit_study_material.visibility' | translate}} *</label>
+      <app-dropdown [items]="visibilityTypes" [getLabel]="visibilityLabel" bindValue="value" id="editVisibility" formControlName="visibility"
+                    [placeholder]="'admin.study_material.edit_study_material.visibility' | translate" [ngClass]="{'is-invalid': editVisibility.invalid}"></app-dropdown>
+      <app-form-control-error [form]="editForm" controlName="visibility" #editVisibility></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="editStartTime">{{'admin.study_material.edit_study_material.covered_on' | translate}}</label>
+      <input type="date" class="form-control" id="editStartTime" formControlName="start_time"/>
+    </div>
+    <ng-container *ngIf="editingItem">
+      <div class="form-group">
+        <div class="row" *ngIf="editingItem.attachments.length > 0">
+          <div class="col mb-2">
+            <p class="mb-2 font-weight-bold">{{'admin.study_material.edit_study_material.existing_attachments' | translate}}</p>
+            <app-list [items]="editingItem.attachments" [getLabel]="getAttachmentName" (delete)="deleteAttachment(editingItem.id, $event.id)"></app-list>
+          </div>
+        </div>
+        <label>{{'admin.study_material.edit_study_material.new_attachments' | translate}}</label>
+        <app-file-upload formControlName="attachments" multiple="true"></app-file-upload>
+      </div>
+    </ng-container>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-study-material-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #linkConstructModal [title]="'admin.study_material.link_construct.modal_title' | translate" (closed)="resetFormValidation(linkConstructForm)" [size]="'lg'">
+  <form id="link-construct-form" [formGroup]="linkConstructForm" (ngSubmit)="linkConstruct()">
+    <div class="form-group">
+      <div class="row" *ngIf="linkConstructC.material.value && linkConstructC.material.value.constructs.length > 0">
+        <div class="col mb-2">
+          <p class="mb-2 font-weight-bold">{{'admin.study_material.link_construct.existing' | translate}}</p>
+          <app-list
+            [getLabel]="existingConstructLabels"
+            [items]="linkConstructC.material.value.constructs"
+            (delete)="deleteConstructLink(linkConstructC.material.value, $event)">
+          </app-list>
+        </div>
+      </div>
+      <label class="mb-2 font-weight-bold">{{'admin.study_material.link_construct.new' | translate}}</label>
+      <div class="row">
+        <div class="col-lg-4 inline-dropdown">
+          <app-dropdown
+            [items]="studyMaterial"
+            id="linkMaterial"
+            formControlName="material"
+            bindLabel="title"
+            [placeholder]="'admin.study_material.link_construct.study_material' | translate"
+            (selectionChange)="setLinkMaterial($event)">
+          </app-dropdown>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-dropdown
+            [items]="constructLinkTypes"
+            id="linkConstructType"
+            [placeholder]="'admin.study_material.link_construct.type' | translate"
+            formControlName="type">
+          </app-dropdown>
+        </div>
+        <div class="col-lg-4 inline-dropdown">
+          <app-construct-dropdown
+            [models]="models"
+            [constructs]="possibleConstructLinks"
+            id="linkConstruct"
+            formControlName="construct"
+            [placeholder]="'admin.study_material.link_construct.construct' | translate"
+            [multiple]="true">
+          </app-construct-dropdown>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="linkConstructModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="link-construct-form" class="btn btn-primary"><i class="construct-link-icon"></i>{{'modal.link' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

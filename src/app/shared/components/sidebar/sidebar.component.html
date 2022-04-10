@@ -1,0 +1,13 @@
+<div class="sidebar" #sidebar
+     [ngClass]="{'mr-sidebar': sidebarService.isCollapsed$ | async}">
+     <div class="d-flex align-items-center mb-2">
+        <p *ngIf="title" class="title">{{title}}</p>
+        <i class="close-icon sidebar-close" (click)="collapseSidebar()"></i>
+     </div>
+  <ng-content></ng-content>
+</div>
+<div class="overlay" (click)="collapseSidebar()" *ngIf="(sidebarService.isCollapsed$ | async) === false"></div>
+<button type="button" class="btn btn-raised sidebar-open" (click)="showSidebar()">
+  <i class="fas fa-bars"></i>
+</button>
+<div class="scroll-padding" *ngIf="sidebarService.isCollapsed$ | async"></div>

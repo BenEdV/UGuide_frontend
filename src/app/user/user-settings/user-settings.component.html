@@ -1,0 +1,17 @@
+<app-title-section [title]="'settings.user.section_title' | translate"></app-title-section>
+
+<div class="row">
+  <div class="col">
+    <app-card [title]="'settings.user.global.card_title' | translate" icon="settings-icon">
+      <ul class="list-unstyled">
+        <li>
+          {{'settings.user.global.accepted_resouces' | translate}}
+          <span *ngIf="acceptedResources.length === 0">{{'list.none' | translate}}</span>
+          <div class="col-6 col-md-4 px-0">
+            <app-list [items]="acceptedResources" (delete)="deleteAcceptedResource($event)" [label]="null"></app-list>
+          </div>
+        </li>
+      </ul>
+    </app-card>
+  </div>
+</div>

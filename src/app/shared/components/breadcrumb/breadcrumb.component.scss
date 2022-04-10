@@ -1,0 +1,16 @@
+@import 'variables';
+
+.breadcrumb {
+  font-size: 0.8rem;
+  line-height: 1rem;
+  background: transparent !important;
+}
+
+.breadcrumb-item a {
+  color: $breadcrumb-color;
+}
+
+.breadcrumb-item.active {
+  color: $breadcrumb-active-color;
+  font-weight: 600;
+}

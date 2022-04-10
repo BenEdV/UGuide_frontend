@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-9 mx-auto">
+    <app-line-chart
+            [datasets]="chartDataset"
+            [labels]="chartLabels"
+      [max]="10"
+      [stepSize]="5"
+      (chartClick)="log($event)">
+    </app-line-chart>
+  </div>
+</div>

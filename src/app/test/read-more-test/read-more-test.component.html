@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-card>
+      <div style="height: 300px">
+        <app-loading-icon></app-loading-icon>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card>
+      <div style="height: 300px">
+        <app-loading-icon></app-loading-icon>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<app-read-more [content]="'Test 1, 2, 3. Test 1, 2, 3. Hello, is this thing on?'" [limit]="10"></app-read-more>
+<hr/>
+<p *appMultiline="let test of multilineTest">{{test}}</p>
+<hr/>
+<!--<ng-select [items]="constructs" class="is-invalid" groupBy="model" [(ngModel)]="test" bindLabel="name" bindValue="id" appendTo="body">-->
+<!--  <ng-template ng-label-tmp let-item="item">-->
+<!--    <b [ngClass]="{'isNegative': isNegative(item)}">{{item.name}}</b>-->
+<!--  </ng-template>-->
+<!--  <ng-template ng-optgroup-tmp let-item="item" let-index="index">-->
+<!--    Model {{item.model}}-->
+<!--  </ng-template>-->
+<!--  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">-->
+<!--    <ngb-highlight [ngClass]="{'isNegative': isNegative(item)}" [result]="item.name"-->
+<!--                   [term]="search">{{item.name}}</ngb-highlight>-->
+<!--  </ng-template>-->
+<!--</ng-select>-->
+
+<form [formGroup]="formX">
+  <h1>Form</h1>
+  <app-dropdown [items]="constructs" [multiple]="true" formControlName="x" bindLabel="name" bindValue="id"></app-dropdown>
+  <ng-select
+    [items]="constructs"
+    [multiple]="true"
+    bindLabel="name"
+    bindValue="id">
+      <!-- Selected item in input field -->
+      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+        <span><b>{{item.name}}</b></span>
+        <span class="ng-value-icon right" (click)="clear(item)">×</span>
+      </ng-template>
+      <!-- Group item -->
+      <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+        {{item.name}}
+      </ng-template>
+      <!-- Items in dropdown -->
+      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <span>
+          <ngb-highlight [result]="item.name" [term]="search">{{item.name}}</ngb-highlight>
+        </span>
+      </ng-template>
+  </ng-select>
+  <button (click)="update()">test</button>
+</form>

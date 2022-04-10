@@ -1,0 +1,65 @@
+$direction-btn-inactive-color: #ccc;
+$direction-btn-active-color: black;
+
+.direction-btn, .title-question-number {
+  cursor: pointer;
+  color: $direction-btn-inactive-color;
+  width: 35px;
+  text-align: center;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: $direction-btn-active-color;
+  }
+}
+
+.direction-btn.disabled {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.title-question-number:after {
+  display: none;
+}
+
+.response {
+  max-height: 120px;
+  overflow: auto;
+}
+
+.dropdown-menu {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.unstyled-pagination ::ng-deep {
+  font-size: 1rem;
+
+  .pagination {
+    margin-bottom: 0;
+  }
+
+  .page-link {
+    border: unset;
+    background: unset;
+    color: black;
+  }
+
+  .page-link:hover {
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+    color: unset;
+  }
+
+  .page-item.active .page-link {
+    background: unset;
+    border: unset;
+    font-weight: 600;
+  }
+
+  .page-item.disabled .page-link {
+    background: unset;
+    border: unset;
+    color: #6c757d;
+  }
+}

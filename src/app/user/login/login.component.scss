@@ -1,0 +1,55 @@
+@keyframes fadeInAnimation {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.fadeIn {
+  animation: fadeInAnimation 3s;
+}
+
+#password::-ms-clear {
+  display: none; // hide default show password icon, since we use a custom one
+}
+
+#userAgreementText.is-invalid {
+  text-decoration-color: red;
+  text-decoration: underline;
+  text-decoration-thickness: 1pt;
+  text-decoration-style: wavy;
+}
+
+.logoutBtn {
+  position: absolute;
+  width: 100px;
+  bottom: 20%;
+  left: 50%;
+  margin-left: -50px;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.show-password-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #ccc;
+  width: 20px;
+  text-align: center;
+  transition: 0.2s ease color;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.contact-p, .contact-p a {
+  color: #ddd;
+}
+
+.contact-p a:hover {
+  color: #007bff;
+}

@@ -1,0 +1,9 @@
+<ol class="breadcrumb m-0 py-1 px-0" *ngIf="breadcrumbs.length > 0">
+  <li class="breadcrumb-item d-none d-sm-block" *ngFor="let breadcrumb of breadcrumbs.slice(0, breadcrumbs.length - 3)">
+    <a [routerLink]="[breadcrumb.url]">{{breadcrumb.label}}</a>
+  </li>
+  <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs.slice(breadcrumbs.length - 3, breadcrumbs.length - 1)">
+    <a [routerLink]="[breadcrumb.url]">{{breadcrumb.label}}</a>
+  </li>
+  <!-- <li class="breadcrumb-item active" aria-current="page">{{breadcrumbs[breadcrumbs.length - 1].label | translate}}</li> -->
+</ol>

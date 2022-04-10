@@ -1,0 +1,17 @@
+<div *ngIf="!this.invalidChart; else warning"
+     class="position-relative"
+     [ngStyle]="{'height': containerHeight, 'width': containerWidth}">
+  <canvas baseChart
+          [datasets]="datasets"
+          [labels]="labels"
+          [options]="mergedOptions"
+          [colors]="colors"
+          [chartType]="type"
+          [legend]="legend"
+          [plugins]="plugins"
+          (chartClick)="emitClick($event)">
+  </canvas>
+</div>
+<ng-template #warning>
+  <p class="text-center">{{ chartErrorMsg | translate}}</p>
+</ng-template>

@@ -1,0 +1,19 @@
+.video-overlay {
+  background: rgba(0,0,0,0.4);
+  color: white;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.warning-title {
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}

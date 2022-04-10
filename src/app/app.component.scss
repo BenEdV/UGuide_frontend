@@ -1,0 +1,47 @@
+@import '~bootstrap-scss/functions';
+@import '~bootstrap-scss/mixins';
+@import '~bootstrap-scss/variables';
+
+@import 'variables';
+
+@include media-breakpoint-up(md) {
+  .content {
+    margin-left: $sidenav-width;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .content {
+    margin-right: $sidebar-width;
+  }
+}
+
+.content {
+  width: unset;
+  padding: 10px 15px 0 15px;
+}
+
+.outlet-wrapper {
+  max-width: 1200px;
+  padding-top: $header-height;
+  padding-bottom: 20px; // allow room to see the end of the card
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+::ng-deep .ngx-bar { // loading bar
+  width: 100% !important;
+  animation: loading 2.5s ease-in-out infinite !important;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.app-toasts {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1200;
+}

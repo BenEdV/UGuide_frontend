@@ -1,0 +1,140 @@
+<app-title-section [title]="'admin.group.section_title' | translate"></app-title-section>
+
+<app-card [title]="'admin.group.table_title' | translate" [icon]="'group-icon'" [actions]="groupTable.cardActions">
+  <app-group-table
+    #groupTable
+    [groups]="groups"
+    [limit]="10"
+    [actions]="tableActions">
+  </app-group-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.group.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.group.group' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.group.new_group.modal_title' | translate" [size]="'lg'">
+  <form id="add-group-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addName">{{'admin.group.new_group.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="addName"
+             [placeholder]="'admin.group.new_group.name' | translate" [ngClass]="{'is-invalid': addName.invalid}">
+      <app-form-control-error [form]="addForm" controlName="name" #addName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <p class="mb-2 font-weight-bold">{{'admin.group.new_group.add_members' | translate}}</p>
+      <div class="row">
+        <div class="col-lg-8 mb-3">
+          <div class="d-lg-flex align-items-center">
+            <span class="mr-2">{{'admin.group.new_group.add' | translate}}</span>
+            <app-dropdown
+              class="flex-grow-1"
+              [items]="participants"
+              [bindLabel]="'display_name'"
+              [multiple]="true"
+              id="addMembers"
+              [placeholder]="'admin.group.new_group.members' | translate"
+              formControlName="members"
+              [ngClass]="{'is-invalid': addMembers.invalid}">
+            </app-dropdown>
+          </div>
+        </div>
+        <div class="col-lg-4 pl-lg-0">
+          <div class="d-lg-flex align-items-center">
+            <span class="mr-2">{{'admin.group.new_group.as' | translate}}</span>
+            <app-dropdown
+              class="flex-grow-1"
+              id="addRole"
+              [items]="roles"
+              [bindLabel]="null"
+              [getLabel]="roleDropdownLabelOverride"
+              [placeholder]="'admin.group.roles.role' | translate"
+              formControlName="role"
+              [ngClass]="{'is-invalid': addRole.invalid}"
+            ></app-dropdown>
+          </div>
+        </div>
+        <app-form-control-error [form]="addForm" controlName="members" #addMembers></app-form-control-error>
+        <app-form-control-error [form]="addForm" controlName="role" #addRole></app-form-control-error>
+      </div>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-group-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.group.edit_group.modal_title' | translate:{groupName: editingItem?.name}" (closed)="resetFormValidation(editForm)" [size]="'lg'">
+  <form id="edit-group-form" [formGroup]="editForm" (ngSubmit)="edit()" *ngIf="editingItem">
+    <div class="form-group">
+      <label for="editName">{{'admin.group.edit_group.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="editName"
+             [placeholder]="'admin.group.edit_group.name' | translate" [ngClass]="{'is-invalid': editName.invalid}">
+      <app-form-control-error [form]="editForm" controlName="name" #editName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <p class="mb-2 font-weight-bold">{{'admin.group.edit_group.existing' | translate}}</p>
+      <div class="mb-2">
+        <app-list
+          [items]="editingItemMembers"
+          [headers]="['display_name', 'role']"
+          [getLabel]="editingMembersOverride"
+          [showHeaders]="true"
+          (delete)="deleteUserLink(editingItem.id, $event.id)">
+        </app-list>
+      </div>
+    </div>
+    <div class="form-group">
+      <p class="mb-2 font-weight-bold">{{'admin.group.edit_group.add_members' | translate}}</p>
+      <div class="row">
+        <div class="col-lg-8 mb-3">
+          <div class="d-lg-flex align-items-center">
+            <span class="mr-2">{{'admin.group.edit_group.add' | translate}}</span>
+            <app-dropdown
+              class="flex-grow-1"
+              [items]="possibleMemberLinks"
+              [bindLabel]="'display_name'"
+              [multiple]="true"
+              id="editMembers"
+              [placeholder]="'admin.group.edit_group.members' | translate"
+              formControlName="members"
+              [ngClass]="{'is-invalid': editMembers.invalid}">
+            </app-dropdown>
+          </div>
+        </div>
+        <div class="col-lg-4 pl-lg-0">
+          <div class="d-lg-flex align-items-center">
+            <span class="mr-2">{{'admin.group.edit_group.as' | translate}}</span>
+            <app-dropdown
+              class="flex-grow-1"
+              id="editRole"
+              [items]="roles"
+              [bindLabel]="null"
+              [getLabel]="roleDropdownLabelOverride"
+              [placeholder]="'admin.group.roles.role' | translate"
+              formControlName="role"
+              [ngClass]="{'is-invalid': editRole.invalid}"
+            ></app-dropdown>
+          </div>
+        </div>
+        <app-form-control-error [form]="editForm" controlName="members" #editMembers></app-form-control-error>
+        <app-form-control-error [form]="editForm" controlName="role" #editRole></app-form-control-error>
+      </div>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-group-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>

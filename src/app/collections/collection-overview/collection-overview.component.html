@@ -1,0 +1,146 @@
+<ng-container *ngIf="collection.course_instance as courseInstance; else noCourse">
+  <app-title-section [title]="courseInstance.course.name" [description]="'course.overview.section_description.course' | translate"></app-title-section>
+</ng-container>
+<ng-template #noCourse>
+  <app-title-section [title]="collection.name" [description]="'course.overview.section_description.collection' | translate"></app-title-section>
+</ng-template>
+
+<p class="section-title">{{'course.overview.general.section_title' | translate}}</p>
+<div class="card-grid">
+  <app-card [title]="'course.overview.general.average_grade' | translate" highlight="primary" *ngIf="averageGrade">
+    <p class="minimal-card-text">{{averageGrade | grade}}</p>
+  </app-card>
+  <app-card [title]="'course.overview.general.average_construct_score' | translate" highlight="primary" *ngIf="showConstructs">
+    <p class="minimal-card-text">{{averageConstructScore | percent}}</p>
+  </app-card>
+  <app-card [title]="'course.overview.general.average_misconstruct_score' | translate" highlight="primary" *ngIf="showMisconstructs">
+    <p class="minimal-card-text">{{averageMisconstructScore | percent}}</p>
+  </app-card>
+  <app-card [title]="'course.overview.general.student_count' | translate" highlight="primary">
+    <p class="minimal-card-text">{{collection.member_count}}</p>
+  </app-card>
+</div>
+
+<ng-container *ngIf="showConstructs || showMisconstructs">
+  <p class="section-title">{{'course.overview.constructs.section_title' | translate}}</p>
+  <div class="row">
+    <div class="col-lg-6 card-spacing" *ngIf="showConstructs">
+      <app-card [icon]="'positive-construct-icon'"
+                [title]="'course.overview.constructs.construct_chart_title' | translate"
+                [actions]="constructChart.cardActions">
+        <app-construct-chart
+          #constructChart
+          [constructs]="constructs"
+          [isNegative]="false"
+          [showScore]="showConstructChartScore"
+          [layer]="'root'"
+          (chartClick)="handleConstructChartClick($event)"
+        ></app-construct-chart>
+      </app-card>
+    </div>
+    <div class="col-lg-6 card-spacing" *ngIf="showMisconstructs">
+      <app-card [icon]="'negative-construct-icon'"
+                [title]="'course.overview.constructs.misconstruct_chart_title' | translate"
+                [actions]="misconstructChart.cardActions">
+        <app-construct-chart
+          #misconstructChart
+          [constructs]="constructs"
+          [isNegative]="true"
+          [showScore]="showConstructChartScore"
+          [layer]="'root'"
+          (chartClick)="handleConstructChartClick($event)"
+        ></app-construct-chart>
+      </app-card>
+    </div>
+  </div>
+</ng-container>
+
+<p class="section-title">{{'course.overview.exams.section_title' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'bar-chart-icon'"
+              [title]="'course.overview.exams.chart.card_title' | translate"
+              [actions]="gradeChart.cardActions">
+     <app-grade-distribution-chart
+        #gradeChart
+        [plugins]="pathPlugin"
+        [options]="{
+          plugins: {
+            path: [
+              gradeAveragePath
+            ]
+          }
+        }"
+        [title]="'course.overview.exams.chart.title' | translate"
+        [yLabel]="'course.overview.exams.chart.y_label' | translate"
+        [xLabel]="'course.overview.exams.chart.x_label' | translate"
+        [items]="studentAverages"
+        [gradeKey]="'score'"
+        [maxX]="10.0"
+        (chartClick)="handleAverageGradeDistClick($event)">
+      </app-grade-distribution-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'exam-icon'"
+              [title]="'course.overview.exams.table_title' | translate"
+              [actions]="examTable.cardActions">
+        <app-exam-table
+          #examTable
+          [activities]="exams"
+          [limit]="5"
+          [sortKey]="'end_time'"
+          [sortReverse]="true">
+        </app-exam-table>
+    </app-card>
+  </div>
+</div>
+
+<p class="section-title">{{'course.overview.material.section_title' | translate}}</p>
+<div class="row">
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'bar-chart-icon'"
+              [title]="'course.overview.material.chart.card_title' | translate"
+              [actions]="studyMaterialChart.cardActions">
+      <!-- <app-bar-chart
+        #studyMaterialChart
+        [datasets]="studyMaterialChartDatasets"
+        [labels]="[
+          'course.overview.material.chart.unseen' | translate,
+          'course.overview.material.chart.seen' | translate,
+          'course.overview.material.chart.completed' | translate
+        ]"
+        [title]="'course.overview.material.chart.title' | translate"
+        [yLabel]="'course.overview.material.chart.y_label' | translate"
+        [xLabel]="'course.overview.material.chart.x_label' | translate"
+        [options]="studyMaterialChartOptions"
+        (chartClick)="handleStudyMaterialChartClick($event)"
+        [legend]="false"
+      ></app-bar-chart> -->
+      <app-line-chart
+        #studyMaterialChart
+        [datasets]="studyMaterialChartDatasets"
+        [options]="studyMaterialChartOptions"
+        [title]="'course.overview.material.chart.title' | translate"
+        [yLabel]="'course.overview.material.chart.y_label' | translate"
+        [xLabel]="'course.overview.material.chart.x_label' | translate"
+        [timeXAxis]="true"
+        [title]="'course.overview.material.chart.title' | translate"
+        (chartClick)="handleStudyMaterialChartClick($event)">
+      </app-line-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6 card-spacing">
+    <app-card [icon]="'study-material-icon'"
+              [title]="'course.overview.material.table_title' | translate"
+              [actions]="studyMaterialTable.cardActions">
+        <app-study-material-table
+          #studyMaterialTable
+          [activities]="studyMaterial"
+          [limit]="5"
+          [sortKey]="'completed'"
+          [sortReverse]="true">
+        </app-study-material-table>
+    </app-card>
+  </div>
+</div>

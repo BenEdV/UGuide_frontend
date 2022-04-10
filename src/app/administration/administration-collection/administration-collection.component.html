@@ -1,0 +1,67 @@
+<app-title-section [title]="'admin.collection.section_title' | translate"></app-title-section>
+
+<app-card
+  [icon]="'fas fa-chalkboard'"
+  [title]="'admin.collection.table_title' | translate">
+  <app-collection-table
+    [collections]="collections"
+    [actions]="tableActions"
+    [limit]="10">
+  </app-collection-table>
+</app-card>
+
+<app-sidebar [title]="'sidebar.actions' | translate">
+  <p class="section-title">{{'admin.collection.create' | translate}}</p>
+  <div class="row">
+    <div class="col mb-3">
+      <button type="button" class="btn btn-success" (click)="addModal.open()">
+        <i class="add-icon"></i>
+        {{'admin.collection.course' | translate}}
+      </button>
+    </div>
+  </div>
+</app-sidebar>
+
+<app-modal #addModal [title]="'admin.collection.new_course.modal_title' | translate">
+  <form id="add-course-form" [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="form-group">
+      <label for="addName">{{'admin.collection.new_course.name' | translate}} *</label>
+      <input type="text" class="form-control" formControlName="name" id="addName"
+             [placeholder]="'admin.collection.new_course.name' | translate" [ngClass]="{'is-invalid': addName.invalid}">
+      <app-form-control-error [form]="addForm" controlName="name" #addName></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addCode">{{'admin.collection.new_course.code' | translate}}</label>
+      <input type="text" class="form-control" formControlName="code" id="addCode"
+             [placeholder]="'admin.collection.new_course.code' | translate" [ngClass]="{'is-invalid': addCode.invalid}">
+      <app-form-control-error [form]="addForm" controlName="code" #addCode></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addParent">{{'admin.collection.new_course.parent' | translate}} *</label>
+      <app-dropdown [items]="collections" bindValue="name" id="addParent" formControlName="parent"
+                    [placeholder]="'admin.collection.new_course.parent' | translate" [ngClass]="{'is-invalid': addParent.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="parent" #addParent></app-form-control-error>
+    </div>
+    <div class="form-group">
+      <label for="addPeriod">{{'admin.collection.new_course.period' | translate}} *</label>
+      <app-dropdown [items]="periods" bindValue="name" id="addPeriod" formControlName="period"
+                    [placeholder]="'admin.collection.new_course.period' | translate" [ngClass]="{'is-invalid': addPeriod.invalid}"></app-dropdown>
+      <app-form-control-error [form]="addForm" controlName="period" #addPeriod></app-form-control-error>
+    </div>
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="add-course-form" class="btn btn-success"><i class="add-icon"></i>{{'modal.add' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-modal #editModal [title]="'admin.collection.edit_course.modal_title' | translate:{collectionName: editingItem?.name}" (closed)="resetFormValidation(editForm)">
+  <form id="edit-collection-form" [formGroup]="editForm" (ngSubmit)="edit()">
+  </form>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="editModal.close('Cancel click')">{{'modal.cancel' | translate}}</button>
+    <button type="submit" form="edit-collection-form" class="btn btn-primary"><i class="edit-icon"></i>{{'modal.edit' | translate}}</button>
+  </div>
+</app-modal>
+
+<app-delete-modal #deleteModal [deletingItem]="deletingItem" (delete)="delete()"></app-delete-modal>
