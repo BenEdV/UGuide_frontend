@@ -53,3 +53,5 @@ When adding new environment variables you must first add the line
 ARG NEW_ENV_VAR
 ```
 to the [`Dockerfile`](Dockerfile), and then it is available to be used in [`environment.prod.ts.temp`](src/environments/environment.prod.ts.temp).
+
+This is a test comment.
